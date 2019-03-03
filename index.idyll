@@ -47,6 +47,10 @@ The basic idea is to make a variable in Idyll which acts as a
 parameter to your component. Then, whenever that variable is updated,
 e.g. by moving the range slider, the component should get updated as well.
 
+The range slider is a build in component, see more about those here: https://idyll-lang.org/docs/components
+
+To learn more about Idyll variables and the markup syntax, read the docs here: https://idyll-lang.org/docs/syntax
+
 ## Sources of Bias
 
 ### Flawed Data

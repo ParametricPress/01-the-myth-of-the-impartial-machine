@@ -1,6 +1,6 @@
-# 01-housing-equity
+# 01-bias in ML
 
-Data science for housing equity in atlanta
+Bias in ML
 
 
 ## Installing dependencies
