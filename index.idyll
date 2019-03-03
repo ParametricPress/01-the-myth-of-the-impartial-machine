@@ -1,0 +1,58 @@
+[meta title:"Bias in Machine Learning" description:"Much hype these days about what ML/AI can achieve and a rush to use it everywhere but there have also been incidents where models have produced shockingly flawed results." /]
+
+[Nav fullWidth:true /]
+
+[Header
+  title:`["Bias", "in ML"]`
+  longTitle:`["Bias in", "Machine Learning"]`
+  date:"April 15, 2019"
+  dek:"Much hype these days about what ML/AI can achieve and a rush to use it everywhere but there have also been incidents where models have produced shockingly flawed results."
+  fullWidth:true
+  authors:`[{
+    name: "Alice Feng",
+    role: ''
+  }, {
+    name: "Shuyan We",
+    role: ''
+  }, {
+    name: "Victoria Uren",
+    role: ''
+  }]`
+  doi:""
+  archive:""
+  source:""
+/]
+
+
+## Intro
+
+Text
+
+## How does ML Work?
+
+Interactive Visual
+
+[var name:"r" value:5 /]
+
+This is an interactive component, look at components/ml-overview.js.
+
+[MLOverview r:r /]
+
+Move this range slider to update the visualization:
+
+[Range value:r min:1 max:100 /]
+
+Look inside index.idyll to see how this works.
+The basic idea is to make a variable in Idyll which acts as a
+parameter to your component. Then, whenever that variable is updated,
+e.g. by moving the range slider, the component should get updated as well.
+
+## Sources of Bias
+
+### Flawed Data
+
+### Bias in Algorithms
+
+## Correcting Bias
+
+## Conclusion

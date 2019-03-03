@@ -1,0 +1,20 @@
+{
+  "name": "data-science-for-housing-equity",
+  "version": "1.0.0",
+  "license": "MIT",
+  "idyll": {
+    "theme": "parametric.css",
+    "layout": "blog",
+    "css": "styles.css",
+    "authorView": false
+  },
+  "dependencies": {
+    "d3": "^4.0.0",
+    "idyll": "^3.0.0",
+    "idyll-d3-component": "^2.0.0",
+    "react-image": "^2.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^0.12.0"
+  }
+}
