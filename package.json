@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "license": "MIT",
   "idyll": {
-    "theme": "parametric.css",
     "layout": "blog",
     "css": "styles.css",
-    "authorView": false
+    "authorView": false,
+    "theme": "node_modules/parametric-styles/issue-01-theme.css",
+    "components": [
+      "./components",
+      "./node_modules/parametric-components/dist/cjs/issue-01"
+    ]
   },
   "dependencies": {
     "d3": "^4.0.0",
-    "idyll": "^3.0.0",
+    "idyll": "^4.0.6-alpha.0",
     "idyll-d3-component": "^2.0.0",
+    "parametric-components": "^1.0.2",
+    "parametric-styles": "^1.0.1",
     "react-image": "^2.0.0"
   },
   "devDependencies": {

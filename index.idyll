@@ -24,39 +24,171 @@
 /]
 
 
-## Intro
+[Aside]
 
-Text
+  ### What’s the difference between Artificial Intelligence and Machine Learning?
 
-## How does ML Work?
+  Artificial intelligence and machine learning are often used interchangeably but there are in fact differences between the two.
 
-Interactive Visual
+  ![ML as a subset of AI](static/images/ai-ml-subset.png)
 
-[var name:"r" value:5 /]
+  [br/]
 
-This is an interactive component, look at components/ml-overview.js.
+  **Artificial intelligence** refers to the broader science of getting computers to act intelligently without being explicitly programmed.
 
-[MLOverview r:r /]
+  **Machine learning** is the use of statistical algorithms to detect patterns in large datasets.  It is one way in which computers can become better at a task and thus considered to be a subset of artificial intelligence.
 
-Move this range slider to update the visualization:
 
-[Range value:r min:1 max:100 /]
+[/Aside]
 
-Look inside index.idyll to see how this works.
-The basic idea is to make a variable in Idyll which acts as a
-parameter to your component. Then, whenever that variable is updated,
-e.g. by moving the range slider, the component should get updated as well.
+From voice assistants to image recognition, fraud detection to social media feeds, machine learning (ML) and artificial intelligence (AI) are becoming an increasingly important part of society.  The two fields have made enormous strides in recent years thanks to gains in computing power and the volume of data being generated.  Such algorithms are being used in fields as varied as medicine, agriculture, insurance, transportation and art, and the number of companies rushing to embrace what ML and AI can offer has increased rapidly in recent years.  According to Adobe, 15% of companies are already using AI but a further 31% are planning to do so in the next 12 months.  Investment in such models is also forecasted to grow from $12 billion in 2017 to $57.6 billion by 2021.  Heralded as being more accurate, consistent and objective than human judgment, the promises and expectations of what ML and AI can achieve have never been greater.
 
-The range slider is a build in component, see more about those here: https://idyll-lang.org/docs/components
 
-To learn more about Idyll variables and the markup syntax, read the docs here: https://idyll-lang.org/docs/syntax
+However, for every neural network that can defeat Jeopardy champions and outplay Go masters, there are other well-documented instances where these algorithms have produced highly disturbing results.  Facial-analysis programs were found to have an error rate of 20 to 34 percent when trying to determine the gender of African-American women compared to an error rate of less than 1 percent for white men.  ML algorithms used to predict which criminals are most likely to reoffend tended to incorrectly flag black defendants as being high risk at twice the rate of white defendants.  A word embedding model used to help machines determine the meaning of words based on their similarity likewise associated men with being computer programmers and women with homemakers.  If data-trained models are supposed to be objective and impartial, how did these algorithms get things so wrong?  Can such bias be fixed?
 
-## Sources of Bias
 
-### Flawed Data
+// [VISUAL: ML as a subset of AI]
 
-### Bias in Algorithms
 
-## Correcting Bias
+## The ML Pipeline
+
+Being able to use data to meaningfully answer questions via machine learning requires several steps.
+
+[Aside]
+  // [VISUAL HERE OF ML PIPELINE]
+  ![ml pipeline](static/images/ml-pipeline.png)
+[/Aside]
+
+1. **Data gathering.**  All machine learning models require data as inputs.  In today’s increasingly digitized world, data can be derived from various sources including user interactions on a website, collections of photo images and sensor recordings.
+2. **Data preparation.** Data collected are rarely in a usable state as-is. Data often need to be cleaned, transformed and checked for errors before they are ready to be fed into a model.
+3. **Split dataset into training and testing sets.** The training dataset will be used for building and training the model while the testing dataset will be used to evaluate how well the model performs. It is important to evaluate the model on data it has not seen before so that it does not learn the idiosyncrasies of the data it was trained on.
+4. **Fit and train models.** This is the step where various types of ML models are built and applied to the training data.  Models are iterated on to improve their performance with the goal of generating the most accurate predictions possible.
+5. **Evaluate model on the test dataset.**  The top performing model is used on the testing data to get a sense of how the model will perform on real world data it’s never seen before.  Based on the results, further refinement and tuning of the model may be needed.
+6. **Make predictions!**  Once the model is finalized, it can begin to be used to answer the question it was designed for.
+
+
+
+## Sources of bias
+There are two key ways bias may be introduced and amplified through the use of machine learning: (1) bias in the underlying data and (2) bias that are amplified through algorithms.
+
+### 1) Biased data
+
+**Data that are non-representative and biased.**[br/]
+When one examines a data sample, it is imperative to check whether the sample is representative of the population of interest. A non-representative sample where some groups are over- or under-represented inevitably introduces bias in the statistical analysis. A dataset may be non-representative due to sampling error and non-sampling errors.
+
+* **Sampling errors** refer to the difference between a population value and a sample estimate that exists only because of the sample that happened to be selected. For example, suppose we sample 100 residents to estimate the average US household income. A sample that happened to include Jeff Bezos would result in an overestimate, while a sample that happened to include predominantly low-income households would result in an underestimate.
+![sampling errors](static/images/sampling-errors.png)
+* **Non-sampling errors** are typically more serious and may arise from many different sources such as errors in data collection, non-response, and selection bias. Typical examples include poorly phrased data-collection questions that can cause systematic misunderstanding and/or misreporting, web-only surveys that may disproportionately leave out the elderly population and households with low levels of education and income, over-representation of people that feel particularly strongly about a subject, and responses that may not reflect one’s true opinion. Even big data are susceptible to non-sampling errors. For example, Shankar (2017) found that the United States (which accounts for 4% of the world population) contributed over 45% of the data for ImageNet, a database of more than 14 million labelled images. Meanwhile, China and India combined contribute just 3%, despite accounting for over 36% of the world population. As a result of this skewed data contribution,  image classification algorithms that use the ImageNet database would often correctly label an image of a traditional US bride with words like “bride” and “wedding” but label an image of an Indian bride with words like “costume”.
+![non-sampling errors](static/images/non-sampling-errors.png)
+
+// [VISUAL: US vs CHINA + INDIA]
+
+
+**Data that are representative but still biased.**[br/]
+What if a dataset is representative of its target population? No more worries about bias coming through the data, right? Not so fast -- a representative dataset may still be biased to the extent that it reflects any underlying/historical social bias. A recruiting algorithm once used by Amazon was found to have disproportionately favored male candidates. The data used to train the algorithm were based on resumes collected over a 10-year period. Because the tech industry was traditionally dominated by men, a majority of the resumes were submitted by men. Therefore, even though the dataset was “representative” of the historical applicant pool, it captured the inherent gender bias and passed it on to the recruiting algorithm. Representative but biased data is in some sense a more problematic issue than non-representative data, since fixing the former would require addressing biases that are inherent in society.
+
+### 2) Bias that are amplified through algorithms
+Machine learning algorithms themselves may amplify bias if they make predictions that are more skewed than the training data. Such amplification often occurs through two mechanisms: 1) algorithms incentivized to predict observations to belong to the majority group , and 2) runaway feedback loops. The two stylized examples below illustrate these mechanisms.
+
+**Algorithms incentivized to predict observations to belong to the majority group.**[br/]
+In order to maximize predictive accuracy when faced with an imbalanced dataset, machine learning algorithms are incentivized to put more learning weight on the majority group, thus disproportionately predicting observations to belong to that majority group.
+
+Consider an image-classification algorithm used to identify the gender of the person in a given image. The training dataset is a representative sample that contains 10 cooking images, six of which show a woman in the kitchen, the other four show men. Suppose that the model achieves a 70% prediction accuracy rate after it runs through this training dataset.
+
+Having representative training data is the ideal scenario. In a more realistic setting, women are likely over-represented in a sample of cooking images. Suppose that an alternate sample was built after culling images from sources like home magazines and online blogs; this new training dataset contains eight images of women cooking and two images of men. When this new data is fed through the model, the model correctly labels the gender of six of the photos of women and one of the photos of a man while mistaking the gender of the remaining three photos (70% accuracy).  If the model were to instead simply predict that every cooking image is of a woman, it would increase its accuracy to 80% because it has correctly labeled all of the photos with a woman. In pursuit of higher predictive accuracy, the model has amplified the bias from 80% in the training data to 100% in the model prediction.
+
+[FullWidth]
+  // [VISUAL: INTERACTIVE COMPONENT (from pitch mockup)]
+  ![unbiased data](static/images/unbiased-data.png)
+
+  ![biased data](static/images/biased-data.png)
+[/FullWidth]
+
+
+**Runaway feedback loops.**[br/]
+In the previous image-classification example, bias amplification stops at the model prediction stage. However, in machine learning models where the prediction is fed back into the model as inputs for the next round of predictions, bias can be amplified further in the form of a feedback loop.
+
+Consider a predictive policing algorithm used to determine the optimal allocation of police force across a city. Suppose the city has two precincts (A and B) and one policeman, John. Precinct A has seen 700 crime incidents over the past year, while precinct B has seen 100. Based on this historical data, the city’s predictive policing algorithm sends John to precinct A on Day 1 since that precinct has a higher predicted crime rate. John encounters three crimes and updates the training data at the end of Day 1. The updated data now shows 703 crimes in precinct A and 100 still in precinct B. On Day 2 the algorithm sends John to precinct A again since the model predicts an even higher probability of crime from the updated training data. John encounters two more crimes on Day 2 and proceeds to update the training data, and so on… the table below illustrates how the first 10 days might have unfolded under this predictive policing algorithm. It should be clear that the more John is sent to precinct A, the more instances of crime would be reported for precinct A relative to B, which causes the model to send John to precinct A even more often. If such a feedback loop runs indefinitely, the model would eventually send John to only precinct A, even though the true optimal allocation would have been to send John occasionally to precinct B.
+
+// [VISUAL: FEEDBACK LOOPS TABLE]
+
+// [VISUAL: INTERACTIVE ILLUSTRATION OF FEEDBACK LOOPS]
+![feedback loops](static/images/feedback-loops.png)
+
+
+Feedback loops are especially problematic when sub-groups in the training data exhibit large statistical differences (e.g. one precinct having a much higher crime rate than others); a model trained on such data will quickly “run away” and make predictions that fall into the majority group only, thereby generating ever-more lopsided data that are fed back into the model. Even when sub-groups are statistically similar, feedback loops can still lead to noisy and less accurate predictions. Algorithms where the predictive outcome determines what feedback the algorithm receives -- e.g. recidivism prediction, language translation, and social media news feeds -- should always be diligently monitored for the presence of feedback loops bias.
+
+## Bias in data and in algorithms are interrelated
+It should be clear by this point that different sources of bias -- whether through data collection or through algorithms themselves -- are interrelated. When an algorithm is fed training data where one group dominates the sample, it is incentivized to prioritize learning about the dominant group and over-predict the number of observations that belong to the dominant group.  If the data were balanced, the model would have nothing to gain by over-predicting that group.  Similarly, bias can be perpetuated through a feedback loop if the model’s own flawed predictions are repeatedly fed back into it, becoming its own biased source data for the next round of predictions. In the machine learning context, it’s no longer just garbage in, garbage out -- when there’s garbage in, more and more garbage may be generated through the ML pipeline.
+
+// [VISUAL: BIAS AMPLIFICATION & INTERACTION]
+![amplification](static/images/amplification-interaction.png)
+
+
+
+## Ways people are tackling bias
+
+How does one actually tackle bias in the ML pipeline? While a suitable fix depends on each specific circumstance, here are some ways that companies and researchers are trying to reduce bias in machine learning.
+
+### 1) De-biasing the data
+* One key to de-biasing the data is to ensure that a representative sample is collected in the first place. Bias from sampling errors can be mitigated by collecting larger samples and adopting data collection techniques such as stratified random sampling. While sampling errors won’t go away entirely, rapid data growth -- 2.5 quintillion bytes per day and counting -- and growing data collection capability have made it easier than ever to mitigate sampling errors compared to the past. Bias from non-sampling errors are much more varied and harder to tackle, but one should still strive to minimize non-sampling error through means such as proper training, establishing a clear purpose and procedure for data collection, and conducting careful data validation. For example, in response to image-classification database that contained disproportionately few wedding / bride images from India, Google deliberately sought out contributions from India to make the database more representative.
+* What about data that are representative but reflect bias inherent in the population? For datasets that contain minority groups, one can oversample those minority groups to create a more balanced training dataset. For datasets that may contain biased associations, one can first quantify and remove any biased associations from the dataset before proceeding to the model training and prediction stages. De-biasing Word2Vec data is an example of this latter approach: Researchers first measured how closely two words relate to each other along the gender dimension and assessed whether different strengths of association reflect gender bias or appropriate relationships. For example, the fact that “female” is more closely related to “homemaker” as opposed to “computer programmer” is indicative of gender bias, whereas a close association between “female” and “queen” reflects an appropriate, definitional relationship. The researchers then implemented a separate algorithm to neutralize gender association between word pairs exhibiting gender bias before feeding this de-biased data into the Word2Vec embedding algorithm.
+// [VISUAL: ADDING DATA FROM UNDER-REPRESENTED GROUPS]
+![under-represented](static/images/under-represented.png)
+
+// [VISUAL: NEUTRALIZING GENDER ASSOCIATION BETWEEN WORD PAIRS]
+![gender-association](static/images/gender-association.png)
+
+### 2) De-biasing the algorithm
+In addition to de-biasing the data, one can apply model interventions to directly offset algorithms’ tendency to amplify bias. One intervention method is to impose model constraints that specify the statistical distribution of predictions. For example, researchers have been able to reduce bias amplification in image-labeling algorithms by nearly 50% by adding model constraints that required the proportion of images predicted to be male versus female to fall within 5% of the ratio observed in the training dataset. This approach can be particularly useful to reduce bias amplification when one is using imbalanced training datasets. Another intervention method that is particularly useful to combat feedback loops is to specify how outputs generated from model predictions should be fed back into the algorithm. Going back to the predictive policing example, instead of letting every newly observed crime instance be fed back into the algorithm, one can impose a sampling rule such that the more likely police are sent to a particular precinct, the less likely data observed from those assignments are incorporated back into the algorithm.
+
+// [VISUAL: CONSTRAINT ON MODEL PREDICTIONS]
+![predition-constraints](static/images/predition-constraints.png)
+
+//  [VISUAL: DROPPING SOME NEWLY OBSERVED DATA]
+![dropping-new-data](static/images/dropping-new-data.png)
+
+
+### 3) Evaluating performance against metrics other than just accuracy
+
+For algorithms that make classification decisions among different groups, it is also important to consider the performance of the model against metrics other than accuracy -- for example, false positive rate or false negative rate. Constraints can also be imposed on these metrics to promote fairness.
+
+For example, consider a criminal-justice algorithm used to assign risk scores for recidivism to defendants. Someone is labeled as “high risk” if they have a ⅔ predicted chance of reoffending within two years. Suppose the training data only contain two groups: white defendants and black defendants; each group has a different underlying profile for recidivism. In this example, possible alternative model metrics would be:
+* False positive rate -- the probability of labeling someone as high risk, even though they did not reoffend
+* False negative rate -- the probability of labeling someone as low risk, even though they did reoffend
+
+One can then apply model constraints to make the algorithm satisfy some fairness rule. Common rules include:
+
+* “Predictive parity” -- Let algorithms make predictions without considering characteristics such as gender and race. In the recidivism example, white and black defendants would be held to the same risk scoring standards.
+* Same “parity” -- Requiring that certain performance measures be held equal across groups. In the recidivism example, the algorithm would be required to achieve the same, say, false positive rate for white and black defendants.
+* Same “calibration” -- Requiring that certain performance measure be held equal across groups, among observations with the same predicted risk profile. In the recidivism example, the algorithm would be calibrated such that, among defendants that were given the same risk score, the proportion that is predicted to reoffend is the same across groups.
+
+
+// [VISUAL: INTERACTIVE FAIRNESS METRICS TOGGLE (similar to Nature’s recidivism example or Google’s loan-grant example)?]
+![fairness](static/images/fairness.png)
+
+### 4) Going beyond the data / algorithm
+Beyond tackling bias directly in the data and / or the algorithm, tech companies have also begun adopting broader measures. One measure is to establish ethical AI guidelines, where minimizing bias is included as part of a company’s overarching AI objectives. (As ML is a subset of AI, the same ethical guidelines would then apply to ML product developments as well.) Google explicitly lists “Avoid creating or reinforcing unfair bias” as the second principle for AI applications. Microsoft similarly includes “AI systems should treat all people fairly” among its AI principles. Another measure is to conduct third-party algorithm audits to ensure each AI product satisfies a company’s AI guidelines; a growing number of data analytics and consulting firms are starting to offer such auditing services. An even broader measure that targets the human source is to promote diversity in the AI / ML workforce. As of 2018, only 13% of AI CEOs are women, and less than 7% of tenure-track engineering faculty identify as either African American or Hispanic. Black in AI and AI4ALL are budding examples of initiatives to change the current landscape by fostering a more diverse and inclusive community of AI / ML practitioners. While these measures alone do not eliminate bias completely from machine learning, they do reflect how companies and the broader AI / ML community are increasingly aware of the need to address bias as AI / ML become ever-more widely used.
+
+// [VISUAL: THREE SIDE-BY-SIDE ILLUSTRATIONS OF ALTERNATIVE MEASURES]
+![alternatives](static/images/alternatives.png)
+
+
 
 ## Conclusion
+
+### Challenges to addressing bias in machine learning
+While the previous section mentioned approaches that can be taken to mitigate bias in ML, truly eliminating such disparities is a more challenging problem than may appear at first glance.  For example, collecting data that perfectly represent all subgroups in a population, while certainly helpful, is not a panacea.  If the underlying systems being modeled are themselves unjust (e.g., minority neighborhoods tend to be disproportionately policed, poor and minority families are more likely to be reported to child abuse hotlines, hiring managers prefer men over women for software engineering roles), then the model results will still end up reflecting these biased behaviors.  Conversely, removing bias from ML, though it may generate less ethically troubling results, will not fix these social injustices either.
+
+Another challenge is pinpointing exactly what a “fair” outcome means.  Is it that the model is equally good at predicting which white and black defendants will commit another crime (“predictive parity”) even if the model incorrectly labels more black defendants as likely to reoffend?  Or should the goal be that the model incorrectly predicts which defendants will reoffend at equal rates between the two races (equal false positive rates)? Or that the model fails to catch white and black reoffenders at the same rate (equal false negative rates)?  All are valid ways to define “fairness” yet it is mathematically impossible to satisfy all of these conditions simultaneously.  Trying to be fair in one way necessarily means being unfair in another way.
+
+Furthermore, optimizing to these definitions can impose other social costs.  Training a model to be unbiased in predicting who will reoffend can lead to an increase in violent crime rates because more high-risk defendants are set free.  Thus there are tensions between prioritizing social welfare (e.g., public safety) vs fairness (e.g., minimizing the needless imprisonment of harmless individuals).
+
+A further wrinkle is that sometimes what may be considered as biased in some situations may be exactly the outcome desired in other instances.  For example, someone looking to study the proportion of male versus female characters that appear in English-language novels over the past several hundred years would want their algorithm to detect gender associations found in occupations in order to identify the sex of that character.  Such “bias” is critical for this type of analysis yet would be entirely problematic if the model was instead designed to screen resumes for job postings.
+
+Lest the situation seem completely hopeless, there are steps that companies and organizations can take to improve the results of their modeling efforts.  One such step is to make sure the group working on ML problems is diverse in terms of gender, race, age, etc so that as many viewpoints as possible are represented.  In addition, employees should be trained on identifying their own biases in order to increase their awareness of how their own assumptions and perceptions of the world influence their work.
+
+Another important point is being transparent and open about what exactly a ML model is doing, how it arrived at the results it did, and which accuracy metrics did it optimize to.  Being able to explain why the model predicted, for example, someone as not being creditworthy allows not only that individual an opportunity to understand what happened but also makes it easier to identify problems in the model’s performance.  Finally, acknowledging that ML is not a magical solution that will solve all of the world’s problems but, like any other tool, has its limitations and weaknesses will help with maintaining a more realistic perspective on what these models can (and cannot) achieve.  Microsoft and Google have recently begun including warnings about the risks of using AI in their Securities and Exchange Commission filings.
+
+Algorithms are being used to recommend what to watch next on Netflix, filter out spam from inboxes, and offer directions that help drivers avoid traffic.  They are also being used to determine whether parole should be granted, which neighborhoods should be policed more heavily, if children are being abused, and who should be hired.  The stakes are real when it comes to how decisions made by ML and AI models are impacting people’s lives and if trends continue, these algorithms will be increasingly used in making these decisions.  Bias in ML imposes serious costs on both individuals and society as a whole by unfairly denying people opportunities while perpetuating stereotypes and inequities.  Tackling bias is a challenging problem for which there are no simple solutions or clear cut answers.  But it is imperative that those building ML models do so by using more representative data, evaluating results against various different definitions of accuracy and being more aware of their own biases.  ML and AI will indeed change the world; let’s make sure they change the world for the better.
+
