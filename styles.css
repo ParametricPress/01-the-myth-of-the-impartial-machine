@@ -1,5 +1,22 @@
+text {
+	font-family: Reforma;
+}
 
+.axis path,
+.axis .tick line {
+	display: none;
+}
 
+.axis text {
+	font-size: 16px;
+}
+
+.barValueLabels {
+	fill: red;
+	font-size: 12px;
+	/*text-align: center;*/
+	text-anchor: middle;
+}
 /*
  * Put your custom styles here.
  */
