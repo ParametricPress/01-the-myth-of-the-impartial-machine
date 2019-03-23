@@ -2,6 +2,10 @@ text {
 	font-family: Reforma;
 }
 
+button {
+	margin: 0;
+}
+
 .axis path,
 .axis .tick line {
 	display: none;
@@ -17,6 +21,15 @@ text {
 	/*text-align: center;*/
 	text-anchor: middle;
 }
+
+.meanLabel {
+	text-anchor: middle;
+}
+
+.incomeCircle.notSampled {
+	visibility: hidden;
+}
+
 /*
  * Put your custom styles here.
  */
