@@ -117,7 +117,7 @@ class SamplingErrorSampleComponent extends D3Component {
    */
   update(props, oldProps) {
 
-    if (props.generateSample !== oldProps) {
+    if (props.generateSample !== oldProps.generateSample) {  // only draw new sample when button is clicked, not if sample size slider is changed
       console.log("generate new sample!");
       generateSample(props.n);
     }
