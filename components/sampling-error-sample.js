@@ -88,7 +88,7 @@ class SamplingErrorSampleComponent extends D3Component {
       .data(data)
       .enter()
       .append("circle")
-      .attr("class", "incomeCircle notSampled")
+      .attr("class", function(d) { return "incomeCircle notSampled income_" + d.id; })
       .attr("r", function(d) { return rScale(d.income); })
       // .attr("r", 10)
       .attr("cx", width / 2)
@@ -117,10 +117,6 @@ class SamplingErrorSampleComponent extends D3Component {
    */
   update(props, oldProps) {
 
-    // Example of how to update based on new props
-    if (props.r !== oldProps) {
-      // this.circle.attr('r', props.r)
-    }
     if (props.generateSample !== oldProps) {
       console.log("generate new sample!");
       generateSample(props.n);
@@ -129,9 +125,26 @@ class SamplingErrorSampleComponent extends D3Component {
 }
 
 function generateSample(sampleSize) {
-  // generate list of randomly selected ID numbers
+  d3.selectAll("#samplePlot .incomeCircle").classed("notSampled", true);
 
-  // select circles matching those ID numbers
+  var sampleIDs = [];
+  var sampleData = [];
+  var maxID = d3.max(data, function(d) { return d.id; });
+
+  while(sampleIDs.length < sampleSize) {
+    var i = Math.floor(Math.random() * maxID) + 1;
+    if(sampleIDs.indexOf(i) === -1) {  // make sure we don't sample same ID more than once
+      sampleIDs.push(i);
+
+      d3.select(".income_" + i).classed("notSampled", false);
+      sampleData.push(d3.select(".income_" + i).datum());
+    }
+  }
+  // console.log(sampleIDs);
+
+  // update sample mean
+  var sampleMean = calculateMean(sampleData);
+  d3.select("#samplePlot .meanLabel").text("Sample mean: $" + sampleMean);
 }
 
 function calculateMean(data) {

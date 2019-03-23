@@ -30,6 +30,10 @@ button {
 	visibility: hidden;
 }
 
+.incomeCircle.sampled {
+	visibility: visible;
+}
+
 /*
  * Put your custom styles here.
  */
