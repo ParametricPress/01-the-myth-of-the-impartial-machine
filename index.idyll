@@ -90,7 +90,7 @@ When one examines a data sample, it is imperative to check whether the sample is
 [Range value:n min:1 max:50 /]
 [/div]
 
-[Button class:"generateSampleBtn" onClick:`generateSample = generateSample + 1`]Generate Sample[/Button]
+[Button className:"generateSampleBtn" onClick:`generateSample = generateSample + 1`]Generate Sample[/Button]
 
 [SamplingErrorSample class:"plot sampleErrorSample" id:"samplePlot" n:n generateSample:generateSample /]
 [/div]
