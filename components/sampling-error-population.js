@@ -76,11 +76,13 @@ class SamplingErrorPopulationComponent extends D3Component {
    * once on the initial pageload.
    */
   initialize(node, props) {
+    d3.select(node).attr("class", props.class);
+
     const svg = this.svg = d3.select(node).append('svg');
     svg.attr('viewBox', `0 0 ${width} ${height}`)
       .attr("id", props.id)
-      .style('width', '50%')
-      .style('height', 'auto');
+      .style('width', '100%')
+      .style('height', '100%');
 
     const dots = svg.append("g")
       // .attr("transform", "translate(0," + margin.top + ")")

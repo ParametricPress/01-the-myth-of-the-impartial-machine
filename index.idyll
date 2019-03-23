@@ -77,18 +77,23 @@ There are two key ways bias may be introduced and amplified through the use of m
 When one examines a data sample, it is imperative to check whether the sample is representative of the population of interest. A non-representative sample where some groups are over- or under-represented inevitably introduces bias in the statistical analysis. A dataset may be non-representative due to sampling error and non-sampling errors.
 
 * **Sampling errors** refer to the difference between a population value and a sample estimate that exists only because of the sample that happened to be selected. For example, suppose we sample 100 residents to estimate the average US household income. A sample that happened to include Jeff Bezos would result in an overestimate, while a sample that happened to include predominantly low-income households would result in an underestimate.
-![sampling errors](static/images/sampling-errors.png)
 
+[div className:"samplingErrorsInteractive"]
 [var name:"n" value:10 /]
 
-[SamplingErrorPopulation id:"populationPlot" /]
+[SamplingErrorPopulation class:"plot sampleErrorPopulation" id:"populationPlot" /]
 
 [var name:"generateSample" value:0 /]
 
+[div className:"slider"]
+[Display value:`"Sample size: " + n` format:"0.0f" /]
 [Range value:n min:1 max:50 /]
-[Button onClick:`generateSample = generateSample + 1`]Generate Sample[/Button]
+[/div]
 
-[SamplingErrorSample id:"samplePlot" n:n generateSample:generateSample /]
+[Button class:"generateSampleBtn" onClick:`generateSample = generateSample + 1`]Generate Sample[/Button]
+
+[SamplingErrorSample class:"plot sampleErrorSample" id:"samplePlot" n:n generateSample:generateSample /]
+[/div]
 
 * **Non-sampling errors** are typically more serious and may arise from many different sources such as errors in data collection, non-response, and selection bias. Typical examples include poorly phrased data-collection questions that can cause systematic misunderstanding and/or misreporting, web-only surveys that may disproportionately leave out the elderly population and households with low levels of education and income, over-representation of people that feel particularly strongly about a subject, and responses that may not reflect one’s true opinion. Even big data are susceptible to non-sampling errors. For example, Shankar (2017) found that the United States (which accounts for 4% of the world population) contributed over 45% of the data for ImageNet, a database of more than 14 million labelled images. Meanwhile, China and India combined contribute just 3%, despite accounting for over 36% of the world population. As a result of this skewed data contribution,  image classification algorithms that use the ImageNet database would often correctly label an image of a traditional US bride with words like “bride” and “wedding” but label an image of an Indian bride with words like “costume”.
 

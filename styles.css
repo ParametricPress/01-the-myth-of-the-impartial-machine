@@ -6,6 +6,64 @@ button {
 	margin: 0;
 }
 
+input {
+	display: block;
+	width: 100%;
+}
+
+/********* STYLES FOR SAMPLING ERROR ITERACTIVE ************/
+.samplingErrorsInteractive {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 40% 20% 40%;
+	grid-template-rows: 100px auto;
+	grid-gap: 10px;
+}
+
+.sampleErrorPopulation.plot {
+	grid-column-start: 1;
+	/*grid-column-end: 1;*/
+	grid-row-start: 1;
+	grid-row-end: 3;
+}
+
+.slider {
+	grid-column-start: 2;
+	/*grid-column-end: 3;*/
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
+.generateSampleBtn {
+	grid-column-start: 2;
+	/*grid-column-end: 3;*/
+	grid-row-start: 2;
+	grid-row-end: 3;
+	width: 100%;
+	height: 50px;
+}
+
+.sampleErrorSample.plot {
+	grid-column-start: 3;
+	/*grid-column-end: 4;*/
+	grid-row-start: 1;
+	grid-row-end: 3;
+}
+
+.meanLabel {
+	text-anchor: middle;
+	font-size: 1.2em;
+}
+
+.incomeCircle.notSampled {
+	visibility: hidden;
+}
+
+.incomeCircle.sampled {
+	visibility: visible;
+}
+
+/********* STYLES FOR STACKED BAR CHART *************/
 .axis path,
 .axis .tick line {
 	display: none;
@@ -21,19 +79,3 @@ button {
 	/*text-align: center;*/
 	text-anchor: middle;
 }
-
-.meanLabel {
-	text-anchor: middle;
-}
-
-.incomeCircle.notSampled {
-	visibility: hidden;
-}
-
-.incomeCircle.sampled {
-	visibility: visible;
-}
-
-/*
- * Put your custom styles here.
- */
