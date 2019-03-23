@@ -5,6 +5,7 @@ const d3 = require('d3');
 const width = 400;
 const height = 400;
 const margin = {top: 20, right: 0, bottom: 0, left: 0};
+const DOLLARFORMAT = d3.format("$,.0f");
 
 const data = [
   {id: 11, income: 8000},
@@ -109,7 +110,7 @@ class SamplingErrorPopulationComponent extends D3Component {
       .attr("class", "meanLabel")
       .attr("x", width / 2)
       .attr("y", margin.top)
-      .text("Population mean: $" + meanIncome);
+      .text("Population mean: " + DOLLARFORMAT(meanIncome));
   }
 }
 

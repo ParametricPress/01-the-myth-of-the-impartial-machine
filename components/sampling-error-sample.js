@@ -5,6 +5,7 @@ const d3 = require('d3');
 const width = 400;
 const height = 400;
 const margin = {top: 20, right: 0, bottom: 0, left: 0};
+const DOLLARFORMAT = d3.format("$,.0f");
 
 const data = [
   {id: 11, income: 8000},
@@ -146,7 +147,7 @@ function generateSample(sampleSize) {
 
   // update sample mean
   var sampleMean = calculateMean(sampleData);
-  d3.select("#samplePlot .meanLabel").text("Sample mean: $" + sampleMean);
+  d3.select("#samplePlot .meanLabel").text("Sample mean: " + DOLLARFORMAT(sampleMean));
 }
 
 function calculateMean(data) {
