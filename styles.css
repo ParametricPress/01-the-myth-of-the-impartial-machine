@@ -11,6 +11,9 @@ input {
 	width: 100%;
 }
 
+
+
+
 /********* STYLES FOR SAMPLING ERROR ITERACTIVE ************/
 .samplingErrorsInteractive {
 	width: 100%;
@@ -63,6 +66,9 @@ input {
 	visibility: visible;
 }
 
+
+
+
 /********* STYLES FOR STACKED BAR CHART *************/
 .axis path,
 .axis .tick line {
@@ -70,7 +76,7 @@ input {
 }
 
 .axis text {
-	font-size: 16px;
+	font-size: 1em;
 }
 
 .barValueLabels {
@@ -78,4 +84,31 @@ input {
 	font-size: 12px;
 	/*text-align: center;*/
 	text-anchor: middle;
+}
+
+
+
+
+/********* STYLES FOR BIAS AMPLIFIED THROUGH ALGORITHMS INTERACTIVE *************/
+.dataPoint.woman {
+	fill: #000;
+}
+
+.dataPoint.man {
+	fill: #d2d2d2;
+}
+
+.dataPoint.incorrect {
+	stroke: red;
+}
+
+.genderLabel {
+	text-anchor: middle;
+	font-size: 0.25em;
+	text-decoration: underline;
+}
+
+.errorLabel {
+	text-anchor: middle;
+	font-size: 0.25em;
 }

@@ -86,8 +86,8 @@ When one examines a data sample, it is imperative to check whether the sample is
 [var name:"generateSample" value:0 /]
 
 [div className:"slider"]
-[Display value:`"Sample size: " + n` format:"0.0f" /]
-[Range value:n min:1 max:50 /]
+  [Display value:`"Sample size: " + n` format:"0.0f" /]
+  [Range value:n min:1 max:50 /]
 [/div]
 
 [Button className:"generateSampleBtn" onClick:`generateSample = generateSample + 1`]Generate Sample[/Button]
@@ -112,11 +112,38 @@ Consider an image-classification algorithm used to identify the gender of the pe
 
 Having representative training data is the ideal scenario. In a more realistic setting, women are likely over-represented in a sample of cooking images. Suppose that an alternate sample was built after culling images from sources like home magazines and online blogs; this new training dataset contains eight images of women cooking and two images of men. When this new data is fed through the model, the model correctly labels the gender of six of the photos of women and one of the photos of a man while mistaking the gender of the remaining three photos (70% accuracy).  If the model were to instead simply predict that every cooking image is of a woman, it would increase its accuracy to 80% because it has correctly labeled all of the photos with a woman. In pursuit of higher predictive accuracy, the model has amplified the bias from 80% in the training data to 100% in the model prediction.
 
-[FullWidth]
+[FullWidth className:"amplifiedBiasInteractive"]
   // [VISUAL: INTERACTIVE COMPONENT (from pitch mockup)]
   ![unbiased data](static/images/unbiased-data.png)
 
   ![biased data](static/images/biased-data.png)
+
+  [var name:"bias" value:0.8 /]
+  [var name:"modelAccuracy" value:0.7 /]
+
+  [div className:"slider"]
+    [Display value:`"Bias: " + bias` format:".0%" /]
+    [Range value:bias min:0.5 max:1 step:0.1 /]
+  [/div]
+
+  [div className:"slider"]
+    [Display value:`"Model accuracy: " + modelAccuracy` format:".0%" /]
+    [Range value:modelAccuracy min:0.5 max:1 step:0.1 /]
+  [/div]
+
+  [div]
+    Data
+    [BiasAmplifiedData id:"biasAmplifiedDataPlot" bias:bias /]
+  [/div]
+
+  [div]
+    Model Predictions
+  [/div]
+
+  [div]
+    If Model Guessed "Woman" All the Time
+    [BiasAmplifiedGuessWoman id:"biasAmplifiedGuessWomanPlot" bias:bias /]
+  [/div]
 [/FullWidth]
 
 
