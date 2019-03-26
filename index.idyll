@@ -138,6 +138,7 @@ Having representative training data is the ideal scenario. In a more realistic s
 
   [div]
     Model Predictions
+    [BiasAmplifiedPrediction id:"biasAmplifiedPredictionPlot" bias:bias modelAccuracy:modelAccuracy /]
   [/div]
 
   [div]
