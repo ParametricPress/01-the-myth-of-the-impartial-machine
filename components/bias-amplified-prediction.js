@@ -11,13 +11,20 @@ const d3 = require('d3');
 const PCTFORMAT = d3.format('.0%');
 
 const size = 400;
-const margin = 16;
+const margin = 20;
 const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let pred_woman_ids;
+let pred_man_ids;
+
 // const ids_incorrect;
 
-const xPos = d3.scaleLinear()
+const xPosWoman = d3.scaleLinear()
   .domain([1, 5])
-  .range([0, (size - margin)/2]);
+  .range([margin, (size/2) - margin]);
+
+const xPosMan = d3.scaleLinear()
+  .domain([1, 5])
+  .range([(size/2) + margin, size - margin]);
 
 class BiasAmplifiedPredictionComponent extends D3Component {
 
@@ -34,9 +41,10 @@ class BiasAmplifiedPredictionComponent extends D3Component {
       .style('height', 'auto');
 
     const g = svg.append('g')
-      .attr('transform', 'translate(' + margin + ',' + margin + ')');
+      .attr('transform', 'translate(0,' + margin + ')');
 
     let incorrectIds = chooseIncorrectPreds(props.modelAccuracy);
+    determinePositions(props.bias, incorrectIds);
 
     const dataCircles = this.dataCircles = g.selectAll('.dataPoint')
       .data(ids)
@@ -44,8 +52,10 @@ class BiasAmplifiedPredictionComponent extends D3Component {
       .append('circle')
       .attr('class', function(d, i) { return determineClasses(d, props.bias, incorrectIds); })
       .attr('r', 2)
-      .attr('cx', function(d, i) { return d % 5 === 0 ? xPos(5) : xPos(d % 5); })
-      .attr('cy', function(d, i) { return d <= 5 ? 10 : 20});
+      .attr('cx', function(d, i) { if(pred_woman_ids.indexOf(d) > -1) return (pred_woman_ids.indexOf(d) + 1) % 5 === 0 ? xPosWoman(5) : xPosWoman((pred_woman_ids.indexOf(d) + 1) % 5);
+                                   else return (pred_man_ids.indexOf(d) + 1) % 5 === 0 ? xPosMan(5) : xPosMan((pred_man_ids.indexOf(d) + 1) % 5);
+                                 })
+      .attr('cy', function(d, i) { return d <= 5 || pred_man_ids.indexOf(d) > -1 ? 10 : 20});
 
     // add labels for woman and man
     svg.append('text')
@@ -71,8 +81,9 @@ class BiasAmplifiedPredictionComponent extends D3Component {
 
   update(props, oldProps) {
     if (props !== oldProps.bias) {
-      let ids_incorrect = chooseIncorrectPreds(props.modelAccuracy);
-      this.dataCircles.attr('class', function(d, i) { return determineClasses(d, props.bias, ids_incorrect); });
+      let incorrectIds = chooseIncorrectPreds(props.modelAccuracy);
+      determinePositions(props.bias, incorrectIds);
+      this.dataCircles.attr('class', function(d, i) { return determineClasses(d, props.bias, incorrectIds); });
       this.errorLabel.text('Error: ' + PCTFORMAT(1 - props.modelAccuracy));
     }
   }
@@ -90,6 +101,33 @@ function chooseIncorrectPreds(modelAccuracy) {
   }
 
   return ids_incorrect;
+}
+
+function determinePositions(bias, incorrectIds) {
+  pred_man_ids = [];
+  pred_woman_ids = [];
+
+  ids.forEach(function(d) {
+    if(d <= 5) {
+      pred_woman_ids.push(d);
+    }
+    else if (d > 5) {
+      // if id correctly predicted as "woman", assign to woman ids
+      if(d <= bias * 10 && incorrectIds.indexOf(d) === -1) pred_woman_ids.push(d);
+
+      // if id correctly predicted as "man", assign to man ids
+      else if(d > bias * 10 && incorrectIds.indexOf(d) === -1) pred_man_ids.push(d);
+
+      // if id incorrectly predicted as "woman", assign to woman ids
+      else if(d > bias * 10 && incorrectIds.indexOf(d) > -1) pred_woman_ids.push(d);
+
+      // if id incorrectly predicted as "man", assign to man ids
+      else if(d <= bias * 10 && incorrectIds.indexOf(d) > -1) pred_man_ids.push(d);
+    }
+  });
+
+  console.log("Woman ids:", pred_woman_ids);
+  console.log("Man ids:", pred_man_ids);
 }
 
 function determineClasses(id, bias, incorrectIdsArray) {

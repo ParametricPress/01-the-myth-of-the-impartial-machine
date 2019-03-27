@@ -11,12 +11,12 @@ const d3 = require('d3');
 const PCTFORMAT = d3.format('.0%');
 
 const size = 400;
-const margin = 16;
+const margin = 20;
 const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const xPos = d3.scaleLinear()
   .domain([1, 5])
-  .range([0, (size - margin)/2]);
+  .range([margin, (size/2) - margin]);
 
 class BiasAmplifiedGuessWomanComponent extends D3Component {
 
@@ -33,7 +33,7 @@ class BiasAmplifiedGuessWomanComponent extends D3Component {
       .style('height', 'auto');
 
     const g = svg.append('g')
-      .attr('transform', 'translate(' + margin + ',' + margin + ')');
+      .attr('transform', 'translate(0,' + margin + ')');
 
     const dataCircles = this.dataCircles = g.selectAll('.dataPoint')
       .data(ids)
