@@ -62,7 +62,7 @@ class BiasAmplifiedGuessWomanComponent extends D3Component {
     this.errorLabel = svg.append('text')
       .attr('class', 'errorLabel')
       .attr('x', width / 2)
-      .attr('y', 60)
+      .attr('y', 70)
       .text('Error: ' + PCTFORMAT(1 - props.bias));
   }
 
