@@ -10,8 +10,9 @@ const d3 = require('d3');
 
 const PCTFORMAT = d3.format('.0%');
 
-const size = 400;
-const margin = 20;
+const height = 100;
+const width = height * 2;
+const margin = 25;
 const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let pred_woman_ids;
 let pred_man_ids;
@@ -20,11 +21,11 @@ let pred_man_ids;
 
 const xPosWoman = d3.scaleLinear()
   .domain([1, 5])
-  .range([margin, (size/2) - margin]);
+  .range([margin, (width/2) - margin]);
 
 const xPosMan = d3.scaleLinear()
   .domain([1, 5])
-  .range([(size/2) + margin, size - margin]);
+  .range([(width/2) + margin, width - margin]);
 
 class BiasAmplifiedPredictionComponent extends D3Component {
 
@@ -35,13 +36,13 @@ class BiasAmplifiedPredictionComponent extends D3Component {
    */
   initialize(node, props) {
     const svg = this.svg = d3.select(node).append('svg');
-    svg.attr('viewBox', `0 0 ${size} ${size}`)
+    svg.attr('viewBox', `0 0 ${width} ${height}`)
       .attr('id', props.id)
       .style('width', '100%')
       .style('height', 'auto');
 
-    const g = svg.append('g')
-      .attr('transform', 'translate(0,' + margin + ')');
+    const g = svg.append('g');
+      // .attr('transform', 'translate(0,' + margin + ')');
 
     let incorrectIds = chooseIncorrectPreds(props.modelAccuracy);
     determinePositions(props.bias, incorrectIds);
@@ -51,29 +52,29 @@ class BiasAmplifiedPredictionComponent extends D3Component {
       .enter()
       .append('circle')
       .attr('class', function(d, i) { return determineClasses(d, props.bias, incorrectIds); })
-      .attr('r', 2)
+      .attr('r', 3)
       .attr('cx', function(d, i) { if(pred_woman_ids.indexOf(d) > -1) return (pred_woman_ids.indexOf(d) + 1) % 5 === 0 ? xPosWoman(5) : xPosWoman((pred_woman_ids.indexOf(d) + 1) % 5);
                                    else return (pred_man_ids.indexOf(d) + 1) % 5 === 0 ? xPosMan(5) : xPosMan((pred_man_ids.indexOf(d) + 1) % 5);
                                  })
-      .attr('cy', function(d, i) { return d <= 5 || pred_man_ids.indexOf(d) > -1 ? 10 : 20});
+      .attr('cy', function(d, i) { return d <= 5 || pred_man_ids.indexOf(d) > -1 ? 20 : 30});
 
     // add labels for woman and man
     svg.append('text')
       .attr('class', 'genderLabel')
-      .attr('x', size / 4 + margin)
-      .attr('y', 16)
+      .attr('x', width * 0.25)
+      .attr('y', 8)
       .text('Woman');
 
     svg.append('text')
       .attr('class', 'genderLabel')
-      .attr('x', size * 0.75 + margin)
-      .attr('y', 16)
+      .attr('x', width * 0.75)
+      .attr('y', 8)
       .text('Man');
 
     // add error rate label
     this.errorLabel = svg.append('text')
       .attr('class', 'errorLabel')
-      .attr('x', size / 2)
+      .attr('x', width / 2)
       .attr('y', 60)
       .text('Error: ' + PCTFORMAT(1 - props.modelAccuracy));
   }

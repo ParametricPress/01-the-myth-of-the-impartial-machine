@@ -131,19 +131,21 @@ Having representative training data is the ideal scenario. In a more realistic s
     [Range value:modelAccuracy min:0.5 max:1 step:0.1 /]
   [/div]
 
-  [div]
-    Data
-    [BiasAmplifiedData id:"biasAmplifiedDataPlot" bias:bias /]
-  [/div]
+  [div className:"plots"]
+    [div]
+      [div className:"plotTitle"]Data[/div]
+      [BiasAmplifiedData id:"biasAmplifiedDataPlot" bias:bias /]
+    [/div]
 
-  [div]
-    Model Predictions
-    [BiasAmplifiedPrediction id:"biasAmplifiedPredictionPlot" bias:bias modelAccuracy:modelAccuracy /]
-  [/div]
+    [div]
+      [div className:"plotTitle"]Model Predictions[/div]
+      [BiasAmplifiedPrediction id:"biasAmplifiedPredictionPlot" bias:bias modelAccuracy:modelAccuracy /]
+    [/div]
 
-  [div]
-    If Model Guessed "Woman" All the Time
-    [BiasAmplifiedGuessWoman id:"biasAmplifiedGuessWomanPlot" bias:bias /]
+    [div]
+      [div className:"plotTitle"]If Model Guessed "Woman" All the Time[/div]
+      [BiasAmplifiedGuessWoman id:"biasAmplifiedGuessWomanPlot" bias:bias /]
+    [/div]
   [/div]
 [/FullWidth]
 

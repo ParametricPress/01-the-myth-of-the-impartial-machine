@@ -11,7 +11,10 @@ input {
 	width: 100%;
 }
 
-
+.plotTitle {
+	width: 100%;
+	text-align: center;
+}
 
 
 /********* STYLES FOR SAMPLING ERROR ITERACTIVE ************/
@@ -90,6 +93,18 @@ input {
 
 
 /********* STYLES FOR BIAS AMPLIFIED THROUGH ALGORITHMS INTERACTIVE *************/
+.amplifiedBiasInteractive .plots{
+	width: 100%;
+	display: grid;
+	grid-template-columns: 20% 40% 40%;
+	grid-template-rows: 300px;
+	grid-gap: 15px;
+}
+
+.amplifiedBiasInteractive .slider {
+	width: 30%;
+}
+
 .dataPoint.woman {
 	fill: #000;
 }
@@ -104,11 +119,11 @@ input {
 
 .genderLabel {
 	text-anchor: middle;
-	font-size: 0.25em;
+	font-size: 0.3em;
 	text-decoration: underline;
 }
 
 .errorLabel {
 	text-anchor: middle;
-	font-size: 0.25em;
+	font-size: 0.3em;
 }
