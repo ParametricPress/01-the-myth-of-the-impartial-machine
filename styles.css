@@ -1,5 +1,7 @@
+.interactive div,
+.interactive span,
 text {
-	font-family: Reforma;
+	font-family: 'Graphik Web';
 }
 
 button {
@@ -9,6 +11,10 @@ button {
 input {
 	display: block;
 	width: 100%;
+}
+
+.slider span {
+	font-size: 0.9em;
 }
 
 .plotTitle {
@@ -83,7 +89,7 @@ input {
 }
 
 .barValueLabels {
-	fill: red;
+	fill: #4801ff;
 	font-size: 12px;
 	/*text-align: center;*/
 	text-anchor: middle;
@@ -114,7 +120,7 @@ input {
 }
 
 .dataPoint.incorrect {
-	stroke: red;
+	stroke: #4801ff;
 }
 
 .genderLabel {
