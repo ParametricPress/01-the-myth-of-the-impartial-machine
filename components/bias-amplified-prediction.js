@@ -84,7 +84,12 @@ class BiasAmplifiedPredictionComponent extends D3Component {
     if (props !== oldProps.bias) {
       let incorrectIds = chooseIncorrectPreds(props.modelAccuracy);
       determinePositions(props.bias, incorrectIds);
-      this.dataCircles.attr('class', function(d, i) { return determineClasses(d, props.bias, incorrectIds); });
+      this.dataCircles.attr('class', function(d, i) { return determineClasses(d, props.bias, incorrectIds)})
+        .attr('cx', function(d, i) { if(pred_woman_ids.indexOf(d) > -1) return (pred_woman_ids.indexOf(d) + 1) % 5 === 0 ? xPosWoman(5) : xPosWoman((pred_woman_ids.indexOf(d) + 1) % 5);
+                                     else return (pred_man_ids.indexOf(d) + 1) % 5 === 0 ? xPosMan(5) : xPosMan((pred_man_ids.indexOf(d) + 1) % 5);
+                                   })
+        .attr('cy', function(d, i) { return d <= 5 || pred_man_ids.indexOf(d) > -1 ? 20 : 30});
+
       this.errorLabel.text('Error: ' + PCTFORMAT(1 - props.modelAccuracy));
     }
   }
