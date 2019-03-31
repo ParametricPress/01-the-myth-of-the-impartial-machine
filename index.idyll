@@ -117,7 +117,7 @@ Having representative training data is the ideal scenario. In a more realistic s
   [var name:"modelAccuracy" value:0.7 /]
 
   [div className:"slider"]
-    Bias: [Display value:`bias` format:".0%" /]
+    Bias: [Display value:`bias*100` format:".0f" /] / [Display value:`100 - bias*100` format:".0f" /]
     [Range value:bias min:0.5 max:1 step:0.1 /]
   [/div]
 
