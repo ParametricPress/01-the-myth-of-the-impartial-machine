@@ -141,6 +141,8 @@ Having representative training data is the ideal scenario. In a more realistic s
       [div className:"plotTitle"]If Model Guessed "Woman" All the Time[/div]
       [BiasAmplifiedGuessWoman id:"biasAmplifiedGuessWomanPlot" bias:bias /]
     [/div]
+
+    [div id:"biasAmplifiedConclusion"]Model would [span][/span] be incentivized to amplify bias.[/div]
   [/div]
 [/FullWidth]
 

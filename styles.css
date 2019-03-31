@@ -103,7 +103,7 @@ input {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 20% 40% 40%;
-	grid-template-rows: 300px;
+	grid-template-rows: 300px 50px;
 	grid-gap: 15px;
 }
 
@@ -132,4 +132,12 @@ input {
 .errorLabel {
 	text-anchor: middle;
 	font-size: 0.3em;
+}
+
+#biasAmplifiedConclusion {
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 2;
+	grid-column-end: 4;
+	text-align: center;
 }
