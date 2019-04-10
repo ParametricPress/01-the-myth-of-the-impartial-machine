@@ -14,9 +14,6 @@
   }, {
     name: "Shuyan Wu",
     role: ''
-  }, {
-    name: "Victoria Uren",
-    role: ''
   }]`
   doi:""
   archive:""
@@ -154,8 +151,13 @@ Consider a predictive policing algorithm used to determine the optimal allocatio
 
 // [VISUAL: FEEDBACK LOOPS TABLE]
 
+[RecidivismTable /]
+
 // [VISUAL: INTERACTIVE ILLUSTRATION OF FEEDBACK LOOPS]
-![feedback loops](static/images/feedback-loops.png)
+
+[Right fullWidth:true]
+  ![feedback loops](static/images/feedback-loops.png)
+[/Right]
 
 
 Feedback loops are especially problematic when sub-groups in the training data exhibit large statistical differences (e.g. one precinct having a much higher crime rate than others); a model trained on such data will quickly “run away” and make predictions that fall into the majority group only, thereby generating ever-more lopsided data that are fed back into the model. Even when sub-groups are statistically similar, feedback loops can still lead to noisy and less accurate predictions. Algorithms where the predictive outcome determines what feedback the algorithm receives -- e.g. recidivism prediction, language translation, and social media news feeds -- should always be diligently monitored for the presence of feedback loops bias.
@@ -238,5 +240,13 @@ Another important point is being transparent and open about what exactly a ML mo
 
 Algorithms are being used to recommend what to watch next on Netflix, filter out spam from inboxes, and offer directions that help drivers avoid traffic.  They are also being used to determine whether parole should be granted, which neighborhoods should be policed more heavily, if children are being abused, and who should be hired.  The stakes are real when it comes to how decisions made by ML and AI models are impacting people’s lives and if trends continue, these algorithms will be increasingly used in making these decisions.  Bias in ML imposes serious costs on both individuals and society as a whole by unfairly denying people opportunities while perpetuating stereotypes and inequities.  Tackling bias is a challenging problem for which there are no simple solutions or clear cut answers.  But it is imperative that those building ML models do so by using more representative data, evaluating results against various different definitions of accuracy and being more aware of their own biases.  ML and AI will indeed change the world; let’s make sure they change the world for the better.
 
+
+[AuthorBio]
+**Alice Feng** TK TK  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nunc fringilla massa dignissim consectetur. Sed quis tristique tellus. Pellentesque quis erat placerat, varius quam id, auctor dolor.
+
+**Shuyan Wu**  TK TK  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nunc fringilla massa dignissim consectetur. Sed quis tristique tellus. Pellentesque quis erat placerat, varius quam id, auctor dolor.
+
+Edited by Victoria Uren.
+[/AuthorBio]
 
 [NextArticle fullWidth:true /]
