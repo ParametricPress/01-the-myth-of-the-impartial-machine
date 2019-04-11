@@ -63,6 +63,39 @@ class RecidivismTable extends React.Component {
                 </tbody>
               </table>
             </div>
+            <div className = "recidivism-table groupB">
+              <div>Model Prediction</div>
+              <table>
+                <thead>
+                  <tr>
+                    <td></td>
+                    <td>Low Risk</td>
+                    <td>High Risk</td>
+                    <td>Total</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Doesn't Reoffend</td>
+                    <td>20</td>
+                    <td>20</td>
+                    <td>40</td>
+                  </tr>
+                  <tr>
+                    <td>Reoffends</td>
+                    <td>20</td>
+                    <td>40</td>
+                    <td>60</td>
+                  </tr>
+                  <tr>
+                    <td>Total</td>
+                    <td>40</td>
+                    <td>60</td>
+                    <td>100</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         );
     }
