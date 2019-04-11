@@ -1,58 +1,68 @@
 const React = require('react');
 
+const accuracy = 0.666;
 
 class RecidivismTable extends React.Component {
     constructor(props) {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.state = {
-          lowRiskNoReoffense: 20,
-          highRiskNoReoffense: 20,
-          lowRiskReoffense: 20,
-          highRiskReoffense: 40
+          totalSampleSize: 100,
+          totalNoReoffense: 70,
+          totalReoffense: 30,
+          totalHighRisk: 30,
+          highRiskNoReoffense: 10,
+          highRiskReoffense: 20
         }
     }
 
     onChange(e) {
       const newValue = +e.target.value;
       this.setState({
-        highRiskNoReoffense: Math.round(0.33 * newValue),
-        highRiskReoffense: Math.round(0.666 * newValue)
+        totalHighRisk: newValue,
+        highRiskNoReoffense: Math.round(accuracy * newValue),
+        highRiskReoffense: Math.round((1 - accuracy) * newValue),
       })
     }
 
     render() {
         const { hasError, idyll, updateProps, ...props } = this.props;
-        const { lowRiskNoReoffense, lowRiskReoffense, highRiskNoReoffense, highRiskReoffense } = this.state;
+        const { totalSampleSize, totalNoReoffense, totalReoffense, totalHighRisk, highRiskNoReoffense, highRiskReoffense } = this.state;
         return (
-          <div className="recidivism-table">
-            <div>Model Prediction</div>
-            <table>
-              <tr>
-                <td></td>
-                <td>Low Risk</td>
-                <td>High Risk</td>
-                <td>Total</td>
-              </tr>
-              <tr>
-                <td>Doesn't Reoffend</td>
-                <td>{lowRiskNoReoffense}</td>
-                <td>{highRiskNoReoffense}</td>
-                <td>{lowRiskNoReoffense + highRiskNoReoffense}</td>
-              </tr>
-              <tr>
-                <td>Reoffends</td>
-                <td>{lowRiskReoffense}</td>
-                <td>{highRiskReoffense}</td>
-                <td>{lowRiskReoffense + highRiskReoffense}</td>
-              </tr>
-              <tr>
-                <td>Total</td>
-                <td>{lowRiskReoffense + lowRiskNoReoffense}</td>
-                <td><input type="text" value={highRiskReoffense + highRiskNoReoffense} onChange={this.onChange} /> </td>
-                <td>{lowRiskReoffense + highRiskReoffense + lowRiskNoReoffense + highRiskNoReoffense}</td>
-              </tr>
-            </table>
+          <div className="recidivism-tables">
+            <div className = "recidivism-table groupA">
+              <div>Model Prediction</div>
+              <table>
+                <thead>
+                  <tr>
+                    <td></td>
+                    <td>Low Risk</td>
+                    <td>High Risk</td>
+                    <td>Total</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Doesn't Reoffend</td>
+                    <td>{totalNoReoffense - highRiskNoReoffense}</td>
+                    <td>{highRiskNoReoffense}</td>
+                    <td>{totalNoReoffense}</td>
+                  </tr>
+                  <tr>
+                    <td>Reoffends</td>
+                    <td>{totalReoffense - highRiskReoffense}</td>
+                    <td>{highRiskReoffense}</td>
+                    <td>{totalReoffense}</td>
+                  </tr>
+                  <tr>
+                    <td>Total</td>
+                    <td>{totalSampleSize - totalHighRisk}</td>
+                    <td><input type="text" value={totalHighRisk} onChange={this.onChange} /> </td>
+                    <td>{totalSampleSize}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         );
     }

@@ -151,8 +151,6 @@ Consider a predictive policing algorithm used to determine the optimal allocatio
 
 // [VISUAL: FEEDBACK LOOPS TABLE]
 
-[RecidivismTable /]
-
 // [VISUAL: INTERACTIVE ILLUSTRATION OF FEEDBACK LOOPS]
 
 [Right fullWidth:true]
@@ -215,7 +213,8 @@ One can then apply model constraints to make the algorithm satisfy some fairness
 // [VISUAL: INTERACTIVE FAIRNESS METRICS TOGGLE (similar to Nature’s recidivism example or Google’s loan-grant example)?]
 ![fairness](static/images/fairness.png)
 
-[PerformanceMetricTable id:"groupB" totalRearrested:60 totalNotRearrested:40 totalHighRisk:60 /]
+[RecidivismTable /]
+// [PerformanceMetricTable id:"groupB" totalRearrested:60 totalNotRearrested:40 totalHighRisk:60 /]
 
 
 ### 4) Going beyond the data / algorithm
