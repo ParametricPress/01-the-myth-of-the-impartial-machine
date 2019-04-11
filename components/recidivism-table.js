@@ -18,6 +18,8 @@ class RecidivismTable extends React.Component {
 
     onChange(e) {
       const newValue = +e.target.value;
+      // do some error handling here
+
       this.setState({
         totalHighRisk: newValue,
         highRiskNoReoffense: Math.round(accuracy * newValue),
@@ -57,7 +59,7 @@ class RecidivismTable extends React.Component {
                   <tr>
                     <td>Total</td>
                     <td>{totalSampleSize - totalHighRisk}</td>
-                    <td><input type="text" value={totalHighRisk} onChange={this.onChange} /> </td>
+                    <td><input type="text" autoComplete="off" value={totalHighRisk} onChange={this.onChange} /> </td>
                     <td>{totalSampleSize}</td>
                   </tr>
                 </tbody>
