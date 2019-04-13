@@ -42,7 +42,8 @@ class RecidivismTable extends React.Component {
         return (
           <div className="recidivism-tables">
             <div className = "recidivism-table groupA">
-              <div>Model Prediction</div>
+              <div className="groupLabel">Group A</div>
+              <div className="predictionLabel">Model Prediction</div>
               <table>
                 <thead>
                   <tr>
@@ -68,14 +69,15 @@ class RecidivismTable extends React.Component {
                   <tr>
                     <td>Total</td>
                     <td>{totalSampleSize - totalHighRisk_a}</td>
-                    <td><input type="text" autoComplete="off" value={totalHighRisk_a} onChange={this.onChange} /> </td>
+                    <td><input type="number" autoComplete="off" min="0" max="100" value={totalHighRisk_a} onChange={this.onChange} /> </td>
                     <td>{totalSampleSize}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div className = "recidivism-table groupB">
-              <div>Model Prediction</div>
+              <div className="groupLabel">Group B</div>
+              <div className="predictionLabel">Model Prediction</div>
               <table>
                 <thead>
                   <tr>

@@ -153,15 +153,21 @@ input {
 	grid-gap: 15px;
 }
 
-.recidivism-table div {
+.recidivism-table .groupLabel {
+	font-weight: bold;
+	text-align: center;
+}
+
+.recidivism-table .predictionLabel {
 	margin-left: 220px;
 }
 
 .recidivism-table input {
 	width: 80px;
+	height: 37px;
 	margin: 2px;
 }
 
 .recidivism-table.accuracyMetrics {
-	margin-top: 40px;
+	margin-top: 80px;
 }
