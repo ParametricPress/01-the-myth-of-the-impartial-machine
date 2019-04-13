@@ -27,7 +27,7 @@
 
   Artificial intelligence and machine learning are often used interchangeably but there are in fact differences between the two.
 
-  ![ML as a subset of AI](static/images/ai-ml-subset.png)
+  ![ML as a subset of AI](static/images/ai-ml.png)
 
   [br/]
 
@@ -57,11 +57,17 @@ Being able to use data to meaningfully answer questions via machine learning req
 [/Aside]
 
 1. **Data gathering.**  All machine learning models require data as inputs.  In today’s increasingly digitized world, data can be derived from various sources including user interactions on a website, collections of photo images and sensor recordings.
+![ML pipeline step 1](static/images/ml-pipeline-step1.png)
 2. **Data preparation.** Data collected are rarely in a usable state as-is. Data often need to be cleaned, transformed and checked for errors before they are ready to be fed into a model.
+![ML pipeline step 2](static/images/ml-pipeline-step2.png)
 3. **Split dataset into training and testing sets.** The training dataset will be used for building and training the model while the testing dataset will be used to evaluate how well the model performs. It is important to evaluate the model on data it has not seen before so that it does not learn the idiosyncrasies of the data it was trained on.
+![ML pipeline step 3](static/images/ml-pipeline-step3.png)
 4. **Fit and train models.** This is the step where various types of ML models are built and applied to the training data.  Models are iterated on to improve their performance with the goal of generating the most accurate predictions possible.
+![ML pipeline step 4](static/images/ml-pipeline-step4.png)
 5. **Evaluate model on the test dataset.**  The top performing model is used on the testing data to get a sense of how the model will perform on real world data it’s never seen before.  Based on the results, further refinement and tuning of the model may be needed.
+![ML pipeline step 5](static/images/ml-pipeline-step5.png)
 6. **Make predictions!**  Once the model is finalized, it can begin to be used to answer the question it was designed for.
+![ML pipeline step 6](static/images/ml-pipeline-step6.png)
 
 
 
@@ -164,7 +170,7 @@ Feedback loops are especially problematic when sub-groups in the training data e
 It should be clear by this point that different sources of bias -- whether through data collection or through algorithms themselves -- are interrelated. When an algorithm is fed training data where one group dominates the sample, it is incentivized to prioritize learning about the dominant group and over-predict the number of observations that belong to the dominant group.  If the data were balanced, the model would have nothing to gain by over-predicting that group.  Similarly, bias can be perpetuated through a feedback loop if the model’s own flawed predictions are repeatedly fed back into it, becoming its own biased source data for the next round of predictions. In the machine learning context, it’s no longer just garbage in, garbage out -- when there’s garbage in, more and more garbage may be generated through the ML pipeline.
 
 // [VISUAL: BIAS AMPLIFICATION & INTERACTION]
-![amplification](static/images/amplification-interaction.png)
+[Video files:`['static/animations/bias-amplification-loop.mp4']` width:600 height:400 /]
 
 
 
@@ -178,21 +184,25 @@ How does one actually tackle bias in the ML pipeline? While a suitable fix depen
 
 
 // [VISUAL: ADDING DATA FROM UNDER-REPRESENTED GROUPS]
-[Video files:`['static/animations/adjust-unbiased-sample.mp4']` width:600 height:400 /]
-
-![under-represented](static/images/under-represented.png)
+[Video files:`['static/animations/adjust-unbalanced-sample.mp4']` width:600 height:400 /]
 
 // [VISUAL: NEUTRALIZING GENDER ASSOCIATION BETWEEN WORD PAIRS]
-![gender-association](static/images/gender-association.png)
+//![gender-association](static/images/gender-association.png)
+[Video files:`['static/animations/adjust-words-association.mp4']` width:600 height:400 /]
 
 ### 2) De-biasing the algorithm
-In addition to de-biasing the data, one can apply model interventions to directly offset algorithms’ tendency to amplify bias. One intervention method is to impose model constraints that specify the statistical distribution of predictions. For example, researchers have been able to reduce bias amplification in image-labeling algorithms by nearly 50% by adding model constraints that required the proportion of images predicted to be male versus female to fall within 5% of the ratio observed in the training dataset. This approach can be particularly useful to reduce bias amplification when one is using imbalanced training datasets. Another intervention method that is particularly useful to combat feedback loops is to specify how outputs generated from model predictions should be fed back into the algorithm. Going back to the predictive policing example, instead of letting every newly observed crime instance be fed back into the algorithm, one can impose a sampling rule such that the more likely police are sent to a particular precinct, the less likely data observed from those assignments are incorporated back into the algorithm.
+In addition to de-biasing the data, one can apply model interventions to directly offset algorithms’ tendency to amplify bias. One intervention method is to impose model constraints that specify the statistical distribution of predictions. For example, researchers have been able to reduce bias amplification in image-labeling algorithms by nearly 50% by adding model constraints that required the proportion of images predicted to be male versus female to fall within 5% of the ratio observed in the training dataset. This approach can be particularly useful to reduce bias amplification when one is using imbalanced training datasets.
+
 
 // [VISUAL: CONSTRAINT ON MODEL PREDICTIONS]
-![predition-constraints](static/images/predition-constraints.png)
+//![predition-constraints](static/images/predition-constraints.png)
+[Video files:`['static/animations/adjust-predictions.mp4']` width:600 height:400 /]
+
+Another intervention method that is particularly useful to combat feedback loops is to specify how outputs generated from model predictions should be fed back into the algorithm. Going back to the predictive policing example, instead of letting every newly observed crime instance be fed back into the algorithm, one can impose a sampling rule such that the more likely police are sent to a particular precinct, the less likely data observed from those assignments are incorporated back into the algorithm.
 
 //  [VISUAL: DROPPING SOME NEWLY OBSERVED DATA]
-![dropping-new-data](static/images/dropping-new-data.png)
+//![dropping-new-data](static/images/dropping-new-data.png)
+[Video files:`['static/animations/adjust-feedback-loop.mp4']` width:600 height:400 /]
 
 
 ### 3) Evaluating performance against metrics other than just accuracy
@@ -215,7 +225,7 @@ One can then apply model constraints to make the algorithm satisfy some fairness
 Beyond tackling bias directly in the data and / or the algorithm, tech companies have also begun adopting broader measures. One measure is to establish ethical AI guidelines, where minimizing bias is included as part of a company’s overarching AI objectives. (As ML is a subset of AI, the same ethical guidelines would then apply to ML product developments as well.) Google explicitly lists “Avoid creating or reinforcing unfair bias” as the second principle for AI applications. Microsoft similarly includes “AI systems should treat all people fairly” among its AI principles. Another measure is to conduct third-party algorithm audits to ensure each AI product satisfies a company’s AI guidelines; a growing number of data analytics and consulting firms are starting to offer such auditing services. An even broader measure that targets the human source is to promote diversity in the AI / ML workforce. As of 2018, only 13% of AI CEOs are women, and less than 7% of tenure-track engineering faculty identify as either African American or Hispanic. Black in AI and AI4ALL are budding examples of initiatives to change the current landscape by fostering a more diverse and inclusive community of AI / ML practitioners. While these measures alone do not eliminate bias completely from machine learning, they do reflect how companies and the broader AI / ML community are increasingly aware of the need to address bias as AI / ML become ever-more widely used.
 
 // [VISUAL: THREE SIDE-BY-SIDE ILLUSTRATIONS OF ALTERNATIVE MEASURES]
-![alternatives](static/images/alternatives.png)
+![alternatives](static/images/alternative-measures.png)
 
 
 
