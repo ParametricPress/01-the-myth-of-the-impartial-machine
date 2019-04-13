@@ -141,3 +141,27 @@ input {
 	grid-column-end: 4;
 	text-align: center;
 }
+
+
+
+
+
+/********* STYLES FOR ACCURACY METRICS INTERACTIVE *************/
+.recidivism-tables {
+	display: grid;
+	grid-template-columns: 30% 30% 30%;
+	grid-gap: 15px;
+}
+
+.recidivism-table div {
+	margin-left: 220px;
+}
+
+.recidivism-table input {
+	width: 80px;
+	margin: 2px;
+}
+
+.recidivism-table.accuracyMetrics {
+	margin-top: 40px;
+}

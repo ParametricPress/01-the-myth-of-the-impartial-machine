@@ -209,13 +209,7 @@ One can then apply model constraints to make the algorithm satisfy some fairness
 * Same “parity” -- Requiring that certain performance measures be held equal across groups. In the recidivism example, the algorithm would be required to achieve the same, say, false positive rate for white and black defendants.
 * Same “calibration” -- Requiring that certain performance measure be held equal across groups, among observations with the same predicted risk profile. In the recidivism example, the algorithm would be calibrated such that, among defendants that were given the same risk score, the proportion that is predicted to reoffend is the same across groups.
 
-
-// [VISUAL: INTERACTIVE FAIRNESS METRICS TOGGLE (similar to Nature’s recidivism example or Google’s loan-grant example)?]
-![fairness](static/images/fairness.png)
-
-[RecidivismTable /]
-// [PerformanceMetricTable id:"groupB" totalRearrested:60 totalNotRearrested:40 totalHighRisk:60 /]
-
+[RecidivismTable fullWidth:true /]
 
 ### 4) Going beyond the data / algorithm
 Beyond tackling bias directly in the data and / or the algorithm, tech companies have also begun adopting broader measures. One measure is to establish ethical AI guidelines, where minimizing bias is included as part of a company’s overarching AI objectives. (As ML is a subset of AI, the same ethical guidelines would then apply to ML product developments as well.) Google explicitly lists “Avoid creating or reinforcing unfair bias” as the second principle for AI applications. Microsoft similarly includes “AI systems should treat all people fairly” among its AI principles. Another measure is to conduct third-party algorithm audits to ensure each AI product satisfies a company’s AI guidelines; a growing number of data analytics and consulting firms are starting to offer such auditing services. An even broader measure that targets the human source is to promote diversity in the AI / ML workforce. As of 2018, only 13% of AI CEOs are women, and less than 7% of tenure-track engineering faculty identify as either African American or Hispanic. Black in AI and AI4ALL are budding examples of initiatives to change the current landscape by fostering a more diverse and inclusive community of AI / ML practitioners. While these measures alone do not eliminate bias completely from machine learning, they do reflect how companies and the broader AI / ML community are increasingly aware of the need to address bias as AI / ML become ever-more widely used.
