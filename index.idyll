@@ -1,12 +1,12 @@
-[meta title:"Bias in Machine Learning" description:"Much hype these days about what ML/AI can achieve and a rush to use it everywhere but there have also been incidents where models have produced shockingly flawed results." /]
+[meta title:"The Myth of the Impartial Machine" description:"Much hype these days about what ML/AI can achieve and a rush to use it everywhere but there have also been incidents where models have produced shockingly flawed results." /]
 
 [Nav fullWidth:true /]
 
 [Header
-  title:`["The Bias of", "Algorithms"]`
-  longTitle:`["Bias in Machine", "Learning"]`
+  title:`["Machine", "Partiality"]`
+  longTitle:`["The Myth of the", "Impartial Machine"]`
   date:"April 15, 2019"
-  dek:"Much hype these days about what ML/AI can achieve and a rush to use it everywhere but there have also been incidents where models have produced shockingly flawed results."
+  dek:"Amidst the rush to deploy artificially intelligent software at scale are incidents where probabilistic models have produced shockingly flawed results."
   fullWidth:true
   headerImage:"static/images/potential-for-violence.png"
   authors:`[{
@@ -22,9 +22,12 @@
 /]
 
 
+From voice assistants to image recognition, fraud detection to social media feeds, machine learning (ML) and artificial intelligence (AI) are becoming an increasingly important part of society.  The two fields have made enormous strides in recent years thanks to gains in computing power and the volume of data being generated.  Such algorithms are being used in fields as varied as medicine, agriculture, insurance, transportation and art, and the number of companies rushing to embrace what ML and AI can offer has increased rapidly in recent years.  According to Adobe, 15% of companies are already using AI but a further 31% are planning to do so in the next 12 months.  Investment in such models is also forecasted to grow from $12 billion in 2017 to $57.6 billion by 2021.  Heralded as being more accurate, consistent and objective than human judgment, the promises and expectations of what ML and AI can achieve have never been greater.
+
+
 [Aside]
 
-  ### What’s the difference between Artificial Intelligence and Machine Learning?
+  **What’s the difference between Artificial Intelligence and Machine Learning?**
 
   Artificial intelligence and machine learning are often used interchangeably but there are in fact differences between the two.
 
@@ -39,9 +42,6 @@
 
 [/Aside]
 
-From voice assistants to image recognition, fraud detection to social media feeds, machine learning (ML) and artificial intelligence (AI) are becoming an increasingly important part of society.  The two fields have made enormous strides in recent years thanks to gains in computing power and the volume of data being generated.  Such algorithms are being used in fields as varied as medicine, agriculture, insurance, transportation and art, and the number of companies rushing to embrace what ML and AI can offer has increased rapidly in recent years.  According to Adobe, 15% of companies are already using AI but a further 31% are planning to do so in the next 12 months.  Investment in such models is also forecasted to grow from $12 billion in 2017 to $57.6 billion by 2021.  Heralded as being more accurate, consistent and objective than human judgment, the promises and expectations of what ML and AI can achieve have never been greater.
-
-
 However, for every neural network that can defeat Jeopardy champions and outplay Go masters, there are other well-documented instances where these algorithms have produced highly disturbing results.  Facial-analysis programs were found to have an error rate of 20 to 34 percent when trying to determine the gender of African-American women compared to an error rate of less than 1 percent for white men.  ML algorithms used to predict which criminals are most likely to reoffend tended to incorrectly flag black defendants as being high risk at twice the rate of white defendants.  A word embedding model used to help machines determine the meaning of words based on their similarity likewise associated men with being computer programmers and women with homemakers.  If data-trained models are supposed to be objective and impartial, how did these algorithms get things so wrong?  Can such bias be fixed?
 
 
@@ -54,6 +54,7 @@ Being able to use data to meaningfully answer questions via machine learning req
 
 [Aside]
   // [VISUAL HERE OF ML PIPELINE]
+  Download this overview as a PNG:
   ![ml pipeline](static/images/ml-pipeline.png)
 [/Aside]
 
@@ -68,6 +69,10 @@ Being able to use data to meaningfully answer questions via machine learning req
 
 ## Sources of bias
 There are two key ways bias may be introduced and amplified through the use of machine learning: (1) bias in the underlying data and (2) bias that are amplified through algorithms.
+
+[Aside]
+  [Recirc /]
+[/Aside]
 
 ### 1) Biased data
 
@@ -99,6 +104,7 @@ When one examines a data sample, it is imperative to check whether the sample is
 
 **Data that are representative but still biased.**[br/]
 What if a dataset is representative of its target population? No more worries about bias coming through the data, right? Not so fast -- a representative dataset may still be biased to the extent that it reflects any underlying/historical social bias. A recruiting algorithm once used by Amazon was found to have disproportionately favored male candidates. The data used to train the algorithm were based on resumes collected over a 10-year period. Because the tech industry was traditionally dominated by men, a majority of the resumes were submitted by men. Therefore, even though the dataset was “representative” of the historical applicant pool, it captured the inherent gender bias and passed it on to the recruiting algorithm. Representative but biased data is in some sense a more problematic issue than non-representative data, since fixing the former would require addressing biases that are inherent in society.
+
 
 ### 2) Bias that are amplified through algorithms
 Machine learning algorithms themselves may amplify bias if they make predictions that are more skewed than the training data. Such amplification often occurs through two mechanisms: 1) algorithms incentivized to predict observations to belong to the majority group , and 2) runaway feedback loops. The two stylized examples below illustrate these mechanisms.
@@ -147,6 +153,10 @@ Having representative training data is the ideal scenario. In a more realistic s
 
 **Runaway feedback loops.**[br/]
 In the previous image-classification example, bias amplification stops at the model prediction stage. However, in machine learning models where the prediction is fed back into the model as inputs for the next round of predictions, bias can be amplified further in the form of a feedback loop.
+
+[Aside]
+  [Newsletter /]
+[/Aside]
 
 Consider a predictive policing algorithm used to determine the optimal allocation of police force across a city. Suppose the city has two precincts (A and B) and one policeman, John. Precinct A has seen 700 crime incidents over the past year, while precinct B has seen 100. Based on this historical data, the city’s predictive policing algorithm sends John to precinct A on Day 1 since that precinct has a higher predicted crime rate. John encounters three crimes and updates the training data at the end of Day 1. The updated data now shows 703 crimes in precinct A and 100 still in precinct B. On Day 2 the algorithm sends John to precinct A again since the model predicts an even higher probability of crime from the updated training data. John encounters two more crimes on Day 2 and proceeds to update the training data, and so on… the table below illustrates how the first 10 days might have unfolded under this predictive policing algorithm. It should be clear that the more John is sent to precinct A, the more instances of crime would be reported for precinct A relative to B, which causes the model to send John to precinct A even more often. If such a feedback loop runs indefinitely, the model would eventually send John to only precinct A, even though the true optimal allocation would have been to send John occasionally to precinct B.
 
