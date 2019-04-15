@@ -1,4 +1,4 @@
-[meta title:"The Myth of the Impartial Machine" description:"Much hype these days about what ML/AI can achieve and a rush to use it everywhere but there have also been incidents where models have produced shockingly flawed results." /]
+[meta title:"The Myth of the Impartial Machine" description:"Lost amidst the rush to deploy artificially intelligent software at scale are incidents where probabilistic models have produced shockingly flawed results." /]
 
 [Nav fullWidth:true /]
 
@@ -6,7 +6,7 @@
   title:`["Machine", "Partiality"]`
   longTitle:`["The Myth of the", "Impartial Machine"]`
   date:"April 15, 2019"
-  dek:"Amidst the rush to deploy artificially intelligent software at scale are incidents where probabilistic models have produced shockingly flawed results."
+  dek:"Lost amidst the rush to deploy artificially intelligent software at scale are incidents where probabilistic models have produced shockingly flawed results."
   fullWidth:true
   headerImage:"static/images/potential-for-violence.png"
   authors:`[{
@@ -54,8 +54,7 @@ Being able to use data to meaningfully answer questions via machine learning req
 
 [Aside]
   // [VISUAL HERE OF ML PIPELINE]
-  Download this overview as a PNG:
-  ![ml pipeline](static/images/ml-pipeline.png)
+  [tooltip content:"<img height='300' src='static/images/ml-pipeline.png' />"][a style:`{color: '#222'}` href:"static/images/ml-pipeline.png"]Click here to download this overview as a PNG.[/a][/tooltip]
 [/Aside]
 
 1. **Data gathering.**  All machine learning models require data as inputs.  In today’s increasingly digitized world, data can be derived from various sources including user interactions on a website, collections of photo images and sensor recordings. [inset]![ML pipeline step 1](static/images/ml-pipeline-step1.png)[/inset]
@@ -100,7 +99,10 @@ When one examines a data sample, it is imperative to check whether the sample is
 
 * **Non-sampling errors** are typically more serious and may arise from many different sources such as errors in data collection, non-response, and selection bias. Typical examples include poorly phrased data-collection questions that can cause systematic misunderstanding and/or misreporting, web-only surveys that may disproportionately leave out the elderly population and households with low levels of education and income, over-representation of people that feel particularly strongly about a subject, and responses that may not reflect one’s true opinion. Even big data are susceptible to non-sampling errors. For example, Shankar (2017) found that the United States (which accounts for 4% of the world population) contributed over 45% of the data for ImageNet, a database of more than 14 million labelled images. Meanwhile, China and India combined contribute just 3%, despite accounting for over 36% of the world population. As a result of this skewed data contribution,  image classification algorithms that use the ImageNet database would often correctly label an image of a traditional US bride with words like “bride” and “wedding” but label an image of an Indian bride with words like “costume”.
 
-[NonSamplingErrorBarChart className:"plot" /]
+// [NonSamplingErrorBarChart className:"plot" /]
+
+[SVG src:"static/svg/bias-non-sampling.svg" /]
+[caption]TK Dowload PNG.[/caption]
 
 **Data that are representative but still biased.**[br/]
 What if a dataset is representative of its target population? No more worries about bias coming through the data, right? Not so fast -- a representative dataset may still be biased to the extent that it reflects any underlying/historical social bias. A recruiting algorithm once used by Amazon was found to have disproportionately favored male candidates. The data used to train the algorithm were based on resumes collected over a 10-year period. Because the tech industry was traditionally dominated by men, a majority of the resumes were submitted by men. Therefore, even though the dataset was “representative” of the historical applicant pool, it captured the inherent gender bias and passed it on to the recruiting algorithm. Representative but biased data is in some sense a more problematic issue than non-representative data, since fixing the former would require addressing biases that are inherent in society.
