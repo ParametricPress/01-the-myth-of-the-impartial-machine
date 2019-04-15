@@ -56,18 +56,12 @@ Being able to use data to meaningfully answer questions via machine learning req
   ![ml pipeline](static/images/ml-pipeline.png)
 [/Aside]
 
-1. **Data gathering.**  All machine learning models require data as inputs.  In today’s increasingly digitized world, data can be derived from various sources including user interactions on a website, collections of photo images and sensor recordings.
-![ML pipeline step 1](static/images/ml-pipeline-step1.png)
-2. **Data preparation.** Data collected are rarely in a usable state as-is. Data often need to be cleaned, transformed and checked for errors before they are ready to be fed into a model.
-![ML pipeline step 2](static/images/ml-pipeline-step2.png)
-3. **Split dataset into training and testing sets.** The training dataset will be used for building and training the model while the testing dataset will be used to evaluate how well the model performs. It is important to evaluate the model on data it has not seen before so that it does not learn the idiosyncrasies of the data it was trained on.
-![ML pipeline step 3](static/images/ml-pipeline-step3.png)
-4. **Fit and train models.** This is the step where various types of ML models are built and applied to the training data.  Models are iterated on to improve their performance with the goal of generating the most accurate predictions possible.
-![ML pipeline step 4](static/images/ml-pipeline-step4.png)
-5. **Evaluate model on the test dataset.**  The top performing model is used on the testing data to get a sense of how the model will perform on real world data it’s never seen before.  Based on the results, further refinement and tuning of the model may be needed.
-![ML pipeline step 5](static/images/ml-pipeline-step5.png)
-6. **Make predictions!**  Once the model is finalized, it can begin to be used to answer the question it was designed for.
-![ML pipeline step 6](static/images/ml-pipeline-step6.png)
+1. **Data gathering.**  All machine learning models require data as inputs.  In today’s increasingly digitized world, data can be derived from various sources including user interactions on a website, collections of photo images and sensor recordings. [inset]![ML pipeline step 1](static/images/ml-pipeline-step1.png)[/inset]
+2. **Data preparation.** Data collected are rarely in a usable state as-is. Data often need to be cleaned, transformed and checked for errors before they are ready to be fed into a model. [inset]![ML pipeline step 2](static/images/ml-pipeline-step2.png)[/inset]
+3. **Split dataset into training and testing sets.** The training dataset will be used for building and training the model while the testing dataset will be used to evaluate how well the model performs. It is important to evaluate the model on data it has not seen before so that it does not learn the idiosyncrasies of the data it was trained on. [inset]![ML pipeline step 3](static/images/ml-pipeline-step3.png)[/inset]
+4. **Fit and train models.** This is the step where various types of ML models are built and applied to the training data.  Models are iterated on to improve their performance with the goal of generating the most accurate predictions possible. [inset]![ML pipeline step 4](static/images/ml-pipeline-step4.png)[/inset]
+5. **Evaluate model on the test dataset.**  The top performing model is used on the testing data to get a sense of how the model will perform on real world data it’s never seen before.  Based on the results, further refinement and tuning of the model may be needed. [inset]![ML pipeline step 5](static/images/ml-pipeline-step5.png)[/inset]
+6. **Make predictions!**  Once the model is finalized, it can begin to be used to answer the question it was designed for. [inset]![ML pipeline step 6](static/images/ml-pipeline-step6.png)[/inset]
 
 
 
@@ -159,9 +153,9 @@ Consider a predictive policing algorithm used to determine the optimal allocatio
 
 // [VISUAL: INTERACTIVE ILLUSTRATION OF FEEDBACK LOOPS]
 
-[Right fullWidth:true]
+// [Right fullWidth:true]
   ![feedback loops](static/images/feedback-loops.png)
-[/Right]
+// [/Right]
 
 
 Feedback loops are especially problematic when sub-groups in the training data exhibit large statistical differences (e.g. one precinct having a much higher crime rate than others); a model trained on such data will quickly “run away” and make predictions that fall into the majority group only, thereby generating ever-more lopsided data that are fed back into the model. Even when sub-groups are statistically similar, feedback loops can still lead to noisy and less accurate predictions. Algorithms where the predictive outcome determines what feedback the algorithm receives -- e.g. recidivism prediction, language translation, and social media news feeds -- should always be diligently monitored for the presence of feedback loops bias.
@@ -256,3 +250,5 @@ Edited by Victoria Uren.
 [/AuthorBio]
 
 [NextArticle fullWidth:true /]
+
+[Footer fullWidth:true /]

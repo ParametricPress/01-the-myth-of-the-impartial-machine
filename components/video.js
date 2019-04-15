@@ -19,7 +19,7 @@ class Video extends React.Component {
             <video controls={true} width={props.width} height={props.height}>
               {
                 props.files.map((file) => {
-                  <source src={file} type={`video/${getExtension(file)}`} />
+                  return <source key={file} src={file} type={`video/${getExtension(file)}`} />
                 })
               }
               Your browser doesn't support embedded videos.

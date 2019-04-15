@@ -16,8 +16,8 @@
     "d3": "^4.0.0",
     "idyll": "^4.0.7",
     "idyll-d3-component": "^2.0.0",
-    "parametric-components": "^1.0.9",
-    "parametric-styles": "^1.0.8",
+    "parametric-components": "^1.0.14",
+    "parametric-styles": "^1.0.13",
     "react-image": "^2.0.0"
   },
   "devDependencies": {
