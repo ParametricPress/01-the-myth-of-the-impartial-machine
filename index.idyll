@@ -3,11 +3,12 @@
 [Nav fullWidth:true /]
 
 [Header
-  title:`["Bias", "in ML"]`
-  longTitle:`["Bias in", "Machine Learning"]`
+  title:`["The Bias of", "Algorithms"]`
+  longTitle:`["Bias in Machine", "Learning"]`
   date:"April 15, 2019"
   dek:"Much hype these days about what ML/AI can achieve and a rush to use it everywhere but there have also been incidents where models have produced shockingly flawed results."
   fullWidth:true
+  headerImage:"static/images/potential-for-violence.png"
   authors:`[{
     name: "Alice Feng",
     role: ''
