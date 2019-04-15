@@ -37,6 +37,14 @@ video {
 	display: block;
 }
 
+ol.ml-pipeline li {
+	margin-bottom: 100px;
+}
+
+ol.ml-pipeline img {
+	max-height: 150px;
+}
+
 
 /********* STYLES FOR SAMPLING ERROR ITERACTIVE ************/
 .samplingErrorsInteractive {
@@ -189,7 +197,7 @@ video {
 /********* STYLES FOR ACCURACY METRICS INTERACTIVE *************/
 .recidivism-tables {
 	display: grid;
-	grid-template-columns: 30% 30% 30%;
+	grid-template-columns: 33% 33% 33%;
 	grid-gap: 15px;
 	padding: 2em;
 	background: #222;
@@ -227,4 +235,17 @@ video {
 
 .recidivism-table.accuracyMetrics {
 	margin-top: 70px;
+}
+
+/** Mobile styles */
+
+@media all and (max-width: 1000px) {
+	ol.ml-pipeline li {
+		margin-bottom: 0;
+	}
+	ol.ml-pipeline img {
+		max-height: none;
+		max-width: 300px;
+		margin: 1em auto;
+	}
 }
