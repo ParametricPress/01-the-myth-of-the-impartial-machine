@@ -46,6 +46,9 @@ ol.ml-pipeline img {
 	max-height: 150px;
 }
 
+.idyll-scroll-graphic > div {
+	top: 25% !important;
+}
 
 /********* STYLES FOR SAMPLING ERROR ITERACTIVE ************/
 .samplingErrorsInteractive {
