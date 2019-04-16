@@ -64,6 +64,11 @@ const rScale = d3.scaleSqrt()
   .domain([d3.min(data, function(d) { return d.income; }), d3.max(data, function(d) { return d.income; })])
   .range([5, 50]);
 
+
+const colorScale = d3.scaleLog()
+.domain([d3.min(data, function(d) { return d.income; }), d3.max(data, function(d) { return d.income; })])
+.range(['#c5c5c5', '#5DA391']);
+
 const simulation = d3.forceSimulation()
     .force("center", d3.forceCenter(width/2, height/2)) // Attraction to the center of the svg area
     .force("charge", d3.forceManyBody().strength(0)) // Nodes are attracted one each other of value is > 0
@@ -92,10 +97,12 @@ class SamplingErrorSampleComponent extends D3Component {
       .enter()
       .append("circle")
       .attr("class", function(d) { return "incomeCircle notSampled income_" + d.id; })
-      .attr("r", function(d) { return rScale(d.income); })
+      .attr("fill", function(d) { return colorScale(d.income); })
+      .attr("opacity", 0)
       // .attr("r", 10)
       .attr("cx", width / 2)
-      .attr("cy", height / 2);
+      .attr("cy", height / 2)
+      .attr("r", function(d) { return rScale(d.income); });
 
     simulation
       .nodes(data)
@@ -104,13 +111,19 @@ class SamplingErrorSampleComponent extends D3Component {
           .attr("cy", function(d) { return d.y; })
     });
 
-    const meanIncome = calculateMean(data);
+    dots
+      .attr('r', 0)
+      .attr('opacity', 1)
+      .transition()
+      .attr("r", function(d) { return rScale(d.income); });
 
-    const meanLabel = svg.append("text")
-      .attr("class", "meanLabel")
-      .attr("x", width / 2)
-      .attr("y", margin.top)
-      .text("Sample mean:");
+    // const meanIncome = calculateMean(data);
+
+    // const meanLabel = svg.append("text")
+    //   .attr("class", "meanLabel")
+    //   .attr("x", width / 2)
+    //   .attr("y", margin.top)
+    //   .text("Sample mean:");
   }
 
   /**
@@ -122,7 +135,11 @@ class SamplingErrorSampleComponent extends D3Component {
 
     if (props.generateSample !== oldProps.generateSample) {  // only draw new sample when button is clicked, not if sample size slider is changed
       console.log("generate new sample!");
-      generateSample(props.n);
+      var mean = generateSample(props.n);
+      this.props.updateProps({
+        sampleErrors: this.props.sampleErrors.concat([mean - 10000]),
+        sampleMeans: this.props.sampleMeans.concat([mean])
+      })
     }
   }
 }
@@ -147,7 +164,8 @@ function generateSample(sampleSize) {
 
   // update sample mean
   var sampleMean = calculateMean(sampleData);
-  d3.select("#samplePlot .meanLabel").text("Sample mean: " + DOLLARFORMAT(sampleMean));
+  // d3.select("#samplePlot .meanLabel").text("Sample mean: " + DOLLARFORMAT(sampleMean));
+  return sampleMean;
 }
 
 function calculateMean(data) {

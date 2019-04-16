@@ -64,6 +64,11 @@ const rScale = d3.scaleSqrt()
   .domain([d3.min(data, function(d) { return d.income; }), d3.max(data, function(d) { return d.income; })])
   .range([5, 50]);
 
+
+const colorScale = d3.scaleLog()
+.domain([d3.min(data, function(d) { return d.income; }), d3.max(data, function(d) { return d.income; })])
+.range(['#c5c5c5', '#5DA391']);
+
 const simulation = d3.forceSimulation()
     .force("center", d3.forceCenter(width/2, height/2)) // Attraction to the center of the svg area
     .force("charge", d3.forceManyBody().strength(0)) // Nodes are attracted one each other of value is > 0
@@ -92,7 +97,9 @@ class SamplingErrorPopulationComponent extends D3Component {
       .enter()
       .append("circle")
       .attr("class", "incomeCircle")
+      .attr("opacity", 0)
       .attr("r", function(d) { return rScale(d.income); })
+      .attr("fill", function(d) { return colorScale(d.income); })
       // .attr("r", 10)
       .attr("cx", width / 2)
       .attr("cy", height / 2);
@@ -103,14 +110,26 @@ class SamplingErrorPopulationComponent extends D3Component {
         dots.attr("cx", function(d) { return d.x; })
           .attr("cy", function(d) { return d.y; })
     });
+    dots
+      .attr('r', 0)
+      .attr('opacity', 1)
+      .transition()
+      .attr("r", function(d) { return rScale(d.income); });
 
     const meanIncome = calculateMean(data);
 
-    const meanLabel = svg.append("text")
-      .attr("class", "meanLabel")
-      .attr("x", width / 2)
-      .attr("y", margin.top)
-      .text("Population mean: " + DOLLARFORMAT(meanIncome));
+    this.props.updateProps({
+      mean: meanIncome
+    })
+
+    // const meanLabel = svg.append("text")
+    //   .attr("class", "meanLabel")
+    //   .attr("x", width / 2)
+    //   .attr("y", margin.top)
+    //   .text("Population mean: " + DOLLARFORMAT(meanIncome));
+  }
+  update() {
+
   }
 }
 
