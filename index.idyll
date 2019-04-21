@@ -3,7 +3,7 @@
 [Nav fullWidth:true /]
 
 [Header
-  title:`["Machine", "Partiality"]`
+  title:`["Impartial", "Machine"]`
   longTitle:`["The Myth of the", "Impartial Machine"]`
   date:"April 15, 2019"
   dek:"Lost amidst the rush to deploy artificially intelligent software at scale are incidents where probabilistic models have produced shockingly flawed results."
@@ -70,9 +70,6 @@ Being able to use data to meaningfully answer questions via machine learning req
 ## Sources of bias
 There are two key ways bias may be introduced and amplified through the use of machine learning: (1) bias in the underlying data and (2) bias that are amplified through algorithms.
 
-[Aside]
-  [Recirc /]
-[/Aside]
 
 ### 1) Biased data
 
@@ -129,6 +126,12 @@ What if a dataset is representative of its target population? No more worries ab
 
 
 ### 2) Bias that are amplified through algorithms
+
+
+[Aside]
+  [Recirc /]
+[/Aside]
+
 Machine learning algorithms themselves may amplify bias if they make predictions that are more skewed than the training data. Such amplification often occurs through two mechanisms: 1) algorithms incentivized to predict observations to belong to the majority group , and 2) runaway feedback loops. The two stylized examples below illustrate these mechanisms.
 
 **Algorithms incentivized to predict observations to belong to the majority group.**[br/]
@@ -282,6 +285,6 @@ Algorithms are being used to recommend what to watch next on Netflix, filter out
 Edited by Victoria Uren.
 [/AuthorBio]
 
-[NextArticle /]
+[NextArticle fullWidth:true /]
 
 [Footer fullWidth:true /]
