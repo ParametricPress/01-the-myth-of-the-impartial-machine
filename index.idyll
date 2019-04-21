@@ -186,11 +186,15 @@ In the previous image-classification example, bias amplification stops at the mo
   [Newsletter /]
 [/Aside]
 
-Consider a predictive policing algorithm used to determine the optimal allocation of police force across a city. Suppose the city has two precincts (A and B) and one policeman, John. Precinct A has seen 700 crime incidents over the past year, while precinct B has seen 100. Based on this historical data, the city’s predictive policing algorithm sends John to precinct A on Day 1 since that precinct has a higher predicted crime rate. John encounters three crimes and updates the training data at the end of Day 1. The updated data now shows 703 crimes in precinct A and 100 still in precinct B. On Day 2 the algorithm sends John to precinct A again since the model predicts an even higher probability of crime from the updated training data. John encounters two more crimes on Day 2 and proceeds to update the training data, and so on… the table below illustrates how the first 10 days might have unfolded under this predictive policing algorithm. It should be clear that the more John is sent to precinct A, the more instances of crime would be reported for precinct A relative to B, which causes the model to send John to precinct A even more often. If such a feedback loop runs indefinitely, the model would eventually send John to only precinct A, even though the true optimal allocation would have been to send John occasionally to precinct B.
+Consider a predictive policing algorithm used to determine the optimal allocation of police force across a city. Suppose the city has two precincts (A and B) and one policeman, John. The city wishes to use historical data on past crime occurrences to determine which precinct to dispatch John to.  The goal is to send John to each precinct in propotion to the frequency of crimes that occur in each precinct.  If 40% of crimes occur in precinct A, the algorithm should send John to patrol A 40% of the time.  In our example, let's say precinct A had 12 crime incidents occur over the past year, while precinct B had 10, as shown below:
+[img src:`"static/images/feedback-loop-1.png" ` /]
 
-// [VISUAL: FEEDBACK LOOPS TABLE]
+The predictive algorithm uses this historical data to determine where to send John.  The likelihood the algorithm will dispatch John to precinct A is in proportion to the share of all crimes that occurred in A.  In this case, this probability is 12/22 = 54.5%.  The probability the algorithm will choose to send John to precinct B is 10/22 = 45.5%. Let's say the algorithm decides to dispatch John to patrol precinct A.  While there, John encounters three crimes and logs them in the system.  The updated data now show a total of 15 past crimes in A and 10 in B.
+[img src:`"static/images/feedback-loop-2.png" ` /]
 
-// [VISUAL: INTERACTIVE ILLUSTRATION OF FEEDBACK LOOPS]
+The next day, when the algorithm decides where to send John to, it will have a 15/25 = 60% probability of sending John to A and 10/25 = 40% probability of sending him to B.  The algorithm now has an even higher likelihood of sending John to precinct A as a result of its decision to assign John to A yesterday.  When the model chooses to send John to precinct A, more instances of crime will be logged for precinct A while crime that occur in B are ignored and remain uncaptured in the data. Over time, the data will become increasingly distorted due to the decisions the model makes.  See what can happen in the simulation below:
+
+// [VISUAL: FEEDBACK LOOPS]
 
 [var name:"runSimulation" value:0 /]
 [Button onClick:`runSimulation = runSimulation + 1`]Run Simulation[/Button]
