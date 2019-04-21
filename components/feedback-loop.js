@@ -42,18 +42,19 @@ class FeedbackLoopComponent extends D3Component {
   initialize(node, props) {
     // d3.select(node).attr("class", props.class);
 
-    let crimeData = initializeData(n_a, n_b);
+    let crimeData = generateData(n_a, n_b, totalTrials);
     console.log(crimeData);
 
     const svg = this.svg = d3.select(node).append('svg');
     svg.attr('viewBox', `0 0 ${width} ${height}`)
       .attr("id", props.id)
       .style('width', '100%')
-      .style('height', '100%')
-      .append("g");
+      .style('height', '100%');
+
+    const g = svg.append("g");
 
     // draw initial plot
-    const dots = svg.selectAll(".feedbackDot")
+    const dots = g.selectAll(".feedbackDot")
       .data(crimeData)
       .enter()
       .append("circle")
@@ -62,6 +63,7 @@ class FeedbackLoopComponent extends D3Component {
       .style("fill", "#353535")
       .attr("cx", width / 2)
       .attr("cy", height / 2);
+      // .style("opacity", function(d) { return d.day === 0 ? 1 : 0; });
 
     simulation
       .nodes(crimeData)
@@ -70,43 +72,23 @@ class FeedbackLoopComponent extends D3Component {
           .attr("cy", function(d) { return d.y; })
       });
 
-    var day = 0;
-    let t = d3.interval(function(elapsed) {
-      dispatchOfficer();
-      total_a += lambda_a;
-      total_b += lambda_b;
-      // console.log(day, total_a, total_b);
-      day++;
+    // let day = 0;
+    // let t = d3.interval(function(elapsed) {
+    //   // console.log(day, total_a, total_b);
+    //   day++;
 
-      if(day === totalTrials) {
-        console.log("Observed crimes in A:", n_a);
-        console.log("Total actual crimes in A:", total_a);
-        console.log("Observed crimes in B:", n_b);
-        console.log("Total actual crimes in B:", total_b);
-        console.log("Pct of time officer sent to A:", sent_to_a/totalTrials);
-        console.log("Pct of time officer sent to B:", sent_to_b/totalTrials);
-      }
+    //   if(day === totalTrials) {
+    //     console.log(crimeData);
+    //     console.log("Observed crimes in A:", n_a);
+    //     console.log("Total actual crimes in A:", total_a);
+    //     console.log("Observed crimes in B:", n_b);
+    //     console.log("Total actual crimes in B:", total_b);
+    //     console.log("Pct of time officer sent to A:", sent_to_a/totalTrials);
+    //     console.log("Pct of time officer sent to B:", sent_to_b/totalTrials);
+    //   }
 
-      if(day > totalTrials) t.stop();
-    }, 250);
-
-
-    function dispatchOfficer() {
-       let r = Math.random();
-       let v = r * (n_a + n_b);
-
-       if(v <= n_a) {
-        // console.log("Officer sent to Neighborhood A");
-        sent_to_a++;
-        n_a += lambda_a;
-       }
-       else if(v > n_a) {
-        // console.log("Officer sent to Neighborhood B");
-        sent_to_b++;
-        n_b += lambda_b;
-       }
-
-    }
+    //   if(day > totalTrials) t.stop();
+    // }, 250);
 
   }
 
@@ -128,17 +110,51 @@ class FeedbackLoopComponent extends D3Component {
   }
 }
 
+function generateData(n_a, n_b, totalTrials) {
+  let data = initializeData(n_a, n_b);
+  for(let i = 1; i < totalTrials; i++) {
+    let location = dispatchOfficer(n_a, n_b);
+    location == "A" ? updateData(data, "A", i, lambda_a) : updateData(data, "B", i, lambda_b);
+  }
+
+  return data;
+}
+
 function initializeData(n_a, n_b) {
   let data = [];
   for(let i = 0; i < n_a + n_b; i++) {
     if(i < n_a) {
-      data.push({"neighborhood": "A", "crime": 1});
+      data.push({"neighborhood": "A", "day": 0, "crime": 1});
     }
     else {
-      data.push({"neighborhood": "B", "crime": 1});
+      data.push({"neighborhood": "B", "day": 0, "crime": 1});
     }
   }
   return data;
+}
+
+function dispatchOfficer(n_a, n_b) {
+   let r = Math.random();
+   let v = r * (n_a + n_b);
+
+   if(v <= n_a) {
+    // console.log("Officer sent to Neighborhood A");
+    sent_to_a++;
+    n_a += lambda_a;
+    return "A";
+   }
+   else if(v > n_a) {
+    // console.log("Officer sent to Neighborhood B");
+    sent_to_b++;
+    n_b += lambda_b;
+    return "B";
+   }
+}
+
+function updateData(data, location, day, crimeRate) {
+  for(let i = 0; i < crimeRate; i++) {
+    data.push({"neighborhood": location, "day": day, "crime": 1});
+  }
 }
 
 module.exports = FeedbackLoopComponent;
