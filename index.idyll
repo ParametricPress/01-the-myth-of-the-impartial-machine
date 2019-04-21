@@ -95,7 +95,7 @@ When one examines a data sample, it is imperative to check whether the sample is
   [var name:"generateSample" value:0 /]
 
 
-  [div class:"plot sampleErrorPopulation" id:"populationPlot"]
+  [div className:"plot sampleErrorPopulation" id:"populationPlot"]
     Population mean: [Display value:populationMean format:"$.0f" /]
 
     [SamplingErrorPopulation mean:populationMean /]
@@ -116,7 +116,7 @@ When one examines a data sample, it is imperative to check whether the sample is
     [Button className:"generateSampleBtn" onClick:`generateSample = generateSample + 1`]Generate Sample[/Button]
   [/div]
 
-  [div id:"samplePlot" class:"plot sampleErrorSample" ]
+  [div id:"samplePlot" className:"plot sampleErrorSample" ]
     Sample mean: [Display value:`sampleMeans[sampleMeans.length - 1] || ''` format:"$.0f" /]
 
     [SamplingErrorSample sampleMeans:sampleMeans sampleErrors:sampleErrors n:n generateSample:generateSample /]
