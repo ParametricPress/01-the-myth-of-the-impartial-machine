@@ -111,6 +111,7 @@ class FeedbackLoopComponent extends D3Component {
       // going to need to first reset simulation:
       // generate new data
       // redraw dots in plot
+      d3.select(".finalResults").classed("hidden", true);
       d3.select(".observedCrimesA").html("Observed crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + n_a + "</span>");
       d3.select(".observedCrimesB").html("Observed crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + n_b + "</span>");
       d3.select(".totalCrimesA").html("Total actual crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + total_a + "</span>");
