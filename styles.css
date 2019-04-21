@@ -62,6 +62,7 @@ ol.ml-pipeline img {
 	color: #fff;
 	fill: #fff;
 	min-height: 500px;
+	margin: 1em 0;
 }
 .samplingErrorsInteractive circle {
 	/* fill: #c5c5c5; */
@@ -95,11 +96,6 @@ ol.ml-pipeline img {
 	transition: color 0.25s;
 	transition: border-color 0.25s;
 	box-shadow: 3px 3px 5px #000;
-	transform: rotate(-1deg);
-}
-
-.generateSampleBtn:hover {
-	transform: rotate(0deg);
 }
 
 .generateSampleBtn:active {
