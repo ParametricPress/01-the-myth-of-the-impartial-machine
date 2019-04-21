@@ -196,6 +196,7 @@ Consider a predictive policing algorithm used to determine the optimal allocatio
   ![feedback loops](static/images/feedback-loops.png)
 // [/Right]
 
+[FeedbackLoop /]
 
 Feedback loops are especially problematic when sub-groups in the training data exhibit large statistical differences (e.g. one precinct having a much higher crime rate than others); a model trained on such data will quickly “run away” and make predictions that fall into the majority group only, thereby generating ever-more lopsided data that are fed back into the model. Even when sub-groups are statistically similar, feedback loops can still lead to noisy and less accurate predictions. Algorithms where the predictive outcome determines what feedback the algorithm receives -- e.g. recidivism prediction, language translation, and social media news feeds -- should always be diligently monitored for the presence of feedback loops bias.
 
