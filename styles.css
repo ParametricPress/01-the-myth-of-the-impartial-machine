@@ -271,8 +271,15 @@ ol.ml-pipeline img {
 	grid-template-rows: repeat(3, 30px);
 	grid-gap: 10px;
 	margin-bottom: 40px;
+	opacity: 1;
+	transition-property: opacity;
+	transition-duration: 1s;
+	transition-delay: 0.5s;
 }
 
+.finalResults.hidden {
+	opacity: 0;
+}
 
 
 

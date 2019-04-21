@@ -7,7 +7,7 @@ const height = 250;
 const margin = {top: 40, right: 10, bottom: 0, left: 100};
 const PCTFORMAT = d3.format(".0%");
 
-const r = 4;
+const r = 5;
 const totalTrials = 30;
 
 const xScale = d3.scaleLinear()
@@ -51,7 +51,7 @@ class FeedbackLoopComponent extends D3Component {
       .style('width', '100%')
       .style('height', '100%');
 
-    const finalResults = d3.select(node).append("div").attr("class", "finalResults");
+    const finalResults = d3.select(node).append("div").attr("class", "finalResults hidden");
 
     // draw initial plot
     const dots_a = svg.append("g")
@@ -92,41 +92,12 @@ class FeedbackLoopComponent extends D3Component {
       .text("B");
 
     // set up final results section
-    const observedCrimesA = finalResults.append("div");
-    const observedCrimesB = finalResults.append("div");
-    const totalCrimesA = finalResults.append("div");
-    const totalCrimesB = finalResults.append("div");
-    const pctSentToA = finalResults.append("div");
-    const pctSentToB = finalResults.append("div");
-
-    // run simulation
-    let day = 0;
-    let t = d3.interval(function(elapsed) {
-      // console.log(day, total_a, total_b);
-      day++;
-
-      if(d3.selectAll(".feedbackDot.neighborhoodA.day" + day).nodes().length > 0) {
-        dispatchedToLabel.html("Day " + day + ": Officer sent to <span class='neighborhoodA'>A</span>");
-      }
-      else {
-        dispatchedToLabel.html("Day " + day + ": Officer sent to <span class='neighborhoodB'>B</span>");
-      }
-
-      dots_a.transition(500).style("opacity", function(d) { return d.day <= day ? 1 : 0; });
-      dots_b.transition(500).style("opacity", function(d) { return d.day <= day ? 1 : 0; });
-
-      if(day === totalTrials) {
-        observedCrimesA.html("Observed crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + n_a + "</span>");
-        observedCrimesB.html("Observed crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + n_b + "</span>");
-        totalCrimesA.html("Total actual crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + total_a + "</span>");
-        totalCrimesB.html("Total actual crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + total_b + "</span>");
-        pctSentToA.html("Percent of time officer sent to <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + PCTFORMAT(sent_to_a/totalTrials) + "</span>");
-        pctSentToB.html("Percent of time officer sent to <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + PCTFORMAT(sent_to_b/totalTrials) + "</span>");
-        t.stop();
-      }
-
-    }, 500);
-
+    const observedCrimesA = finalResults.append("div").attr("class", "observedCrimesA");
+    const observedCrimesB = finalResults.append("div").attr("class", "observedCrimesB");
+    const totalCrimesA = finalResults.append("div").attr("class", "totalCrimesA");
+    const totalCrimesB = finalResults.append("div").attr("class", "totalCrimesB");
+    const pctSentToA = finalResults.append("div").attr("class", "pctSentToA");
+    const pctSentToB = finalResults.append("div").attr("class", "pctSentToB");
   }
 
   /**
@@ -136,14 +107,40 @@ class FeedbackLoopComponent extends D3Component {
    */
   update(props, oldProps) {
 
-    // if (props.generateSample !== oldProps.generateSample) {  // only draw new sample when button is clicked, not if sample size slider is changed
-    //   console.log("generate new sample!");
-    //   var mean = generateSample(props.n);
-    //   this.props.updateProps({
-    //     sampleErrors: this.props.sampleErrors.concat([mean - 10000]),
-    //     sampleMeans: this.props.sampleMeans.concat([mean])
-    //   })
-    // }
+    if (props.runSimulation !== oldProps.runSimulation) {
+      // going to need to first reset simulation:
+      // generate new data
+      // redraw dots in plot
+      d3.select(".observedCrimesA").html("Observed crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + n_a + "</span>");
+      d3.select(".observedCrimesB").html("Observed crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + n_b + "</span>");
+      d3.select(".totalCrimesA").html("Total actual crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + total_a + "</span>");
+      d3.select(".totalCrimesB").html("Total actual crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + total_b + "</span>");
+      d3.select(".pctSentToA").html("Percent of time officer sent to <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + PCTFORMAT(sent_to_a/totalTrials) + "</span>");
+      d3.select(".pctSentToB").html("Percent of time officer sent to <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + PCTFORMAT(sent_to_b/totalTrials) + "</span>");
+
+
+      let day = 0;
+      let t = d3.interval(function(elapsed) {
+        // console.log(day, total_a, total_b);
+        day++;
+
+        if(d3.selectAll(".feedbackDot.neighborhoodA.day" + day).nodes().length > 0) {
+          d3.select(".dispatchedToLabel").html("Day " + day + ": Officer sent to <span class='neighborhoodA'>A</span>");
+        }
+        else {
+          d3.select(".dispatchedToLabel").html("Day " + day + ": Officer sent to <span class='neighborhoodB'>B</span>");
+        }
+
+        d3.selectAll(".feedbackDot.neighborhoodA").transition(500).style("opacity", function(d) { return d.day <= day ? 1 : 0; });
+        d3.selectAll(".feedbackDot.neighborhoodB").transition(500).style("opacity", function(d) { return d.day <= day ? 1 : 0; });
+
+        if(day === totalTrials) {
+          d3.select(".finalResults").classed("hidden", false);
+          t.stop();
+        }
+
+      }, 500);
+    }
   }
 }
 
