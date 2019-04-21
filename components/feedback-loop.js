@@ -4,21 +4,19 @@ const d3 = require('d3');
 
 const width = 600;
 const height = 400;
-const margin = {top: 20, right: 0, bottom: 0, left: 0};
+const margin = {top: 20, right: 10, bottom: 0, left: 10};
 
 const r = 4;
 const totalTrials = 10;
 
-const xPos = d3.scaleOrdinal()
-  .domain(["A", "B"])
-  .range([width * 0.25, width * 0.75]);
+const xScale_a = d3.scaleLinear()
+  .domain([1, 10])
+  .range([margin.left, margin.left + 10*(r + 2)]);
 
-const simulation = d3.forceSimulation()
-    .force("x", d3.forceX().strength(0.5).x(function(d) { return xPos(d.neighborhood); }))
-    .force("y", d3.forceY().strength(0.5).y(height/2))
-    .force("center", d3.forceCenter(width/2, height/2)) // Attraction to the center of the svg area
-    .force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted one each other of value is > 0
-    .force("collide", d3.forceCollide().strength(0.1).radius(r + 1).iterations(5)); // Force that avoids circle overlapping
+const xScale_b = d3.scaleLinear()
+  .domain([1, 10])
+  .range([width/2 + margin.left, width/2 + margin.left + 10*(r + 2)]);
+
 
 // initial parameters (eventually come from props)
 let n_a = 12;  // number of observed crimes in neighborhood A
@@ -43,7 +41,7 @@ class FeedbackLoopComponent extends D3Component {
     // d3.select(node).attr("class", props.class);
 
     let crimeData = generateData(n_a, n_b, totalTrials);
-    console.log(crimeData);
+    // console.log(crimeData);
 
     const svg = this.svg = d3.select(node).append('svg');
     svg.attr('viewBox', `0 0 ${width} ${height}`)
@@ -51,26 +49,32 @@ class FeedbackLoopComponent extends D3Component {
       .style('width', '100%')
       .style('height', '100%');
 
-    const g = svg.append("g");
+    // const g = svg.append("g");
 
-    // draw initial plot
-    const dots = g.selectAll(".feedbackDot")
-      .data(crimeData)
+    // // draw initial plot
+    const dots_a = svg.append("g")
+      .selectAll(".feedbackDot")
+      .data(crimeData[0])
       .enter()
       .append("circle")
-      .attr("class", "feedbackDot")
+      .attr("class", "feedbackDot neighborhoodA")
       .attr("r", r)
       .style("fill", "#353535")
-      .attr("cx", width / 2)
-      .attr("cy", height / 2);
-      // .style("opacity", function(d) { return d.day === 0 ? 1 : 0; });
+      .attr("cx", function(d, i) { return margin.left + (i % 10) * (r * 2 + 2); })
+      .attr("cy", function(d, i) { return margin.top + Math.floor(i / 10) * (r * 2 + 2); })
+      .style("opacity", function(d) { return d.day === 0 ? 1 : 0; });
 
-    simulation
-      .nodes(crimeData)
-      .on("tick", function(d) {
-        dots.attr("cx", function(d) { return d.x; })
-          .attr("cy", function(d) { return d.y; })
-      });
+    const dots_b = svg.append("g")
+      .selectAll(".feedbackDot")
+      .data(crimeData[1])
+      .enter()
+      .append("circle")
+      .attr("class", "feedbackDot neighborhoodB")
+      .attr("r", r)
+      .style("fill", "#353535")
+      .attr("cx", function(d, i) { return (width/2 + margin.left) + (i % 10) * (r * 2 + 2); })
+      .attr("cy", function(d, i) { return margin.top + Math.floor(i / 10) * (r * 2 + 2); })
+      .style("opacity", function(d) { return d.day === 0 ? 1 : 0; });
 
     // let day = 0;
     // let t = d3.interval(function(elapsed) {
@@ -111,24 +115,20 @@ class FeedbackLoopComponent extends D3Component {
 }
 
 function generateData(n_a, n_b, totalTrials) {
-  let data = initializeData(n_a, n_b);
-  for(let i = 1; i < totalTrials; i++) {
+  let data_a = initializeData(n_a, "A");
+  let data_b = initializeData(n_b, "B");
+  for(let i = 1; i < totalTrials + 1; i++) {
     let location = dispatchOfficer(n_a, n_b);
-    location == "A" ? updateData(data, "A", i, lambda_a) : updateData(data, "B", i, lambda_b);
+    location == "A" ? updateData(data_a, "A", i, lambda_a) : updateData(data_b, "B", i, lambda_b);
   }
 
-  return data;
+  return [data_a, data_b];
 }
 
-function initializeData(n_a, n_b) {
+function initializeData(n, location) {
   let data = [];
-  for(let i = 0; i < n_a + n_b; i++) {
-    if(i < n_a) {
-      data.push({"neighborhood": "A", "day": 0, "crime": 1});
-    }
-    else {
-      data.push({"neighborhood": "B", "day": 0, "crime": 1});
-    }
+  for(let i = 0; i < n; i++) {
+    data.push({"neighborhood": location, "day": 0, "crime": 1});
   }
   return data;
 }
