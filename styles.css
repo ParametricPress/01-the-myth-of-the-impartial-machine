@@ -235,6 +235,46 @@ ol.ml-pipeline img {
 
 
 
+/********* STYLES FOR BIAS AMPLIFIED THROUGH ALGORITHMS INTERACTIVE *************/
+.dispatchedToLabel {
+	font-family: 'Graphik Web';
+	width: 100%;
+	text-align: center;
+}
+
+.neighborhoodLabel {
+	text-anchor: middle;
+}
+
+.neighborhoodA {
+	color: #4801FF;
+}
+
+.neighborhoodB {
+	color: #539987;
+}
+
+.neighborhoodLabel.neighborhoodA,
+.feedbackDot.neighborhoodA {
+	fill: #4801FF;
+}
+
+.neighborhoodLabel.neighborhoodB,
+.feedbackDot.neighborhoodB {
+	fill: #539987;
+}
+
+.finalResults {
+	font-family: 'Graphik Web';
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: repeat(3, 30px);
+	grid-gap: 10px;
+	margin-bottom: 40px;
+}
+
+
+
 
 /********* STYLES FOR ACCURACY METRICS INTERACTIVE *************/
 .recidivism-tables {

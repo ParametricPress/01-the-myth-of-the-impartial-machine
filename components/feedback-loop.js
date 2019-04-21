@@ -3,19 +3,16 @@ const D3Component = require('idyll-d3-component');
 const d3 = require('d3');
 
 const width = 600;
-const height = 400;
-const margin = {top: 20, right: 10, bottom: 0, left: 10};
+const height = 250;
+const margin = {top: 40, right: 10, bottom: 0, left: 100};
+const PCTFORMAT = d3.format(".0%");
 
 const r = 4;
-const totalTrials = 10;
+const totalTrials = 30;
 
-const xScale_a = d3.scaleLinear()
-  .domain([1, 10])
-  .range([margin.left, margin.left + 10*(r + 2)]);
-
-const xScale_b = d3.scaleLinear()
-  .domain([1, 10])
-  .range([width/2 + margin.left, width/2 + margin.left + 10*(r + 2)]);
+const xScale = d3.scaleLinear()
+  .domain([0, 9])
+  .range([0, 10*(r * 2 + 1)]);
 
 
 // initial parameters (eventually come from props)
@@ -43,56 +40,92 @@ class FeedbackLoopComponent extends D3Component {
     let crimeData = generateData(n_a, n_b, totalTrials);
     // console.log(crimeData);
 
+    // set up main parts of the interactive
+    const dispatchedToLabel = d3.select(node).append("div")
+      .attr("class", "dispatchedToLabel")
+      .text("Day 0");
+
     const svg = this.svg = d3.select(node).append('svg');
     svg.attr('viewBox', `0 0 ${width} ${height}`)
       .attr("id", props.id)
       .style('width', '100%')
       .style('height', '100%');
 
-    // const g = svg.append("g");
+    const finalResults = d3.select(node).append("div").attr("class", "finalResults");
 
-    // // draw initial plot
+    // draw initial plot
     const dots_a = svg.append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       .selectAll(".feedbackDot")
       .data(crimeData[0])
       .enter()
       .append("circle")
-      .attr("class", "feedbackDot neighborhoodA")
+      .attr("class", function(d) { return "feedbackDot neighborhoodA day" + d.day; })
       .attr("r", r)
-      .style("fill", "#353535")
-      .attr("cx", function(d, i) { return margin.left + (i % 10) * (r * 2 + 2); })
-      .attr("cy", function(d, i) { return margin.top + Math.floor(i / 10) * (r * 2 + 2); })
+      .attr("cx", function(d, i) { return xScale(i % 10); })
+      .attr("cy", function(d, i) { return Math.floor(i / 10) * (r * 2 + 2); })
       .style("opacity", function(d) { return d.day === 0 ? 1 : 0; });
 
     const dots_b = svg.append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       .selectAll(".feedbackDot")
       .data(crimeData[1])
       .enter()
       .append("circle")
-      .attr("class", "feedbackDot neighborhoodB")
+      .attr("class", function(d) { return "feedbackDot neighborhoodB day" + d.day; })
       .attr("r", r)
-      .style("fill", "#353535")
-      .attr("cx", function(d, i) { return (width/2 + margin.left) + (i % 10) * (r * 2 + 2); })
-      .attr("cy", function(d, i) { return margin.top + Math.floor(i / 10) * (r * 2 + 2); })
+      .attr("cx", function(d, i) { return width/2 + xScale(i % 10); })
+      .attr("cy", function(d, i) { return Math.floor(i / 10) * (r * 2 + 2); })
       .style("opacity", function(d) { return d.day === 0 ? 1 : 0; });
 
-    // let day = 0;
-    // let t = d3.interval(function(elapsed) {
-    //   // console.log(day, total_a, total_b);
-    //   day++;
+    // label neighborhoods
+    svg.append("text")
+      .attr("class", "neighborhoodLabel neighborhoodA")
+      .attr("x", margin.left + (r*2 + 2) * 5)
+      .attr("y", 20)
+      .text("A");
 
-    //   if(day === totalTrials) {
-    //     console.log(crimeData);
-    //     console.log("Observed crimes in A:", n_a);
-    //     console.log("Total actual crimes in A:", total_a);
-    //     console.log("Observed crimes in B:", n_b);
-    //     console.log("Total actual crimes in B:", total_b);
-    //     console.log("Pct of time officer sent to A:", sent_to_a/totalTrials);
-    //     console.log("Pct of time officer sent to B:", sent_to_b/totalTrials);
-    //   }
+    svg.append("text")
+      .attr("class", "neighborhoodLabel neighborhoodB")
+      .attr("x", margin.left + (width/2) + (r*2 + 2) * 5)
+      .attr("y", 20)
+      .text("B");
 
-    //   if(day > totalTrials) t.stop();
-    // }, 250);
+    // set up final results section
+    const observedCrimesA = finalResults.append("div");
+    const observedCrimesB = finalResults.append("div");
+    const totalCrimesA = finalResults.append("div");
+    const totalCrimesB = finalResults.append("div");
+    const pctSentToA = finalResults.append("div");
+    const pctSentToB = finalResults.append("div");
+
+    // run simulation
+    let day = 0;
+    let t = d3.interval(function(elapsed) {
+      // console.log(day, total_a, total_b);
+      day++;
+
+      if(d3.selectAll(".feedbackDot.neighborhoodA.day" + day).nodes().length > 0) {
+        dispatchedToLabel.html("Day " + day + ": Officer sent to <span class='neighborhoodA'>A</span>");
+      }
+      else {
+        dispatchedToLabel.html("Day " + day + ": Officer sent to <span class='neighborhoodB'>B</span>");
+      }
+
+      dots_a.transition(500).style("opacity", function(d) { return d.day <= day ? 1 : 0; });
+      dots_b.transition(500).style("opacity", function(d) { return d.day <= day ? 1 : 0; });
+
+      if(day === totalTrials) {
+        observedCrimesA.html("Observed crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + n_a + "</span>");
+        observedCrimesB.html("Observed crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + n_b + "</span>");
+        totalCrimesA.html("Total actual crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + total_a + "</span>");
+        totalCrimesB.html("Total actual crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + total_b + "</span>");
+        pctSentToA.html("Percent of time officer sent to <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + PCTFORMAT(sent_to_a/totalTrials) + "</span>");
+        pctSentToB.html("Percent of time officer sent to <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + PCTFORMAT(sent_to_b/totalTrials) + "</span>");
+        t.stop();
+      }
+
+    }, 500);
 
   }
 
@@ -118,8 +151,10 @@ function generateData(n_a, n_b, totalTrials) {
   let data_a = initializeData(n_a, "A");
   let data_b = initializeData(n_b, "B");
   for(let i = 1; i < totalTrials + 1; i++) {
-    let location = dispatchOfficer(n_a, n_b);
+    let location = dispatchOfficer();
     location == "A" ? updateData(data_a, "A", i, lambda_a) : updateData(data_b, "B", i, lambda_b);
+    total_a += lambda_a;
+    total_b += lambda_b;
   }
 
   return [data_a, data_b];
@@ -133,7 +168,7 @@ function initializeData(n, location) {
   return data;
 }
 
-function dispatchOfficer(n_a, n_b) {
+function dispatchOfficer() {
    let r = Math.random();
    let v = r * (n_a + n_b);
 
