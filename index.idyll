@@ -1,5 +1,7 @@
 [meta title:"The Myth of the Impartial Machine" description:"Lost amidst the rush to deploy artificially intelligent software at scale are incidents where probabilistic models have produced shockingly flawed results." /]
 
+[var name:"parametricSlug" value:"bias-in-ml" /]
+
 [Nav fullWidth:true /]
 
 [Header
@@ -144,7 +146,7 @@ What if a dataset is representative of its target population? No more worries ab
 
 
 [Aside]
-  [Recirc /]
+  [Recirc slug:parametricSlug /]
 [/Aside]
 
 Machine learning algorithms themselves may amplify bias if they make predictions that are more skewed than the training data. Such amplification often occurs through two mechanisms: 1) algorithms incentivized to predict observations to belong to the majority group , and 2) runaway feedback loops. The two stylized examples below illustrate these mechanisms.
@@ -197,18 +199,18 @@ Having representative training data is the ideal scenario. In a more realistic s
   [/div]
   [div className:"plots"]
     [div className:"plot-container"]
-      [div className:"plotTitle"]Model Predictions[/div]
+      [div className:"plotTitle"]Model trained on data[/div]
       [BiasAmplifiedPrediction id:"biasAmplifiedPredictionPlot" bias:bias modelAccuracy:modelAccuracy /]
     [/div]
 
     [div className:"plot-container"]
-      [div className:"plotTitle"]If Model Guessed "Woman" All the Time[/div]
+      [div className:"plotTitle"]Model always guesses "woman"[/div]
       [BiasAmplifiedGuessWoman id:"biasAmplifiedGuessWomanPlot" bias:bias /]
     [/div]
   [/div]
 
   [div className:"interactive-instruction"]
-    Result. [span className:"light"]Model [Display value:`modelAccuracy >= bias ? 'would' : 'would not' ` /] be incentivized to amplify bias.[/div]
+    Result. [span className:"light"]Model [Display value:`modelAccuracy <= bias ? 'would not' : 'would' ` /] be incentivized to amplify bias.[/div]
   [/div]
 [/FullWidth]
 
@@ -237,8 +239,9 @@ Feedback loops are especially problematic when sub-groups in the training data e
 It should be clear by this point that different sources of bias -- whether through data collection or through algorithms themselves -- are interrelated. When an algorithm is fed training data where one group dominates the sample, it is incentivized to prioritize learning about the dominant group and over-predict the number of observations that belong to the dominant group.  If the data were balanced, the model would have nothing to gain by over-predicting that group.  Similarly, bias can be perpetuated through a feedback loop if the model’s own flawed predictions are repeatedly fed back into it, becoming its own biased source data for the next round of predictions. In the machine learning context, it’s no longer just garbage in, garbage out -- when there’s garbage in, more and more garbage may be generated through the ML pipeline.
 
 // [VISUAL: BIAS AMPLIFICATION & INTERACTION]
-[img src:"static/animations/bias-amplification-loop.gif" /]
-
+[inset]
+  [img src:"static/animations/bias-amplification-loop.gif" /]
+[/inset]
 
 
 
@@ -328,6 +331,6 @@ Algorithms are being used to recommend what to watch next on Netflix, filter out
 Edited by Victoria Uren.
 [/AuthorBio]
 
-[NextArticle fullWidth:true /]
+[NextArticle slug:parametricSlug fullWidth:true /]
 
 [Footer fullWidth:true /]
