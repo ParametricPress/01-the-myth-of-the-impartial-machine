@@ -10,10 +10,10 @@
   fullWidth:true
   authors:`[{
     name: "Alice Feng",
-    role: ''
+    role: 'Author'
   }, {
     name: "Shuyan Wu",
-    role: ''
+    role: 'Author'
   }]`
   doi:""
   archive:""
@@ -85,32 +85,48 @@ When one examines a data sample, it is imperative to check whether the sample is
   [var name:"sampleMeans" value:`[] ` /]
   [var name:"generateSample" value:0 /]
 
-
-  [div class:"plot sampleErrorPopulation" id:"populationPlot"]
-    Population mean: [Display value:populationMean format:"$.0f" /]
-
-    [SamplingErrorPopulation mean:populationMean /]
+  [div]
+    [div className:"interactiveHed"]
+      Sampling errors can lead to biased models
+    [/div]
+    [div className:"interactiveDek"]
+      Draw samples from a population and see how close the estimates are to the true value. What happens when the sample size is changed?
+    [/div]
   [/div]
 
-  [div]
-    [div className:"slider"]
-      Sample size: [Display value:n format:"0.0f" /]
-      [Range value:n min:1 max:50 /]
+
+  [div className:"samplingErrorsInteractiveContent"]
+    [div class:"plot sampleErrorPopulation" id:"populationPlot"]
+      [SamplingErrorPopulation mean:populationMean /]
+
+      Population mean: [Display value:populationMean format:"$.0f" /]
     [/div]
 
-    // [div className:"sample-metadata"]
-    //   Sample count: [Display className:"idyll-display" value:`sampleErrors.length` format:"d" /][br/]
-    //   Mean of all samples: [Display format:"0.2f" className:"idyll-display" value:`sampleMeans.length ? sampleMeans.reduce((memo, delta, list) => memo + delta, 0) / sampleMeans.length : '-'`/][br/]
-    //   Average sampling error: [Display  format:"0.2f" className:"idyll-display" value:`sampleErrors.length ? sampleErrors.reduce((memo, delta, list) => memo + delta, 0) / sampleErrors.length : '-' `/]
-    // [/div]
+    [div]
+      [div className:"slider"]
+        Sample size: [Display value:n format:"0.0f" /]
+        [Range value:n min:1 max:50 /]
+      [/div]
 
-    [Button className:"generateSampleBtn" onClick:`generateSample = generateSample + 1`]Generate Sample[/Button]
-  [/div]
+      // [div className:"sample-metadata"]
+      //   Sample count: [Display className:"idyll-display" value:`sampleErrors.length` format:"d" /][br/]
+      //   Mean of all samples: [Display format:"0.2f" className:"idyll-display" value:`sampleMeans.length ? sampleMeans.reduce((memo, delta, list) => memo + delta, 0) / sampleMeans.length : '-'`/][br/]
+      //   Average sampling error: [Display  format:"0.2f" className:"idyll-display" value:`sampleErrors.length ? sampleErrors.reduce((memo, delta, list) => memo + delta, 0) / sampleErrors.length : '-' `/]
+      // [/div]
 
-  [div id:"samplePlot" class:"plot sampleErrorSample" ]
-    Sample mean: [Display value:`sampleMeans[sampleMeans.length - 1] || ''` format:"$.0f" /]
+      [Button className:"generateSampleBtn" onClick:`generateSample = generateSample + 1`]Generate Sample[/Button]
+    [/div]
 
-    [SamplingErrorSample sampleMeans:sampleMeans sampleErrors:sampleErrors n:n generateSample:generateSample /]
+    [div id:"samplePlot" class:"plot sampleErrorSample" ]
+      [SamplingErrorSample sampleMeans:sampleMeans sampleErrors:sampleErrors n:n generateSample:generateSample /]
+
+      [Conditional if:`sampleMeans.length`]
+        Sample mean: [Display value:`sampleMeans[sampleMeans.length - 1] || ''` format:"$.0f" /]
+      [/Conditional]
+      [Conditional if:`!sampleMeans.length`]
+        Generate a sample.
+      [/Conditional]
+    [/div]
   [/div]
 [/div]
 
@@ -145,33 +161,55 @@ Having representative training data is the ideal scenario. In a more realistic s
   [var name:"bias" value:0.8 /]
   [var name:"modelAccuracy" value:0.7 /]
 
-  [div className:"slider"]
-    Bias: [Display value:`bias*100` format:".0f" /] / [Display value:`100 - bias*100` format:".0f" /]
-    [Range value:bias min:0.5 max:1 step:0.1 /]
+  [div]
+    [div className:"interactiveHed"]
+      Sampling errors can lead to biased models
+    [/div]
+    [div className:"interactiveDek"]
+      Draw samples from a population and see how close your estimates are to the true value. What happens when the sample size is changed?
+    [/div]
   [/div]
 
-  [div className:"slider"]
-    Model accuracy: [Display value:`modelAccuracy ` format:".0%" /]
-    [Range value:modelAccuracy min:0.5 max:1 step:0.1 /]
+  [div className:"interactive-instruction"]
+    Input. [span className:"light"]Adjust the sliders to set model bias and accuracy.[/span]
   [/div]
 
-  [div className:"plots"]
-    [div]
-      [div className:"plotTitle"]Data[/div]
+  [div style:`{display: 'flex', flexDirection: 'row', paddingLeft: '1em'}`]
+    [div className:"slider-container"]
+      [div className:"slider"]
+        Bias: [Display value:`bias*100` format:".0f" /] / [Display value:`100 - bias*100` format:".0f" /]
+        [Range value:bias min:0.5 max:1 step:0.1 /]
+      [/div]
+
+      [div className:"slider"]
+        Model accuracy: [Display value:`modelAccuracy ` format:".0%" /]
+        [Range value:modelAccuracy min:0.5 max:1 step:0.1 /]
+      [/div]
+    [/div]
+    [div className:"slider-container"]
+      [div className:"plotTitle"]Data [BiasDataLabel /][/div]
       [BiasAmplifiedData id:"biasAmplifiedDataPlot" bias:bias /]
     [/div]
 
-    [div]
+  [/div]
+
+  [div className:"interactive-instruction"]
+    Model Predictions. [span className:"light"]Compare two models, one that is trained on the data, and one that always guesses "woman."[/span]
+  [/div]
+  [div className:"plots"]
+    [div className:"plot-container"]
       [div className:"plotTitle"]Model Predictions[/div]
       [BiasAmplifiedPrediction id:"biasAmplifiedPredictionPlot" bias:bias modelAccuracy:modelAccuracy /]
     [/div]
 
-    [div]
+    [div className:"plot-container"]
       [div className:"plotTitle"]If Model Guessed "Woman" All the Time[/div]
       [BiasAmplifiedGuessWoman id:"biasAmplifiedGuessWomanPlot" bias:bias /]
     [/div]
+  [/div]
 
-    [div id:"biasAmplifiedConclusion"]Model would [span][/span] be incentivized to amplify bias.[/div]
+  [div className:"interactive-instruction"]
+    Result. [span className:"light"]Model [Display value:`modelAccuracy >= bias ? 'would' : 'would not' ` /] be incentivized to amplify bias.[/div]
   [/div]
 [/FullWidth]
 
