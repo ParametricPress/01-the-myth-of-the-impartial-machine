@@ -10,6 +10,10 @@ text {
 }
 
 
+.idyll-text-container img {
+	margin: 2em auto;
+}
+
 button {
 	margin: 0;
 }
@@ -207,7 +211,7 @@ ol.ml-pipeline img {
 	margin-top: 1em;
 	border: solid 1px #979797;
 	border-radius: 9px;
-	max-width: 500px;
+	width: 500px;
 }
 
 .amplifiedBiasInteractive .slider-container {

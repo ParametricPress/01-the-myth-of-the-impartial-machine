@@ -134,8 +134,7 @@ When one examines a data sample, it is imperative to check whether the sample is
 
 // [NonSamplingErrorBarChart className:"plot" /]
 
-[a href:"static/images/bias-non-sampling.png"][SVG src:"static/svg/bias-non-sampling.svg" /][/a]
-[caption][a href:"static/images/bias-non-sampling.png"]Click to dowload image.[/a][/caption]
+[img src:"static/images/bias-non-sampling.png" /]
 
 **Data that are representative but still biased.**[br/]
 What if a dataset is representative of its target population? No more worries about bias coming through the data, right? Not so fast -- a representative dataset may still be biased to the extent that it reflects any underlying/historical social bias. A recruiting algorithm once used by Amazon was found to have disproportionately favored male candidates. The data used to train the algorithm were based on resumes collected over a 10-year period. Because the tech industry was traditionally dominated by men, a majority of the resumes were submitted by men. Therefore, even though the dataset was “representative” of the historical applicant pool, it captured the inherent gender bias and passed it on to the recruiting algorithm. Representative but biased data is in some sense a more problematic issue than non-representative data, since fixing the former would require addressing biases that are inherent in society.
@@ -174,7 +173,7 @@ Having representative training data is the ideal scenario. In a more realistic s
     Input. [span className:"light"]Adjust the sliders to set model bias and accuracy.[/span]
   [/div]
 
-  [div style:`{display: 'flex', flexDirection: 'row', paddingLeft: '1em'}`]
+  [div style:`{display: 'flex', flexDirection: 'row', paddingLeft: '1em', color: '#7e7e7e', fontWeight: 500}`]
     [div className:"slider-container"]
       [div className:"slider"]
         Bias: [Display value:`bias*100` format:".0f" /] / [Display value:`100 - bias*100` format:".0f" /]
@@ -238,7 +237,8 @@ Feedback loops are especially problematic when sub-groups in the training data e
 It should be clear by this point that different sources of bias -- whether through data collection or through algorithms themselves -- are interrelated. When an algorithm is fed training data where one group dominates the sample, it is incentivized to prioritize learning about the dominant group and over-predict the number of observations that belong to the dominant group.  If the data were balanced, the model would have nothing to gain by over-predicting that group.  Similarly, bias can be perpetuated through a feedback loop if the model’s own flawed predictions are repeatedly fed back into it, becoming its own biased source data for the next round of predictions. In the machine learning context, it’s no longer just garbage in, garbage out -- when there’s garbage in, more and more garbage may be generated through the ML pipeline.
 
 // [VISUAL: BIAS AMPLIFICATION & INTERACTION]
-[Video files:`['static/animations/bias-amplification-loop.mp4']` width:600 height:400 /]
+[img src:"static/animations/bias-amplification-loop.gif" /]
+
 
 
 
@@ -247,16 +247,21 @@ It should be clear by this point that different sources of bias -- whether throu
 How does one actually tackle bias in the ML pipeline? While a suitable fix depends on each specific circumstance, here are some ways that companies and researchers are trying to reduce bias in machine learning.
 
 ### 1) De-biasing the data
-* One key to de-biasing the data is to ensure that a representative sample is collected in the first place. Bias from sampling errors can be mitigated by collecting larger samples and adopting data collection techniques such as stratified random sampling. While sampling errors won’t go away entirely, rapid data growth -- 2.5 quintillion bytes per day and counting -- and growing data collection capability have made it easier than ever to mitigate sampling errors compared to the past. Bias from non-sampling errors are much more varied and harder to tackle, but one should still strive to minimize non-sampling error through means such as proper training, establishing a clear purpose and procedure for data collection, and conducting careful data validation. For example, in response to image-classification database that contained disproportionately few wedding / bride images from India, Google deliberately sought out contributions from India to make the database more representative.
-* What about data that are representative but reflect bias inherent in the population? For datasets that contain minority groups, one can oversample those minority groups to create a more balanced training dataset. For datasets that may contain biased associations, one can first quantify and remove any biased associations from the dataset before proceeding to the model training and prediction stages. De-biasing Word2Vec data is an example of this latter approach: Researchers first measured how closely two words relate to each other along the gender dimension and assessed whether different strengths of association reflect gender bias or appropriate relationships. For example, the fact that “female” is more closely related to “homemaker” as opposed to “computer programmer” is indicative of gender bias, whereas a close association between “female” and “queen” reflects an appropriate, definitional relationship. The researchers then implemented a separate algorithm to neutralize gender association between word pairs exhibiting gender bias before feeding this de-biased data into the Word2Vec embedding algorithm.
 
+One key to de-biasing the data is to ensure that a representative sample is collected in the first place. Bias from sampling errors can be mitigated by collecting larger samples and adopting data collection techniques such as stratified random sampling. While sampling errors won’t go away entirely, rapid data growth -- 2.5 quintillion bytes per day and counting -- and growing data collection capability have made it easier than ever to mitigate sampling errors compared to the past. Bias from non-sampling errors are much more varied and harder to tackle, but one should still strive to minimize non-sampling error through means such as proper training, establishing a clear purpose and procedure for data collection, and conducting careful data validation. For example, in response to image-classification database that contained disproportionately few wedding / bride images from India, Google deliberately sought out contributions from India to make the database more representative.
+
+What about data that are representative but reflect bias inherent in the population? For datasets that contain minority groups, one can oversample those minority groups to create a more balanced training dataset.
 
 // [VISUAL: ADDING DATA FROM UNDER-REPRESENTED GROUPS]
-[Video files:`['static/animations/adjust-unbalanced-sample.mp4']` width:600 height:400 /]
+[img src:"static/animations/adjust-unbalanced-sample.gif" /]
+
+For datasets that may contain biased associations, one can first quantify and remove any biased associations from the dataset before proceeding to the model training and prediction stages. De-biasing Word2Vec data is an example of this latter approach: Researchers first measured how closely two words relate to each other along the gender dimension and assessed whether different strengths of association reflect gender bias or appropriate relationships. For example, the fact that “female” is more closely related to “homemaker” as opposed to “computer programmer” is indicative of gender bias, whereas a close association between “female” and “queen” reflects an appropriate, definitional relationship. The researchers then implemented a separate algorithm to neutralize gender association between word pairs exhibiting gender bias before feeding this de-biased data into the Word2Vec embedding algorithm.
+
+
 
 // [VISUAL: NEUTRALIZING GENDER ASSOCIATION BETWEEN WORD PAIRS]
 //![gender-association](static/images/gender-association.png)
-[Video files:`['static/animations/adjust-words-association.mp4']` width:600 height:400 /]
+[img src:"static/animations/adjust-words-association.gif" /]
 
 ### 2) De-biasing the algorithm
 In addition to de-biasing the data, one can apply model interventions to directly offset algorithms’ tendency to amplify bias. One intervention method is to impose model constraints that specify the statistical distribution of predictions. For example, researchers have been able to reduce bias amplification in image-labeling algorithms by nearly 50% by adding model constraints that required the proportion of images predicted to be male versus female to fall within 5% of the ratio observed in the training dataset. This approach can be particularly useful to reduce bias amplification when one is using imbalanced training datasets.
@@ -264,13 +269,13 @@ In addition to de-biasing the data, one can apply model interventions to directl
 
 // [VISUAL: CONSTRAINT ON MODEL PREDICTIONS]
 //![predition-constraints](static/images/predition-constraints.png)
-[Video files:`['static/animations/adjust-predictions.mp4']` width:600 height:400 /]
+[img src:"static/animations/adjust-predictions.gif" /]
 
 Another intervention method that is particularly useful to combat feedback loops is to specify how outputs generated from model predictions should be fed back into the algorithm. Going back to the predictive policing example, instead of letting every newly observed crime instance be fed back into the algorithm, one can impose a sampling rule such that the more likely police are sent to a particular precinct, the less likely data observed from those assignments are incorporated back into the algorithm.
 
 //  [VISUAL: DROPPING SOME NEWLY OBSERVED DATA]
 //![dropping-new-data](static/images/dropping-new-data.png)
-[Video files:`['static/animations/adjust-feedback-loop.mp4']` width:600 height:400 /]
+[img src:"static/animations/adjust-feedback-loop.gif" /]
 
 
 ### 3) Evaluating performance against metrics other than just accuracy
