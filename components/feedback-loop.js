@@ -126,10 +126,10 @@ class FeedbackLoopComponent extends D3Component {
         day++;
 
         if(d3.selectAll(".feedbackDot.neighborhoodA.day" + day).nodes().length > 0) {
-          d3.select(".dispatchedToLabel").html("Day " + day + ": Officer sent to <span class='neighborhoodA'>A</span>");
+          d3.select(".dispatchedToLabel").html("Day " + day + "/" + totalTrials + ": Officer sent to <span class='neighborhoodA'>A</span>");
         }
         else {
-          d3.select(".dispatchedToLabel").html("Day " + day + ": Officer sent to <span class='neighborhoodB'>B</span>");
+          d3.select(".dispatchedToLabel").html("Day " + day + "/" + totalTrials + ": Officer sent to <span class='neighborhoodB'>B</span>");
         }
 
         d3.selectAll(".feedbackDot.neighborhoodA").transition(500).style("opacity", function(d) { return d.day <= day ? 1 : 0; });
