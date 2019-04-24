@@ -251,7 +251,7 @@ ol.ml-pipeline img {
 }
 
 .neighborhoodB {
-	color: #539987;
+	color: #c5c5c5;
 }
 
 .neighborhoodLabel.neighborhoodA,
@@ -261,7 +261,7 @@ ol.ml-pipeline img {
 
 .neighborhoodLabel.neighborhoodB,
 .feedbackDot.neighborhoodB {
-	fill: #539987;
+	fill: #c5c5c5;
 }
 
 .finalResults {
