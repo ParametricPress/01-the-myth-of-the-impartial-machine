@@ -186,7 +186,7 @@ In the previous image-classification example, bias amplification stops at the mo
   [Newsletter /]
 [/Aside]
 
-Consider a predictive policing algorithm used to determine the optimal allocation of police force across a city. Suppose the city has two precincts (A and B) and one policeman, John. The city wishes to use historical data on past crime occurrences to determine which precinct to dispatch John to.  The goal is to send John to each precinct in propotion to the frequency of crimes that occur in each precinct.  If 40% of crimes occur in precinct A, the algorithm should send John to patrol A 40% of the time.  In our example, let's say precinct A had 12 crime incidents occur over the past year, while precinct B had 10, as shown below:
+Consider a predictive policing algorithm used to determine the optimal allocation of police force across a city. Suppose the city has two precincts (A and B) and one policeman, John. The city wishes to use historical data on past crime occurrences to determine which precinct to dispatch John to.  The goal is to send John to each precinct in propotion to the frequency of crimes that occur in each precinct.  If 40% of crimes occur in precinct A, the algorithm should send John to patrol A 40% of the time.  In our example, let's say the city experienced a total of 22 crimes in the past year, with 12 of those occurring in precinct A and 10 in precinct B, as shown below:
 [img src:`"static/images/feedback-loop-1.png" ` /]
 
 The predictive algorithm uses this historical data to determine where to send John.  The likelihood the algorithm will dispatch John to precinct A is in proportion to the share of all crimes that occurred in A.  In this case, this probability is 12/22 = 54.5%.  The probability the algorithm will choose to send John to precinct B is 10/22 = 45.5%. Let's say the algorithm decides to dispatch John to patrol precinct A.  While there, John encounters three crimes and logs them in the system.  The updated data now show a total of 15 past crimes in A and 10 in B.
@@ -195,11 +195,20 @@ The predictive algorithm uses this historical data to determine where to send Jo
 The next day, when the algorithm decides where to send John to, it will have a 15/25 = 60% probability of sending John to A and 10/25 = 40% probability of sending him to B.  The algorithm now has an even higher likelihood of sending John to precinct A as a result of its decision to assign John to A yesterday.  When the model chooses to send John to precinct A, more instances of crime will be logged for precinct A while crime that occur in B are ignored and remain uncaptured in the data. Over time, the data will become increasingly distorted due to the decisions the model makes.  See what can happen in the simulation below:
 
 // [VISUAL: FEEDBACK LOOPS]
-
+[var name:"crimeRateA" value:"4" /]
+[var name:"crimeRateB" value:"2" /]
 [var name:"runSimulation" value:0 /]
+
+//[Radio value:crimeRateA options:`[{value: "2", label: "Low (2 crimes per day)"}, {value: "4", label: "Medium (4 crimes per day)"}, {value: "8", label: "High (8 crimes per day)"}]` /]
+[div className:"feedbackLoopCrimeRateSelector"]
+  Crimes per day in A: [Radio value:crimeRateA options:`["2", "4", "8"]` /]
+[/div]
+[div className:"feedbackLoopCrimeRateSelector"]
+  Crimes per day in B: [Radio value:crimeRateB options:`["2", "4", "8"]` /]
+[/div]
 [Button onClick:`runSimulation = runSimulation + 1`]Run Simulation[/Button]
 
-[FeedbackLoop runSimulation:runSimulation /]
+[FeedbackLoop crimeRateA:crimeRateA crimeRateB:crimeRateB runSimulation:runSimulation /]
 
 Feedback loops are especially problematic when sub-groups in the training data exhibit large statistical differences (e.g. one precinct having a much higher crime rate than others); a model trained on such data will quickly “run away” and make predictions that fall into the majority group only, thereby generating ever-more lopsided data that are fed back into the model. Even when sub-groups are statistically similar, feedback loops can still lead to noisy and less accurate predictions. Algorithms where the predictive outcome determines what feedback the algorithm receives -- e.g. recidivism prediction, language translation, and social media news feeds -- should always be diligently monitored for the presence of feedback loops bias.
 

@@ -236,6 +236,15 @@ ol.ml-pipeline img {
 
 
 /********* STYLES FOR BIAS AMPLIFIED THROUGH ALGORITHMS INTERACTIVE *************/
+label {
+	margin-right: 20px;
+}
+
+input[type="radio"] {
+	display: inline;
+	width: auto;
+}
+
 .dispatchedToLabel {
 	font-family: 'Graphik Web';
 	width: 100%;
@@ -247,21 +256,22 @@ ol.ml-pipeline img {
 }
 
 .neighborhoodA {
-	color: #4801FF;
+	color: #c5c5c5;
 }
 
 .neighborhoodB {
-	color: #c5c5c5;
+	color: #4801FF;
+
 }
 
 .neighborhoodLabel.neighborhoodA,
 .feedbackDot.neighborhoodA {
-	fill: #4801FF;
+	fill: #c5c5c5;
 }
 
 .neighborhoodLabel.neighborhoodB,
 .feedbackDot.neighborhoodB {
-	fill: #c5c5c5;
+	fill: #4801FF;
 }
 
 .finalResults {

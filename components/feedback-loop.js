@@ -16,16 +16,17 @@ const xScale = d3.scaleLinear()
 
 
 // initial parameters (eventually come from props)
-let n_a = 12;  // number of observed crimes in neighborhood A
-let n_b = 10;  // number of observed crimes in neighborhood B
-let lambda_a = 3;  // crime rate of neighborhood A
-let lambda_b = 2;  // crime rate of neighborhood B
+let n_a;  // number of observed crimes in neighborhood A
+let n_b;  // number of observed crimes in neighborhood B
+let lambda_a;  // crime rate of neighborhood A
+let lambda_b;  // crime rate of neighborhood B
 
-let total_a = n_a;  // total number of crimes that occurred in A (initially equal to number of observed crimes)
-let total_b = n_b;  // total number of crimes that occurred in B
+let total_a;  // total number of crimes that occurred in A
+let total_b;  // total number of crimes that occurred in B
 let sent_to_a = 0;  // total number of times officer sent to A
 let sent_to_b = 0;  // total number of times officer sent to B
 
+let crimeData;
 
 class FeedbackLoopComponent extends D3Component {
 
@@ -36,9 +37,14 @@ class FeedbackLoopComponent extends D3Component {
    */
   initialize(node, props) {
     // d3.select(node).attr("class", props.class);
-
-    let crimeData = generateData(n_a, n_b, totalTrials);
-    // console.log(crimeData);
+    n_a = +props.crimeRateA;
+    n_b = +props.crimeRateB;
+    lambda_a = +props.crimeRateA;
+    lambda_b = +props.crimeRateB;
+    total_a = n_a;
+    total_b = n_b;
+    crimeData = generateData(n_a, n_b, totalTrials);
+    console.log(crimeData);
 
     // set up main parts of the interactive
     const dispatchedToLabel = d3.select(node).append("div")
@@ -47,36 +53,13 @@ class FeedbackLoopComponent extends D3Component {
 
     const svg = this.svg = d3.select(node).append('svg');
     svg.attr('viewBox', `0 0 ${width} ${height}`)
-      .attr("id", props.id)
+      .attr("id", "feedbackLoopPlot")
       .style('width', '100%')
       .style('height', '100%');
 
     const finalResults = d3.select(node).append("div").attr("class", "finalResults hidden");
 
     // draw initial plot
-    const dots_a = svg.append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .selectAll(".feedbackDot")
-      .data(crimeData[0])
-      .enter()
-      .append("circle")
-      .attr("class", function(d) { return "feedbackDot neighborhoodA day" + d.day; })
-      .attr("r", r)
-      .attr("cx", function(d, i) { return xScale(i % 10); })
-      .attr("cy", function(d, i) { return Math.floor(i / 10) * (r * 2 + 2); })
-      .style("opacity", function(d) { return d.day === 0 ? 1 : 0; });
-
-    const dots_b = svg.append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .selectAll(".feedbackDot")
-      .data(crimeData[1])
-      .enter()
-      .append("circle")
-      .attr("class", function(d) { return "feedbackDot neighborhoodB day" + d.day; })
-      .attr("r", r)
-      .attr("cx", function(d, i) { return width/2 + xScale(i % 10); })
-      .attr("cy", function(d, i) { return Math.floor(i / 10) * (r * 2 + 2); })
-      .style("opacity", function(d) { return d.day === 0 ? 1 : 0; });
 
     // label neighborhoods
     svg.append("text")
@@ -90,6 +73,8 @@ class FeedbackLoopComponent extends D3Component {
       .attr("x", margin.left + (width/2) + (r*2 + 1) * 5)
       .attr("y", 20)
       .text("B");
+
+    drawDots(svg, crimeData);
 
     // set up final results section
     const observedCrimesA = finalResults.append("div").attr("class", "observedCrimesA");
@@ -108,19 +93,40 @@ class FeedbackLoopComponent extends D3Component {
   update(props, oldProps) {
 
     if (props.runSimulation !== oldProps.runSimulation) {
-      // going to need to first reset simulation:
-      // generate new data
-      // redraw dots in plot
+      // console.log(props.crimeRateA, props.crimeRateB, props.runSimulation);
+      // console.log("Old props:", oldProps.crimeRateA, oldProps.crimeRateB, oldProps.runSimulation);
+
+      // BUG? oldProps are getting updated with current props for crimeRateA and crimeRateB
+      // if user has changed the crime rate settings and is rerunning the simulation:
+      if(+props.crimeRateA !== lambda_a || +props.crimeRateB !== lambda_b){
+        n_a = +props.crimeRateA;
+        n_b = +props.crimeRateB;
+        lambda_a = +props.crimeRateA;
+        lambda_b = +props.crimeRateB;
+        total_a = n_a;
+        total_b = n_b;
+        sent_to_a = 0;
+        sent_to_b = 0;
+        crimeData = generateData(n_a, n_b, totalTrials);
+        console.log(crimeData);
+
+        // redraw dots in plot
+        d3.selectAll("#feedbackLoopPlot g").remove();
+
+        let svg = d3.select("#feedbackLoopPlot");
+        drawDots(svg, crimeData);
+      }
+
       d3.select(".finalResults").classed("hidden", true);
       d3.select(".observedCrimesA").html("Observed crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + n_a + "</span>");
       d3.select(".observedCrimesB").html("Observed crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + n_b + "</span>");
-      d3.select(".totalCrimesA").html("Total actual crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + total_a + "</span>");
-      d3.select(".totalCrimesB").html("Total actual crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + total_b + "</span>");
+      d3.select(".totalCrimesA").html("Total actual crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + total_a + " (" + PCTFORMAT(total_a/(total_a + total_b)) + ")" + "</span>");
+      d3.select(".totalCrimesB").html("Total actual crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + total_b + " (" + PCTFORMAT(total_b/(total_a + total_b)) + ")" + "</span>");
       d3.select(".pctSentToA").html("Percent of time officer sent to <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + PCTFORMAT(sent_to_a/totalTrials) + "</span>");
       d3.select(".pctSentToB").html("Percent of time officer sent to <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + PCTFORMAT(sent_to_b/totalTrials) + "</span>");
 
 
-      let day = 0;
+      let day = 0; // TODO: need to figure out a way to interrupt the autoplay if the user clicks the button before the current simulation has finished
       let t = d3.interval(function(elapsed) {
         // console.log(day, total_a, total_b);
         day++;
@@ -195,6 +201,33 @@ function updateData(data, location, day, crimeRate) {
   for(let i = 0; i < crimeRate; i++) {
     data.push({"neighborhood": location, "day": day, "crime": 1});
   }
+}
+
+function drawDots(svg, datasets) {
+  console.log(svg.node());
+  const dots_a = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .selectAll(".feedbackDot")
+    .data(datasets[0])
+    .enter()
+    .append("circle")
+    .attr("class", function(d) { return "feedbackDot neighborhoodA day" + d.day; })
+    .attr("r", r)
+    .attr("cx", function(d, i) { return xScale(i % 10); })
+    .attr("cy", function(d, i) { return Math.floor(i / 10) * (r * 2 + 2); })
+    .style("opacity", function(d) { return d.day === 0 ? 1 : 0; });
+
+  const dots_b = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .selectAll(".feedbackDot")
+    .data(datasets[1])
+    .enter()
+    .append("circle")
+    .attr("class", function(d) { return "feedbackDot neighborhoodB day" + d.day; })
+    .attr("r", r)
+    .attr("cx", function(d, i) { return width/2 + xScale(i % 10); })
+    .attr("cy", function(d, i) { return Math.floor(i / 10) * (r * 2 + 2); })
+    .style("opacity", function(d) { return d.day === 0 ? 1 : 0; });
 }
 
 module.exports = FeedbackLoopComponent;
