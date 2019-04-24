@@ -81,13 +81,13 @@ class FeedbackLoopComponent extends D3Component {
     // label neighborhoods
     svg.append("text")
       .attr("class", "neighborhoodLabel neighborhoodA")
-      .attr("x", margin.left + (r*2 + 2) * 5)
+      .attr("x", margin.left + (r*2 + 1) * 5)
       .attr("y", 20)
       .text("A");
 
     svg.append("text")
       .attr("class", "neighborhoodLabel neighborhoodB")
-      .attr("x", margin.left + (width/2) + (r*2 + 2) * 5)
+      .attr("x", margin.left + (width/2) + (r*2 + 1) * 5)
       .attr("y", 20)
       .text("B");
 
@@ -132,15 +132,22 @@ class FeedbackLoopComponent extends D3Component {
           d3.select(".dispatchedToLabel").html("Day " + day + "/" + totalTrials + ": Officer sent to <span class='neighborhoodB'>B</span>");
         }
 
-        d3.selectAll(".feedbackDot.neighborhoodA").transition(500).style("opacity", function(d) { return d.day <= day ? 1 : 0; });
-        d3.selectAll(".feedbackDot.neighborhoodB").transition(500).style("opacity", function(d) { return d.day <= day ? 1 : 0; });
+        d3.selectAll(".feedbackDot.neighborhoodA")
+          .transition(500)
+          .delay(500)
+          .style("opacity", function(d) { return d.day <= day ? 1 : 0; });
+
+        d3.selectAll(".feedbackDot.neighborhoodB")
+          .transition(500)
+          .delay(500)
+          .style("opacity", function(d) { return d.day <= day ? 1 : 0; });
 
         if(day === totalTrials) {
           d3.select(".finalResults").classed("hidden", false);
           t.stop();
         }
 
-      }, 500);
+      }, 1000);
     }
   }
 }
