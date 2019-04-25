@@ -210,7 +210,7 @@ Having representative training data is the ideal scenario. In a more realistic s
   [/div]
 
   [div className:"interactive-instruction"]
-    Result. [span className:"light"]Model [Display value:`modelAccuracy <= bias ? 'would not' : 'would' ` /] be incentivized to amplify bias.[/div]
+    Result. [span className:"light"]Model [Display value:`modelAccuracy >= bias ? 'would not' : 'would' ` /] be incentivized to amplify bias.[/div]
   [/div]
 [/FullWidth]
 
