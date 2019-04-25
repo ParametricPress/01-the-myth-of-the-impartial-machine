@@ -69,7 +69,7 @@ class RecidivismTable extends React.Component {
                   <tr>
                     <td>Total</td>
                     <td>{totalSampleSize - totalHighRisk_a}</td>
-                    <td><input type="number" autoComplete="off" min="0" max="100" value={totalHighRisk_a} onChange={this.onChange} /> </td>
+                    <td><input type="number" autoComplete="off" min="0" max="45" value={totalHighRisk_a} onChange={this.onChange} /> </td>
                     <td>{totalSampleSize}</td>
                   </tr>
                 </tbody>
