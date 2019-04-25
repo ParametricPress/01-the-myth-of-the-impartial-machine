@@ -8,7 +8,7 @@ const margin = {top: 40, right: 10, bottom: 0, left: 100};
 const PCTFORMAT = d3.format(".0%");
 
 const r = 5;
-const totalTrials = 30;
+const totalTrials = 14;
 
 const xScale = d3.scaleLinear()
   .domain([0, 9])
@@ -27,6 +27,7 @@ let sent_to_a = 0;  // total number of times officer sent to A
 let sent_to_b = 0;  // total number of times officer sent to B
 
 let crimeData;
+let history = [];
 
 class FeedbackLoopComponent extends D3Component {
 
@@ -57,9 +58,7 @@ class FeedbackLoopComponent extends D3Component {
       .style('width', '100%')
       .style('height', '100%');
 
-    const finalResults = d3.select(node).append("div").attr("class", "finalResults hidden");
-
-    // draw initial plot
+    const finalResults = d3.select(node).append("div").attr("class", "finalResults");
 
     // label neighborhoods
     svg.append("text")
@@ -74,15 +73,16 @@ class FeedbackLoopComponent extends D3Component {
       .attr("y", 20)
       .text("B");
 
+    // draw initial plot
     drawDots(svg, crimeData);
 
     // set up final results section
-    const observedCrimesA = finalResults.append("div").attr("class", "observedCrimesA");
-    const observedCrimesB = finalResults.append("div").attr("class", "observedCrimesB");
-    const totalCrimesA = finalResults.append("div").attr("class", "totalCrimesA");
-    const totalCrimesB = finalResults.append("div").attr("class", "totalCrimesB");
-    const pctSentToA = finalResults.append("div").attr("class", "pctSentToA");
-    const pctSentToB = finalResults.append("div").attr("class", "pctSentToB");
+    finalResults.append("div").attr("class", "observedCrimesA").html("Observed crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + history[0].observed_a + "</span>");
+    finalResults.append("div").attr("class", "observedCrimesB").html("Observed crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + history[0].observed_b + "</span>");
+    finalResults.append("div").attr("class", "totalCrimesA").html("Total actual crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + history[0].total_a + " (" + PCTFORMAT(history[0].total_a/(history[0].total_a + history[0].total_b)) + ")" + "</span>");
+    finalResults.append("div").attr("class", "totalCrimesB").html("Total actual crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + history[0].total_b + " (" + PCTFORMAT(history[0].total_b/(history[0].total_a + history[0].total_b)) + ")" + "</span>");
+    finalResults.append("div").attr("class", "pctSentToA").html("Percent of time officer sent to <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'></span>");
+    finalResults.append("div").attr("class", "pctSentToB").html("Percent of time officer sent to <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'></span>");
   }
 
   /**
@@ -99,6 +99,7 @@ class FeedbackLoopComponent extends D3Component {
       // BUG? oldProps are getting updated with current props for crimeRateA and crimeRateB
       // if user has changed the crime rate settings and is rerunning the simulation:
       if(+props.crimeRateA !== lambda_a || +props.crimeRateB !== lambda_b){
+        history = [];
         n_a = +props.crimeRateA;
         n_b = +props.crimeRateB;
         lambda_a = +props.crimeRateA;
@@ -108,7 +109,7 @@ class FeedbackLoopComponent extends D3Component {
         sent_to_a = 0;
         sent_to_b = 0;
         crimeData = generateData(n_a, n_b, totalTrials);
-        console.log(crimeData);
+        // console.log(crimeData);
 
         // redraw dots in plot
         d3.selectAll("#feedbackLoopPlot g").remove();
@@ -116,14 +117,6 @@ class FeedbackLoopComponent extends D3Component {
         let svg = d3.select("#feedbackLoopPlot");
         drawDots(svg, crimeData);
       }
-
-      d3.select(".finalResults").classed("hidden", true);
-      d3.select(".observedCrimesA").html("Observed crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + n_a + "</span>");
-      d3.select(".observedCrimesB").html("Observed crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + n_b + "</span>");
-      d3.select(".totalCrimesA").html("Total actual crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + total_a + " (" + PCTFORMAT(total_a/(total_a + total_b)) + ")" + "</span>");
-      d3.select(".totalCrimesB").html("Total actual crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + total_b + " (" + PCTFORMAT(total_b/(total_a + total_b)) + ")" + "</span>");
-      d3.select(".pctSentToA").html("Percent of time officer sent to <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + PCTFORMAT(sent_to_a/totalTrials) + "</span>");
-      d3.select(".pctSentToB").html("Percent of time officer sent to <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + PCTFORMAT(sent_to_b/totalTrials) + "</span>");
 
 
       let day = 0; // TODO: need to figure out a way to interrupt the autoplay if the user clicks the button before the current simulation has finished
@@ -141,33 +134,54 @@ class FeedbackLoopComponent extends D3Component {
         d3.selectAll(".feedbackDot.neighborhoodA")
           .transition(500)
           .delay(500)
-          .style("opacity", function(d) { return d.day <= day ? 1 : 0; });
+          .style("opacity", function(d) { return d.day <= day ? 1 : 0; })
+          .on("end", function() {
+            // d3.select(".finalResults").classed("hidden", true);
+            d3.select(".observedCrimesA span.neighborhoodA:nth-child(2)").text(history[day].observed_a);
+            d3.select(".observedCrimesB span.neighborhoodB:nth-child(2)").text(history[day].observed_b);
+            d3.select(".totalCrimesA span.neighborhoodA:nth-child(2)").text(history[day].total_a + " (" + PCTFORMAT(history[day].total_a/(history[day].total_a + history[day].total_b)) + ")");
+            d3.select(".totalCrimesB span.neighborhoodB:nth-child(2)").text(history[day].total_b + " (" + PCTFORMAT(history[day].total_b/(history[day].total_a + history[day].total_b)) + ")");
+            d3.select(".pctSentToA span.neighborhoodA:nth-child(2)").text(PCTFORMAT(history[day].pct_sent_a));
+            d3.select(".pctSentToB span.neighborhoodB:nth-child(2)").text(PCTFORMAT(history[day].pct_sent_b));
+          });
 
         d3.selectAll(".feedbackDot.neighborhoodB")
           .transition(500)
           .delay(500)
-          .style("opacity", function(d) { return d.day <= day ? 1 : 0; });
+          .style("opacity", function(d) { return d.day <= day ? 1 : 0; })
+          .on("end", function() {
+            // d3.select(".finalResults").classed("hidden", true);
+            d3.select(".observedCrimesA span.neighborhoodA:nth-child(2)").text(history[day].observed_a);
+            d3.select(".observedCrimesB span.neighborhoodB:nth-child(2)").text(history[day].observed_b);
+            d3.select(".totalCrimesA span.neighborhoodA:nth-child(2)").text(history[day].total_a + " (" + PCTFORMAT(history[day].total_a/(history[day].total_a + history[day].total_b)) + ")");
+            d3.select(".totalCrimesB span.neighborhoodB:nth-child(2)").text(history[day].total_b + " (" + PCTFORMAT(history[day].total_b/(history[day].total_a + history[day].total_b)) + ")");
+            d3.select(".pctSentToA span.neighborhoodA:nth-child(2)").text(PCTFORMAT(history[day].pct_sent_a));
+            d3.select(".pctSentToB span.neighborhoodB:nth-child(2)").text(PCTFORMAT(history[day].pct_sent_b));
+          });
+
 
         if(day === totalTrials) {
-          d3.select(".finalResults").classed("hidden", false);
+          // d3.select(".finalResults").classed("hidden", false);
           t.stop();
         }
 
-      }, 1000);
+      }, 2000);
     }
   }
 }
 
-function generateData(n_a, n_b, totalTrials) {
-  let data_a = initializeData(n_a, "A");
-  let data_b = initializeData(n_b, "B");
+function generateData(initial_a, initial_b, totalTrials) {
+  let data_a = initializeData(initial_a, "A");
+  let data_b = initializeData(initial_b, "B");
+  history.push({observed_a: initial_a, observed_b: initial_b, total_a: initial_a, total_b: initial_b, pct_sent_a: 0, pct_sent_b: 0});
+
   for(let i = 1; i < totalTrials + 1; i++) {
     let location = dispatchOfficer();
     location == "A" ? updateData(data_a, "A", i, lambda_a) : updateData(data_b, "B", i, lambda_b);
     total_a += lambda_a;
     total_b += lambda_b;
+    history.push({observed_a: n_a, observed_b: n_b, total_a: total_a, total_b: total_b, pct_sent_a: sent_to_a/i, pct_sent_b: sent_to_b/i});
   }
-
   return [data_a, data_b];
 }
 
@@ -204,7 +218,6 @@ function updateData(data, location, day, crimeRate) {
 }
 
 function drawDots(svg, datasets) {
-  console.log(svg.node());
   const dots_a = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     .selectAll(".feedbackDot")
