@@ -219,6 +219,10 @@ ol.ml-pipeline img {
 	width: 500px;
 }
 
+.amplifiedBiasInteractive .plotTitle{
+	color: #d3d3d3;
+}
+
 .amplifiedBiasInteractive .slider-container {
 	max-width: 200px;
 	margin-top: 0;
@@ -232,6 +236,7 @@ ol.ml-pipeline img {
 	text-align: left;
 	margin-bottom: 1em;
 	margin-top: 0;
+	color: #d3d3d3;
 }
 
 .amplifiedBiasInteractive .slider input {
@@ -262,9 +267,10 @@ ol.ml-pipeline img {
 	text-decoration: underline;
 }
 
-.errorLabel {
+.amplifiedBiasInteractive text.errorLabel {
 	text-anchor: middle;
-	font-size: 0.3em;
+	font-size: 0.4em;
+	fill: #DACDFF;
 }
 
 #biasAmplifiedConclusion {
