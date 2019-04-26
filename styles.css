@@ -328,6 +328,15 @@ ol.ml-pipeline img {
 	margin-top: 70px;
 }
 
+.recidivism-tables .inputError {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	font-style: italic;
+}
+
+.recidivism-tables .inputError.hidden {
+	display: none;
+}
 
 .interactive {
 	padding-left: 50px;

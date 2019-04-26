@@ -28,12 +28,19 @@ class RecidivismTable extends React.Component {
     onChange(e) {
       const newValue = +e.target.value;
       // do some error handling here
+      if(newValue < 0 || newValue > 45) {
+        console.log("Error: invalid value");
+        d3.select(".recidivism-tables .inputError").classed("hidden", false);
+      }
+      else {
+        d3.select(".recidivism-tables .inputError").classed("hidden", true);
 
-      this.setState({
-        totalHighRisk_a: newValue,
-        highRiskReoffense_a: Math.round(accuracy * newValue),
-        highRiskNoReoffense_a: Math.round((1 - accuracy) * newValue),
-      })
+        this.setState({
+          totalHighRisk_a: newValue,
+          highRiskReoffense_a: Math.round(accuracy * newValue),
+          highRiskNoReoffense_a: Math.round((1 - accuracy) * newValue),
+        })
+      }
     }
 
     render() {
@@ -137,6 +144,7 @@ class RecidivismTable extends React.Component {
                 </tbody>
               </table>
             </div>
+            <div class="inputError hidden">Invalid entry: Please enter a number between 0 and 45.</div>
           </div>
         );
     }
