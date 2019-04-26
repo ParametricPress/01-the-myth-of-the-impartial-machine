@@ -77,12 +77,12 @@ class FeedbackLoopComponent extends D3Component {
     drawDots(svg, crimeData);
 
     // set up final results section
-    finalResults.append("div").attr("class", "observedCrimesA").html("Observed crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + history[0].observed_a + "</span>");
-    finalResults.append("div").attr("class", "observedCrimesB").html("Observed crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + history[0].observed_b + "</span>");
-    finalResults.append("div").attr("class", "totalCrimesA").html("Total actual crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + history[0].total_a + " (" + PCTFORMAT(history[0].total_a/(history[0].total_a + history[0].total_b)) + ")" + "</span>");
-    finalResults.append("div").attr("class", "totalCrimesB").html("Total actual crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + history[0].total_b + " (" + PCTFORMAT(history[0].total_b/(history[0].total_a + history[0].total_b)) + ")" + "</span>");
-    finalResults.append("div").attr("class", "pctSentToA").html("Percent of time officer sent to <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'></span>");
-    finalResults.append("div").attr("class", "pctSentToB").html("Percent of time officer sent to <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'></span>");
+    finalResults.append("div").attr("class", "pctSentToA").html("Officer sent to <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>0</span>");
+    finalResults.append("div").attr("class", "pctSentToB").html("Officer sent to <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>0</span>");
+    finalResults.append("div").attr("class", "observedCrimesA").html("Observed crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + history[0].observed_a + " (" + PCTFORMAT(history[0].observed_a/(history[0].observed_a + history[0].observed_b)) + ")</span>");
+    finalResults.append("div").attr("class", "observedCrimesB").html("Observed crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + history[0].observed_b + " (" + PCTFORMAT(history[0].observed_b/(history[0].observed_a + history[0].observed_b)) + ")</span>");
+    finalResults.append("div").attr("class", "totalCrimesA").html("Total actual crimes in <span class='neighborhoodA'>A</span>: <span class='neighborhoodA'>" + history[0].total_a + " (" + PCTFORMAT(history[0].total_a/(history[0].total_a + history[0].total_b)) + ")</span>");
+    finalResults.append("div").attr("class", "totalCrimesB").html("Total actual crimes in <span class='neighborhoodB'>B</span>: <span class='neighborhoodB'>" + history[0].total_b + " (" + PCTFORMAT(history[0].total_b/(history[0].total_a + history[0].total_b)) + ")</span>");
   }
 
   /**
@@ -137,12 +137,12 @@ class FeedbackLoopComponent extends D3Component {
           .style("opacity", function(d) { return d.day <= day ? 1 : 0; })
           .on("end", function() {
             // d3.select(".finalResults").classed("hidden", true);
-            d3.select(".observedCrimesA span.neighborhoodA:nth-child(2)").text(history[day].observed_a);
-            d3.select(".observedCrimesB span.neighborhoodB:nth-child(2)").text(history[day].observed_b);
+            d3.select(".pctSentToA span.neighborhoodA:nth-child(2)").text(history[day].sent_to_a + " (" + PCTFORMAT(history[day].pct_sent_a) + ")");
+            d3.select(".pctSentToB span.neighborhoodB:nth-child(2)").text(history[day].sent_to_b + " (" + PCTFORMAT(history[day].pct_sent_b) + ")");
+            d3.select(".observedCrimesA span.neighborhoodA:nth-child(2)").text(history[day].observed_a + " (" + PCTFORMAT(history[day].observed_a/(history[day].observed_a + history[day].observed_b)) + ")");
+            d3.select(".observedCrimesB span.neighborhoodB:nth-child(2)").text(history[day].observed_b + " (" + PCTFORMAT(history[day].observed_b/(history[day].observed_a + history[day].observed_b)) + ")");
             d3.select(".totalCrimesA span.neighborhoodA:nth-child(2)").text(history[day].total_a + " (" + PCTFORMAT(history[day].total_a/(history[day].total_a + history[day].total_b)) + ")");
             d3.select(".totalCrimesB span.neighborhoodB:nth-child(2)").text(history[day].total_b + " (" + PCTFORMAT(history[day].total_b/(history[day].total_a + history[day].total_b)) + ")");
-            d3.select(".pctSentToA span.neighborhoodA:nth-child(2)").text(PCTFORMAT(history[day].pct_sent_a));
-            d3.select(".pctSentToB span.neighborhoodB:nth-child(2)").text(PCTFORMAT(history[day].pct_sent_b));
           });
 
         d3.selectAll(".feedbackDot.neighborhoodB")
@@ -151,12 +151,12 @@ class FeedbackLoopComponent extends D3Component {
           .style("opacity", function(d) { return d.day <= day ? 1 : 0; })
           .on("end", function() {
             // d3.select(".finalResults").classed("hidden", true);
-            d3.select(".observedCrimesA span.neighborhoodA:nth-child(2)").text(history[day].observed_a);
-            d3.select(".observedCrimesB span.neighborhoodB:nth-child(2)").text(history[day].observed_b);
+            d3.select(".pctSentToA span.neighborhoodA:nth-child(2)").text(history[day].sent_to_a + " (" + PCTFORMAT(history[day].pct_sent_a) + ")");
+            d3.select(".pctSentToB span.neighborhoodB:nth-child(2)").text(history[day].sent_to_b + " (" + PCTFORMAT(history[day].pct_sent_b) + ")");
+            d3.select(".observedCrimesA span.neighborhoodA:nth-child(2)").text(history[day].observed_a + " (" + PCTFORMAT(history[day].observed_a/(history[day].observed_a + history[day].observed_b)) + ")");
+            d3.select(".observedCrimesB span.neighborhoodB:nth-child(2)").text(history[day].observed_b + " (" + PCTFORMAT(history[day].observed_b/(history[day].observed_a + history[day].observed_b)) + ")");
             d3.select(".totalCrimesA span.neighborhoodA:nth-child(2)").text(history[day].total_a + " (" + PCTFORMAT(history[day].total_a/(history[day].total_a + history[day].total_b)) + ")");
             d3.select(".totalCrimesB span.neighborhoodB:nth-child(2)").text(history[day].total_b + " (" + PCTFORMAT(history[day].total_b/(history[day].total_a + history[day].total_b)) + ")");
-            d3.select(".pctSentToA span.neighborhoodA:nth-child(2)").text(PCTFORMAT(history[day].pct_sent_a));
-            d3.select(".pctSentToB span.neighborhoodB:nth-child(2)").text(PCTFORMAT(history[day].pct_sent_b));
           });
 
 
@@ -173,14 +173,14 @@ class FeedbackLoopComponent extends D3Component {
 function generateData(initial_a, initial_b, totalTrials) {
   let data_a = initializeData(initial_a, "A");
   let data_b = initializeData(initial_b, "B");
-  history.push({observed_a: initial_a, observed_b: initial_b, total_a: initial_a, total_b: initial_b, pct_sent_a: 0, pct_sent_b: 0});
+  history.push({observed_a: initial_a, observed_b: initial_b, total_a: initial_a, total_b: initial_b, sent_to_a: 0, pct_sent_a: 0, sent_to_b: 0, pct_sent_b: 0});
 
   for(let i = 1; i < totalTrials + 1; i++) {
     let location = dispatchOfficer();
     location == "A" ? updateData(data_a, "A", i, lambda_a) : updateData(data_b, "B", i, lambda_b);
     total_a += lambda_a;
     total_b += lambda_b;
-    history.push({observed_a: n_a, observed_b: n_b, total_a: total_a, total_b: total_b, pct_sent_a: sent_to_a/i, pct_sent_b: sent_to_b/i});
+    history.push({observed_a: n_a, observed_b: n_b, total_a: total_a, total_b: total_b, sent_to_a: sent_to_a, pct_sent_a: sent_to_a/i, sent_to_b: sent_to_b, pct_sent_b: sent_to_b/i});
   }
   return [data_a, data_b];
 }
