@@ -64,6 +64,10 @@ ol.ml-pipeline img {
 	max-width: 600px;
 }
 
+.plotNotes {
+	font-style: italic;
+}
+
 /********* STYLES FOR SAMPLING ERROR ITERACTIVE ************/
 .samplingErrorsInteractive {
 	width: 100%;

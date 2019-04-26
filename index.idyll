@@ -94,6 +94,9 @@ When one examines a data sample, it is imperative to check whether the sample is
     [div className:"interactiveDek"]
       Draw samples from a population and see how close the estimates are to the true value. What happens when the sample size is changed?
     [/div]
+    [div className:"plotNotes"]
+      Note: Larger circle represents higher household income.
+    [/div]
   [/div]
 
 
