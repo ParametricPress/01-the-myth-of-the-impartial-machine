@@ -28,7 +28,7 @@ class BiasAmplifiedGuessWomanComponent extends D3Component {
    */
   initialize(node, props) {
     const svg = this.svg = d3.select(node).append('svg');
-    svg.attr('viewBox', `0 0 ${width} ${height}`)
+    svg.attr('viewBox', `0 0 ${width} ${height - 50}`)
       .attr('id', props.id)
       .style('width', '100%')
       .style('height', 'auto');
@@ -62,7 +62,7 @@ class BiasAmplifiedGuessWomanComponent extends D3Component {
     this.errorLabel = svg.append('text')
       .attr('class', 'errorLabel')
       .attr('x', width / 2)
-      .attr('y', 70)
+      .attr('y', 50)
       .text('Error: ' + PCTFORMAT(1 - props.bias));
   }
 

@@ -25,7 +25,7 @@ class BiasAmplifiedDataComponent extends D3Component {
    */
   initialize(node, props) {
     const svg = this.svg = d3.select(node).append('svg');
-    svg.attr('viewBox', `0 0 ${size} ${size}`)
+    svg.attr('viewBox', `0 0 ${size} ${40}`)
       .attr('id', props.id)
       .style('width', '100%')
       .style('height', '100%');
@@ -40,7 +40,7 @@ class BiasAmplifiedDataComponent extends D3Component {
       .attr('class', function(d, i) { return d <= props.bias * 10 ? 'dataPoint woman' : 'dataPoint man'; })
       .attr('r', 3)
       .attr('cx', function(d, i) { return d % 5 === 0 ? xPos(5) : xPos(d % 5); })
-      .attr('cy', function(d, i) { return d <= 5 ? 20 : 30});
+      .attr('cy', function(d, i) { return d <= 5 ? 10 : 20});
   }
 
 

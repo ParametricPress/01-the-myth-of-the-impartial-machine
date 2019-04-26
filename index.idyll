@@ -1,20 +1,21 @@
 [meta title:"The Myth of the Impartial Machine" description:"Lost amidst the rush to deploy artificially intelligent software at scale are incidents where probabilistic models have produced shockingly flawed results." /]
 
+[var name:"parametricSlug" value:"bias-in-machine-learning" /]
+
 [Nav fullWidth:true /]
 
 [Header
-  title:`["Machine", "Partiality"]`
+  title:`["Impartial", "Machine"]`
   longTitle:`["The Myth of the", "Impartial Machine"]`
   date:"April 15, 2019"
   dek:"Lost amidst the rush to deploy artificially intelligent software at scale are incidents where probabilistic models have produced shockingly flawed results."
   fullWidth:true
-  headerImage:"static/images/potential-for-violence.png"
   authors:`[{
     name: "Alice Feng",
-    role: ''
+    role: 'Author'
   }, {
     name: "Shuyan Wu",
-    role: ''
+    role: 'Author'
   }]`
   doi:""
   archive:""
@@ -50,35 +51,27 @@ However, for every neural network that can defeat Jeopardy champions and outplay
 
 ## The ML Pipeline
 
-Being able to use data to meaningfully answer questions via machine learning requires several steps. [tooltip content:"<img height='300' src='static/images/ml-pipeline.png' />"][a style:`{color: '#222'}` href:"static/images/ml-pipeline.png"]Click here to download this overview as a PNG.[/a][/tooltip]
+Being able to use data to meaningfully answer questions via machine learning requires several steps.
 
-[var name:"pipelineIndex" value:0 /]
-[scroller currentStep:pipelineIndex ]
-  [Graphic]
-    [TextContainer]
-      [aside]
-        [img src:`"static/images/ml-pipeline-step" + (pipelineIndex + 1) + ".png" ` /]
-      [/aside]
-    [/TextContainer]
-  [/Graphic]
-
-  [Step]
-    **Data gathering.**  All machine learning models require data as inputs.  In today’s increasingly digitized world, data can be derived from various sources including user interactions on a website, collections of photo images and sensor recordings.
-  [/Step]
-  [Step]**Data preparation.** Data collected are rarely in a usable state as-is. Data often need to be cleaned, transformed and checked for errors before they are ready to be fed into a model.[/Step]
-  [Step]**Split dataset into training and testing sets.** The training dataset will be used for building and training the model while the testing dataset will be used to evaluate how well the model performs. It is important to evaluate the model on data it has not seen before so that it does not learn the idiosyncrasies of the data it was trained on.[/Step]
-  [Step]**Fit and train models.** This is the step where various types of ML models are built and applied to the training data.  Models are iterated on to improve their performance with the goal of generating the most accurate predictions possible.[/Step]
-  [Step]**Evaluate model on the test dataset.**  The top performing model is used on the testing data to get a sense of how the model will perform on real world data it’s never seen before.  Based on the results, further refinement and tuning of the model may be needed.[/Step]
-  [Step]**Make predictions!**  Once the model is finalized, it can begin to be used to answer the question it was designed for.[/Step]
-[/scroller]
+[ol className:"ml-pipeline"]
+[aside]![ML pipeline step 1](static/images/ml-pipeline-step1.png)[/aside]
+[li]**Data gathering.**  All machine learning models require data as inputs.  In today’s increasingly digitized world, data can be derived from various sources including user interactions on a website, collections of photo images and sensor recordings.[/li]
+[aside]![ML pipeline step 2](static/images/ml-pipeline-step2.png)[/aside]
+[li]**Data preparation.** Data collected are rarely in a usable state as-is. Data often need to be cleaned, transformed and checked for errors before they are ready to be fed into a model.[/li]
+[aside]![ML pipeline step 3](static/images/ml-pipeline-step3.png)[/aside]
+[li]**Split dataset into training and testing sets.** The training dataset will be used for building and training the model while the testing dataset will be used to evaluate how well the model performs. It is important to evaluate the model on data it has not seen before so that it does not learn the idiosyncrasies of the data it was trained on.[/li]
+[aside]![ML pipeline step 4](static/images/ml-pipeline-step4.png)[/aside]
+[li]**Fit and train models.** This is the step where various types of ML models are built and applied to the training data.  Models are iterated on to improve their performance with the goal of generating the most accurate predictions possible.[/li]
+[aside]![ML pipeline step 5](static/images/ml-pipeline-step5.png)[/aside]
+[li]**Evaluate model on the test dataset.**  The top performing model is used on the testing data to get a sense of how the model will perform on real world data it’s never seen before.  Based on the results, further refinement and tuning of the model may be needed.[/li]
+[aside]![ML pipeline step 6](static/images/ml-pipeline-step6.png)[/aside]
+[li]**Make predictions!**  Once the model is finalized, it can begin to be used to answer the question it was designed for.[/li]
+[/ol]
 
 
 ## Sources of bias
 There are two key ways bias may be introduced and amplified through the use of machine learning: (1) bias in the underlying data and (2) bias that are amplified through algorithms.
 
-[Aside]
-  [Recirc /]
-[/Aside]
 
 ### 1) Biased data
 
@@ -94,32 +87,50 @@ When one examines a data sample, it is imperative to check whether the sample is
   [var name:"sampleMeans" value:`[] ` /]
   [var name:"generateSample" value:0 /]
 
-
-  [div className:"plot sampleErrorPopulation" id:"populationPlot"]
-    Population mean: [Display value:populationMean format:"$.0f" /]
-
-    [SamplingErrorPopulation mean:populationMean /]
-  [/div]
-
   [div]
-    [div className:"slider"]
-      Sample size: [Display value:n format:"0.0f" /]
-      [Range value:n min:1 max:50 /]
+    [div className:"interactiveHed"]
+      Sampling errors can lead to biased models
     [/div]
-
-    [div className:"sample-metadata"]
-      Sample count: [Display className:"idyll-display" value:`sampleErrors.length` format:"d" /][br/]
-      Mean of all samples: [Display format:"0.2f" className:"idyll-display" value:`sampleMeans.length ? sampleMeans.reduce((memo, delta, list) => memo + delta, 0) / sampleMeans.length : '-'`/][br/]
-      Average sampling error: [Display  format:"0.2f" className:"idyll-display" value:`sampleErrors.length ? sampleErrors.reduce((memo, delta, list) => memo + delta, 0) / sampleErrors.length : '-' `/]
+    [div className:"interactiveDek"]
+      Draw samples from a population and see how close the estimates are to the true value. What happens when the sample size is changed?
     [/div]
-
-    [Button className:"generateSampleBtn" onClick:`generateSample = generateSample + 1`]Generate Sample[/Button]
+    [div className:"plotNotes"]
+      Note: Larger circle represents higher household income.
+    [/div]
   [/div]
 
-  [div id:"samplePlot" className:"plot sampleErrorSample" ]
-    Sample mean: [Display value:`sampleMeans[sampleMeans.length - 1] || ''` format:"$.0f" /]
+  [div className:"samplingErrorsInteractiveContent"]
+    [div class:"plot sampleErrorPopulation" id:"populationPlot"]
+      [SamplingErrorPopulation mean:populationMean /]
 
-    [SamplingErrorSample sampleMeans:sampleMeans sampleErrors:sampleErrors n:n generateSample:generateSample /]
+      Population mean: [Display value:populationMean format:"$.0f" /]
+    [/div]
+
+    [div]
+      [div className:"slider"]
+        Sample size: [Display value:n format:"0.0f" /]
+        [Range value:n min:1 max:50 /]
+      [/div]
+
+      // [div className:"sample-metadata"]
+      //   Sample count: [Display className:"idyll-display" value:`sampleErrors.length` format:"d" /][br/]
+      //   Mean of all samples: [Display format:"0.2f" className:"idyll-display" value:`sampleMeans.length ? sampleMeans.reduce((memo, delta, list) => memo + delta, 0) / sampleMeans.length : '-'`/][br/]
+      //   Average sampling error: [Display  format:"0.2f" className:"idyll-display" value:`sampleErrors.length ? sampleErrors.reduce((memo, delta, list) => memo + delta, 0) / sampleErrors.length : '-' `/]
+      // [/div]
+
+      [Button className:"generateSampleBtn" onClick:`generateSample = generateSample + 1`]Generate Sample[/Button]
+    [/div]
+
+    [div id:"samplePlot" class:"plot sampleErrorSample" ]
+      [SamplingErrorSample sampleMeans:sampleMeans sampleErrors:sampleErrors n:n generateSample:generateSample /]
+
+      [Conditional if:`sampleMeans.length`]
+        Sample mean: [Display value:`sampleMeans[sampleMeans.length - 1] || ''` format:"$.0f" /]
+      [/Conditional]
+      [Conditional if:`!sampleMeans.length`]
+        Generate a sample.
+      [/Conditional]
+    [/div]
   [/div]
 [/div]
 
@@ -127,14 +138,19 @@ When one examines a data sample, it is imperative to check whether the sample is
 
 // [NonSamplingErrorBarChart className:"plot" /]
 
-[a href:"static/images/bias-non-sampling.png"][SVG src:"static/svg/bias-non-sampling.svg" /][/a]
-[caption][a href:"static/images/bias-non-sampling.png"]Click to dowload image.[/a][/caption]
+[img src:"static/images/bias-non-sampling.png" /]
 
 **Data that are representative but still biased.**[br/]
 What if a dataset is representative of its target population? No more worries about bias coming through the data, right? Not so fast -- a representative dataset may still be biased to the extent that it reflects any underlying/historical social bias. A recruiting algorithm once used by Amazon was found to have disproportionately favored male candidates. The data used to train the algorithm were based on resumes collected over a 10-year period. Because the tech industry was traditionally dominated by men, a majority of the resumes were submitted by men. Therefore, even though the dataset was “representative” of the historical applicant pool, it captured the inherent gender bias and passed it on to the recruiting algorithm. Representative but biased data is in some sense a more problematic issue than non-representative data, since fixing the former would require addressing biases that are inherent in society.
 
 
 ### 2) Bias that are amplified through algorithms
+
+
+[Aside]
+  [Recirc slug:parametricSlug /]
+[/Aside]
+
 Machine learning algorithms themselves may amplify bias if they make predictions that are more skewed than the training data. Such amplification often occurs through two mechanisms: 1) algorithms incentivized to predict observations to belong to the majority group , and 2) runaway feedback loops. The two stylized examples below illustrate these mechanisms.
 
 **Algorithms incentivized to predict observations to belong to the majority group.**[br/]
@@ -148,33 +164,56 @@ Having representative training data is the ideal scenario. In a more realistic s
   [var name:"bias" value:0.8 /]
   [var name:"modelAccuracy" value:0.7 /]
 
-  [div className:"slider"]
-    Bias: [Display value:`bias*100` format:".0f" /] / [Display value:`100 - bias*100` format:".0f" /]
-    [Range value:bias min:0.5 max:1 step:0.1 /]
+  [div]
+    [div className:"interactiveHed"]
+      Sampling errors can lead to biased models
+    [/div]
+    [div className:"interactiveDek"]
+      Draw samples from a population and see how close your estimates are to the true value. What happens when the sample size is changed?
+    [/div]
   [/div]
 
-  [div className:"slider"]
-    Model accuracy: [Display value:`modelAccuracy ` format:".0%" /]
-    [Range value:modelAccuracy min:0.5 max:1 step:0.1 /]
+  [div className:"interactive-instruction"]
+    Input. [span className:"light"]Adjust the sliders to set model bias and accuracy.[/span]
   [/div]
 
-  [div className:"plots"]
-    [div]
-      [div className:"plotTitle"]Data[/div]
+  [div style:`{display: 'flex', flexDirection: 'row', paddingLeft: '1em', color: '#7e7e7e', fontWeight: 500}`]
+    [div className:"slider-container"]
+      [div className:"slider"]
+        Bias: [Display value:`bias*100` format:".0f" /] / [Display value:`100 - bias*100` format:".0f" /]
+        [Range value:bias min:0.5 max:1 step:0.1 /]
+      [/div]
+
+      [div className:"slider"]
+        Model accuracy: [Display value:`modelAccuracy ` format:".0%" /]
+        [Range value:modelAccuracy min:0.5 max:1 step:0.1 /]
+      [/div]
+    [/div]
+    [div className:"slider-container"]
+      [div className:"plotTitle"]Data [BiasDataLabel /][/div]
       [BiasAmplifiedData id:"biasAmplifiedDataPlot" bias:bias /]
     [/div]
 
-    [div]
-      [div className:"plotTitle"]Model Predictions[/div]
+  [/div]
+
+  [div className:"interactive-instruction"]
+    Model Predictions. [span className:"light"]Compare two models, one that is trained on the data, and one that always guesses "woman."[/span]
+  [/div]
+  [div][BiasIncorrectPredLabel /][/div]
+  [div className:"plots"]
+    [div className:"plot-container"]
+      [div className:"plotTitle"]Model trained on data[/div]
       [BiasAmplifiedPrediction id:"biasAmplifiedPredictionPlot" bias:bias modelAccuracy:modelAccuracy /]
     [/div]
 
-    [div]
-      [div className:"plotTitle"]If Model Guessed "Woman" All the Time[/div]
+    [div className:"plot-container"]
+      [div className:"plotTitle"]Model always guesses "woman"[/div]
       [BiasAmplifiedGuessWoman id:"biasAmplifiedGuessWomanPlot" bias:bias /]
     [/div]
+  [/div]
 
-    [div id:"biasAmplifiedConclusion"]Model would [span][/span] be incentivized to amplify bias.[/div]
+  [div className:"interactive-instruction"]
+    Result. [span className:"light"]Model [Display value:`modelAccuracy >= bias ? 'would not' : 'would' ` /] be incentivized to amplify bias.[/div]
   [/div]
 [/FullWidth]
 
@@ -216,7 +255,9 @@ Feedback loops are especially problematic when sub-groups in the training data e
 It should be clear by this point that different sources of bias -- whether through data collection or through algorithms themselves -- are interrelated. When an algorithm is fed training data where one group dominates the sample, it is incentivized to prioritize learning about the dominant group and over-predict the number of observations that belong to the dominant group.  If the data were balanced, the model would have nothing to gain by over-predicting that group.  Similarly, bias can be perpetuated through a feedback loop if the model’s own flawed predictions are repeatedly fed back into it, becoming its own biased source data for the next round of predictions. In the machine learning context, it’s no longer just garbage in, garbage out -- when there’s garbage in, more and more garbage may be generated through the ML pipeline.
 
 // [VISUAL: BIAS AMPLIFICATION & INTERACTION]
-[Video files:`['static/animations/bias-amplification-loop.mp4']` width:600 height:400 /]
+[inset]
+  [img src:"static/animations/bias-amplification-loop.gif" /]
+[/inset]
 
 
 
@@ -225,16 +266,21 @@ It should be clear by this point that different sources of bias -- whether throu
 How does one actually tackle bias in the ML pipeline? While a suitable fix depends on each specific circumstance, here are some ways that companies and researchers are trying to reduce bias in machine learning.
 
 ### 1) De-biasing the data
-* One key to de-biasing the data is to ensure that a representative sample is collected in the first place. Bias from sampling errors can be mitigated by collecting larger samples and adopting data collection techniques such as stratified random sampling. While sampling errors won’t go away entirely, rapid data growth -- 2.5 quintillion bytes per day and counting -- and growing data collection capability have made it easier than ever to mitigate sampling errors compared to the past. Bias from non-sampling errors are much more varied and harder to tackle, but one should still strive to minimize non-sampling error through means such as proper training, establishing a clear purpose and procedure for data collection, and conducting careful data validation. For example, in response to image-classification database that contained disproportionately few wedding / bride images from India, Google deliberately sought out contributions from India to make the database more representative.
-* What about data that are representative but reflect bias inherent in the population? For datasets that contain minority groups, one can oversample those minority groups to create a more balanced training dataset. For datasets that may contain biased associations, one can first quantify and remove any biased associations from the dataset before proceeding to the model training and prediction stages. De-biasing Word2Vec data is an example of this latter approach: Researchers first measured how closely two words relate to each other along the gender dimension and assessed whether different strengths of association reflect gender bias or appropriate relationships. For example, the fact that “female” is more closely related to “homemaker” as opposed to “computer programmer” is indicative of gender bias, whereas a close association between “female” and “queen” reflects an appropriate, definitional relationship. The researchers then implemented a separate algorithm to neutralize gender association between word pairs exhibiting gender bias before feeding this de-biased data into the Word2Vec embedding algorithm.
 
+One key to de-biasing the data is to ensure that a representative sample is collected in the first place. Bias from sampling errors can be mitigated by collecting larger samples and adopting data collection techniques such as stratified random sampling. While sampling errors won’t go away entirely, rapid data growth -- 2.5 quintillion bytes per day and counting -- and growing data collection capability have made it easier than ever to mitigate sampling errors compared to the past. Bias from non-sampling errors are much more varied and harder to tackle, but one should still strive to minimize non-sampling error through means such as proper training, establishing a clear purpose and procedure for data collection, and conducting careful data validation. For example, in response to image-classification database that contained disproportionately few wedding / bride images from India, Google deliberately sought out contributions from India to make the database more representative.
+
+What about data that are representative but reflect bias inherent in the population? For datasets that contain minority groups, one can oversample those minority groups to create a more balanced training dataset.
 
 // [VISUAL: ADDING DATA FROM UNDER-REPRESENTED GROUPS]
-[Video files:`['static/animations/adjust-unbalanced-sample.mp4']` width:600 height:400 /]
+[img src:"static/animations/adjust-unbalanced-sample.gif" /]
+
+For datasets that may contain biased associations, one can first quantify and remove any biased associations from the dataset before proceeding to the model training and prediction stages. De-biasing Word2Vec data is an example of this latter approach: Researchers first measured how closely two words relate to each other along the gender dimension and assessed whether different strengths of association reflect gender bias or appropriate relationships. For example, the fact that “female” is more closely related to “homemaker” as opposed to “computer programmer” is indicative of gender bias, whereas a close association between “female” and “queen” reflects an appropriate, definitional relationship. The researchers then implemented a separate algorithm to neutralize gender association between word pairs exhibiting gender bias before feeding this de-biased data into the Word2Vec embedding algorithm.
+
+
 
 // [VISUAL: NEUTRALIZING GENDER ASSOCIATION BETWEEN WORD PAIRS]
 //![gender-association](static/images/gender-association.png)
-[Video files:`['static/animations/adjust-words-association.mp4']` width:600 height:400 /]
+[img src:"static/animations/adjust-words-association.gif" /]
 
 ### 2) De-biasing the algorithm
 In addition to de-biasing the data, one can apply model interventions to directly offset algorithms’ tendency to amplify bias. One intervention method is to impose model constraints that specify the statistical distribution of predictions. For example, researchers have been able to reduce bias amplification in image-labeling algorithms by nearly 50% by adding model constraints that required the proportion of images predicted to be male versus female to fall within 5% of the ratio observed in the training dataset. This approach can be particularly useful to reduce bias amplification when one is using imbalanced training datasets.
@@ -242,13 +288,13 @@ In addition to de-biasing the data, one can apply model interventions to directl
 
 // [VISUAL: CONSTRAINT ON MODEL PREDICTIONS]
 //![predition-constraints](static/images/predition-constraints.png)
-[Video files:`['static/animations/adjust-predictions.mp4']` width:600 height:400 /]
+[img src:"static/animations/adjust-predictions.gif" /]
 
 Another intervention method that is particularly useful to combat feedback loops is to specify how outputs generated from model predictions should be fed back into the algorithm. Going back to the predictive policing example, instead of letting every newly observed crime instance be fed back into the algorithm, one can impose a sampling rule such that the more likely police are sent to a particular precinct, the less likely data observed from those assignments are incorporated back into the algorithm.
 
 //  [VISUAL: DROPPING SOME NEWLY OBSERVED DATA]
 //![dropping-new-data](static/images/dropping-new-data.png)
-[Video files:`['static/animations/adjust-feedback-loop.mp4']` width:600 height:400 /]
+[img src:"static/animations/adjust-feedback-loop.gif" /]
 
 
 ### 3) Evaluating performance against metrics other than just accuracy
@@ -301,6 +347,8 @@ Algorithms are being used to recommend what to watch next on Netflix, filter out
 Edited by Victoria Uren.
 [/AuthorBio]
 
-[NextArticle /]
+[NextArticle slug:parametricSlug fullWidth:true /]
 
 [Footer fullWidth:true /]
+
+[Analytics google:"UA-139053456-1" tag:parametricSlug /]
