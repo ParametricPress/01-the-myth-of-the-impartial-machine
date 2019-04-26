@@ -284,7 +284,7 @@ ol.ml-pipeline img {
 
 
 
-/********* STYLES FOR BIAS AMPLIFIED THROUGH ALGORITHMS INTERACTIVE *************/
+/********* STYLES FOR FEEDBACK LOOPS INTERACTIVE *************/
 label {
 	margin-right: 20px;
 }
@@ -305,7 +305,7 @@ input[type="radio"] {
 }
 
 .neighborhoodA {
-	color: #c5c5c5;
+	color: #888;
 }
 
 .neighborhoodB {
@@ -315,7 +315,7 @@ input[type="radio"] {
 
 .neighborhoodLabel.neighborhoodA,
 .feedbackDot.neighborhoodA {
-	fill: #c5c5c5;
+	fill: #888;
 }
 
 .neighborhoodLabel.neighborhoodB,
