@@ -200,7 +200,7 @@ Having representative training data is the ideal scenario. In a more realistic s
   [div className:"interactive-instruction"]
     Model Predictions. [span className:"light"]Compare two models, one that is trained on the data, and one that always guesses "woman."[/span]
   [/div]
-  [BiasIncorrectPredLabel /]
+  [div][BiasIncorrectPredLabel /][/div]
   [div className:"plots"]
     [div className:"plot-container"]
       [div className:"plotTitle"]Model trained on data[/div]

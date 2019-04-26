@@ -34,7 +34,6 @@ class RecidivismTable extends React.Component {
       }
       else {
         d3.select(".recidivism-tables .inputError").classed("hidden", true);
-
         this.setState({
           totalHighRisk_a: newValue,
           highRiskReoffense_a: Math.round(accuracy * newValue),
@@ -144,7 +143,7 @@ class RecidivismTable extends React.Component {
                 </tbody>
               </table>
             </div>
-            <div class="inputError hidden">Invalid entry: Please enter a number between 0 and 45.</div>
+            <div className="inputError hidden">Invalid entry: Please enter a number between 0 and 45.</div>
           </div>
         );
     }
