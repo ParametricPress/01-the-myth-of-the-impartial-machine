@@ -33,7 +33,8 @@ input {
 }
 
 .parametric-inset img {
-	max-width: 300px;
+	max-width: 700px;
+    max-height: 400px;
 	margin: 0 auto;
 }
 
@@ -42,12 +43,22 @@ video {
 	display: block;
 }
 
+.ml-pipeline-text {
+    color: #555555;
+    font-style: italic
+}
+
+.note {
+    color: #4801FF
+}
+
 ol.ml-pipeline li {
 	margin-bottom: 100px;
 }
 
 ol.ml-pipeline img {
 	max-height: 150px;
+    margin-top: 1em;
 }
 
 .interactiveHed {

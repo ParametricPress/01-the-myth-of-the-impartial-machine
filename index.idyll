@@ -48,8 +48,11 @@ However, for every neural network that can defeat Jeopardy champions and outplay
 
 // [VISUAL: ML as a subset of AI]
 
+[div className:"ml-pipeline-text"]
 
 ## The ML Pipeline
+
+(You can skip to the next section if you are already familiar with the basic steps of machine learning.)
 
 Being able to use data to meaningfully answer questions via machine learning requires several steps.
 
@@ -67,6 +70,8 @@ Being able to use data to meaningfully answer questions via machine learning req
 [aside]![ML pipeline step 6](static/images/ml-pipeline-step6.png)[/aside]
 [li]**Make predictions!**  Once the model is finalized, it can begin to be used to answer the question it was designed for.[/li]
 [/ol]
+
+[/div]
 
 
 ## Sources of bias
@@ -256,15 +261,20 @@ One key to de-biasing the data is to ensure that a representative sample is coll
 What about data that are representative but reflect bias inherent in the population? For datasets that contain minority groups, one can oversample those minority groups to create a more balanced training dataset.
 
 // [VISUAL: ADDING DATA FROM UNDER-REPRESENTED GROUPS]
-[img src:"static/animations/adjust-unbalanced-sample.gif" /]
+[inset]
+  [img src:"static/animations/adjust-unbalanced-sample.gif" /]
+[/inset]
+
 
 For datasets that may contain biased associations, one can first quantify and remove any biased associations from the dataset before proceeding to the model training and prediction stages. De-biasing Word2Vec data is an example of this latter approach: Researchers first measured how closely two words relate to each other along the gender dimension and assessed whether different strengths of association reflect gender bias or appropriate relationships. For example, the fact that “female” is more closely related to “homemaker” as opposed to “computer programmer” is indicative of gender bias, whereas a close association between “female” and “queen” reflects an appropriate, definitional relationship. The researchers then implemented a separate algorithm to neutralize gender association between word pairs exhibiting gender bias before feeding this de-biased data into the Word2Vec embedding algorithm.
 
 
 
 // [VISUAL: NEUTRALIZING GENDER ASSOCIATION BETWEEN WORD PAIRS]
-//![gender-association](static/images/gender-association.png)
-[img src:"static/animations/adjust-words-association.gif" /]
+[inset]
+  [img src:"static/animations/adjust-words-association.gif" /]
+[/inset]
+
 
 ### 2) De-biasing the algorithm
 In addition to de-biasing the data, one can apply model interventions to directly offset algorithms’ tendency to amplify bias. One intervention method is to impose model constraints that specify the statistical distribution of predictions. For example, researchers have been able to reduce bias amplification in image-labeling algorithms by nearly 50% by adding model constraints that required the proportion of images predicted to be male versus female to fall within 5% of the ratio observed in the training dataset. This approach can be particularly useful to reduce bias amplification when one is using imbalanced training datasets.
@@ -272,13 +282,18 @@ In addition to de-biasing the data, one can apply model interventions to directl
 
 // [VISUAL: CONSTRAINT ON MODEL PREDICTIONS]
 //![predition-constraints](static/images/predition-constraints.png)
-[img src:"static/animations/adjust-predictions.gif" /]
+[inset]
+  [img src:"static/animations/adjust-predictions.gif" /]
+[/inset]
 
 Another intervention method that is particularly useful to combat feedback loops is to specify how outputs generated from model predictions should be fed back into the algorithm. Going back to the predictive policing example, instead of letting every newly observed crime instance be fed back into the algorithm, one can impose a sampling rule such that the more likely police are sent to a particular precinct, the less likely data observed from those assignments are incorporated back into the algorithm.
 
 //  [VISUAL: DROPPING SOME NEWLY OBSERVED DATA]
 //![dropping-new-data](static/images/dropping-new-data.png)
-[img src:"static/animations/adjust-feedback-loop.gif" /]
+[inset]
+  [img src:"static/animations/adjust-feedback-loop.gif" /]
+[/inset]
+
 
 
 ### 3) Evaluating performance against metrics other than just accuracy
