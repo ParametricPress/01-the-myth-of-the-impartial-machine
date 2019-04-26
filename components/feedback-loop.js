@@ -111,6 +111,9 @@ class FeedbackLoopComponent extends D3Component {
         crimeData = generateData(n_a, n_b, totalTrials);
         // console.log(crimeData);
 
+        // reset title to "Day 0"
+        d3.select(".dispatchedToLabel").text("Day 0");
+
         // redraw dots in plot
         d3.selectAll("#feedbackLoopPlot g").remove();
 
@@ -124,6 +127,7 @@ class FeedbackLoopComponent extends D3Component {
         // console.log(day, total_a, total_b);
         day++;
 
+        // update title with day number and neighborhood officer dispatched to
         if(d3.selectAll(".feedbackDot.neighborhoodA.day" + day).nodes().length > 0) {
           d3.select(".dispatchedToLabel").html("Day " + day + "/" + totalTrials + ": Officer sent to <span class='neighborhoodA' style='opacity:0'>A</span>");
         }
@@ -134,6 +138,7 @@ class FeedbackLoopComponent extends D3Component {
           .transition(500)
           .style("opacity", 1);
 
+        // update dots
         d3.selectAll(".feedbackDot.neighborhoodA")
           .transition(500)
           .delay(500)
