@@ -121,6 +121,7 @@ class FeedbackLoopComponent extends D3Component {
         drawDots(svg, crimeData);
       }
 
+      d3.select(".feedbackLoopRunBtn").attr("disabled", true);
 
       let day = 0; // TODO: need to figure out a way to interrupt the autoplay if the user clicks the button before the current simulation has finished
       let t = d3.interval(function(elapsed) {
@@ -171,6 +172,7 @@ class FeedbackLoopComponent extends D3Component {
         if(day === totalTrials) {
           // d3.select(".finalResults").classed("hidden", false);
           t.stop();
+          d3.select(".feedbackLoopRunBtn").attr("disabled", null);
         }
 
       }, 2000);

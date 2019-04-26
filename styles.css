@@ -294,6 +294,11 @@ input[type="radio"] {
 	width: auto;
 }
 
+.feedbackLoopRunBtn:disabled {
+	background-color: #d2d2d2;
+	cursor: auto;
+}
+
 .dispatchedToLabel {
 	font-family: 'Graphik Web';
 	width: 100%;
