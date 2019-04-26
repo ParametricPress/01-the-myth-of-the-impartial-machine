@@ -302,6 +302,8 @@ ol.ml-pipeline img {
 .recidivism-tables table {
 	color: #222;
 	/* height: 400px; */
+	max-width: 430px;
+	table-layout: fixed;
 }
 .recidivism-tables table tr {
 	height: 70px;
