@@ -105,7 +105,7 @@ When one examines a data sample, it is imperative to check whether the sample is
       Population mean: [Display value:populationMean format:"$.0f" /]
     [/div]
 
-    [div]
+    [div style:`{alignSelf: 'center'}`]
       [div className:"slider"]
         Sample size: [Display value:n format:"0.0f" /]
         [Range value:n min:1 max:50 /]
@@ -127,7 +127,7 @@ When one examines a data sample, it is imperative to check whether the sample is
         Sample mean: [Display value:`sampleMeans[sampleMeans.length - 1] || ''` format:"$.0f" /]
       [/Conditional]
       [Conditional if:`!sampleMeans.length`]
-        Generate a sample.
+        Sample mean: generate a sample.
       [/Conditional]
     [/div]
   [/div]

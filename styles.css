@@ -9,6 +9,11 @@ text {
 	font-family: 'Graphik Web';
 }
 
+.idyll-text-container img {
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
 button {
 	margin: 0;
 }
@@ -102,7 +107,6 @@ ol.ml-pipeline img {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 40% 20% 40%;
-	grid-template-rows: 100px auto;
 	grid-gap: 10px;
 	text-align: center;
 }
@@ -132,26 +136,7 @@ ol.ml-pipeline img {
 	width: 75%;
 }
 
-.sampleErrorPopulation.plot {
-	grid-column-start: 1;
-	/*grid-column-end: 1;*/
-	grid-row-start: 1;
-	grid-row-end: 3;
-}
-
-.slider {
-	grid-column-start: 2;
-	/*grid-column-end: 3;*/
-	grid-row-start: 1;
-	grid-row-end: 2;
-	margin-top: 100px;
-}
-
 .generateSampleBtn {
-	grid-column-start: 2;
-	/*grid-column-end: 3;*/
-	grid-row-start: 2;
-	grid-row-end: 3;
 	width: 200px;
 	padding: 0.5em;
 	margin: 0 auto;
@@ -182,13 +167,6 @@ ol.ml-pipeline img {
 	width: 100%;
 	white-space: nowrap;
 	margin-bottom: 1em;
-}
-
-.sampleErrorSample.plot {
-	grid-column-start: 3;
-	/*grid-column-end: 4;*/
-	grid-row-start: 1;
-	grid-row-end: 3;
 }
 
 .meanLabel {
@@ -434,9 +412,9 @@ ol.ml-pipeline img {
 	.samplingErrorsInteractiveContent svg {
 		max-height: 200px;
 	}
-	/* .samplingErrorsInteractiveContent > div:nth-child(2) {
-		order: 2;
-	} */
+	.samplingErrorsInteractiveContent > div:nth-child(2) {
+		order: 3;
+	}
 	.slider {
 		margin-top: 0;
 	}
