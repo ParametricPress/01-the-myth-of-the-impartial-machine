@@ -43,7 +43,7 @@ video {
 }
 
 ol.ml-pipeline li {
-	margin-bottom: 100px;
+	margin-bottom: 1em;
 }
 
 ol.ml-pipeline img {
@@ -65,7 +65,23 @@ ol.ml-pipeline img {
 }
 
 .plotNotes {
-	font-style: italic;
+	/* font-style: italic; */
+	font-size: 14px;
+	font-weight: 400;
+	color: #c5c5c5;
+}
+
+.parametric-optional-module {
+	font-family: 'Graphik Web';
+	font-size: 16px;
+	line-height: 18px;
+	background: #fff;
+	border-radius: 10px;
+	padding: 1em;
+	margin: 2em 0;
+	font-weight: 400;
+	border: solid 1px #c5c5c5;
+	box-shadow: 3px 3px 2px #c5c5c5;
 }
 
 /********* STYLES FOR SAMPLING ERROR ITERACTIVE ************/
