@@ -65,6 +65,7 @@ ol.ml-pipeline img {
 	line-height: 16px;
 	font-weight: 400;
 	color: #c5c5c5;
+	margin-top: 1em;
 }
 
 .parametric-optional-module {
@@ -111,6 +112,24 @@ ol.ml-pipeline img {
 
 .samplingErrorsInteractive svg {
 	max-height: 400px;
+}
+
+.samplingErrorsInteractive .plot {
+	margin-top: 1em;
+}
+.samplingErrorsInteractive .plot > div {
+	border: solid 1px #7e7e7e;
+}
+.samplingErrorsInteractive .plot > p,
+.samplingErrorsInteractive .plot > div:not(:first-of-type) {
+	background: #7e7e7e;
+	padding: 0.5em 0;
+}
+
+.samplingErrorsInteractive input[type="range"] {
+	margin-left: auto;
+	margin-right: auto;
+	width: 75%;
 }
 
 .sampleErrorPopulation.plot {
@@ -231,14 +250,12 @@ ol.ml-pipeline img {
 .amplifiedBiasInteractive .plots .plot-container{
 	margin-top: 1em;
 	border: solid 1px #979797;
-	border-radius: 9px;
 	width: 500px;
 }
 
 .amplifiedBiasInteractive .plotTitle{
 	color: #fff;
 	background: #7e7e7e;
-	border-radius: 9px 9px 0 0;
 }
 
 .amplifiedBiasInteractive .slider-container {
@@ -428,6 +445,7 @@ ol.ml-pipeline img {
 	}
 	.amplifiedBiasInteractive .plots {
 		flex-direction: column;
+		padding-right: 1em;
 	}
 	.amplifiedBiasInteractive .plots .plot-container{
 		width: 100%;

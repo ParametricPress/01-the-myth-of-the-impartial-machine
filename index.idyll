@@ -182,7 +182,7 @@ Having representative training data is the ideal scenario. In a more realistic s
     Input. [span className:"light"]Adjust the sliders to set model bias and accuracy.[/span]
   [/div]
 
-  [div className:"interactive-flex-row" style:`{paddingLeft: '1em', color: '#7e7e7e', fontWeight: 500}`]
+  [div className:"interactive-flex-row" style:`{padding: '1em', color: '#d3d3d3', fontWeight: 500, display: 'inline-flex', margin: '1em 1em 0 1em', border: 'solid 1px #7e7e7e'}`]
     [div className:"slider-container"]
       [div className:"slider"]
         Bias: [Display value:`bias*100` format:".0f" /] / [Display value:`100 - bias*100` format:".0f" /]
