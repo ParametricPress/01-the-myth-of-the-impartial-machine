@@ -48,25 +48,22 @@ However, for every neural network that can defeat Jeopardy champions and outplay
 
 // [VISUAL: ML as a subset of AI]
 
+[div className:"parametric-optional-module"]
 
-## The ML Pipeline
+    [h2 style:`{marginTop: 0}`]The Machine Learning Pipeline[/h2]
 
-Being able to use data to meaningfully answer questions via machine learning requires several steps.
+    Being able to use data to meaningfully answer questions via machine learning requires several steps. Before getting into the details of bias, it is important to understand these steps. If you're already comfortable with the basics of machine feel free to continue to the next section.
 
-[ol className:"ml-pipeline"]
-[aside]![ML pipeline step 1](static/images/ml-pipeline-step1.png)[/aside]
-[li]**Data gathering.**  All machine learning models require data as inputs.  In today’s increasingly digitized world, data can be derived from various sources including user interactions on a website, collections of photo images and sensor recordings.[/li]
-[aside]![ML pipeline step 2](static/images/ml-pipeline-step2.png)[/aside]
-[li]**Data preparation.** Data collected are rarely in a usable state as-is. Data often need to be cleaned, transformed and checked for errors before they are ready to be fed into a model.[/li]
-[aside]![ML pipeline step 3](static/images/ml-pipeline-step3.png)[/aside]
-[li]**Split dataset into training and testing sets.** The training dataset will be used for building and training the model while the testing dataset will be used to evaluate how well the model performs. It is important to evaluate the model on data it has not seen before so that it does not learn the idiosyncrasies of the data it was trained on.[/li]
-[aside]![ML pipeline step 4](static/images/ml-pipeline-step4.png)[/aside]
-[li]**Fit and train models.** This is the step where various types of ML models are built and applied to the training data.  Models are iterated on to improve their performance with the goal of generating the most accurate predictions possible.[/li]
-[aside]![ML pipeline step 5](static/images/ml-pipeline-step5.png)[/aside]
-[li]**Evaluate model on the test dataset.**  The top performing model is used on the testing data to get a sense of how the model will perform on real world data it’s never seen before.  Based on the results, further refinement and tuning of the model may be needed.[/li]
-[aside]![ML pipeline step 6](static/images/ml-pipeline-step6.png)[/aside]
-[li]**Make predictions!**  Once the model is finalized, it can begin to be used to answer the question it was designed for.[/li]
-[/ol]
+    [ol className:"ml-pipeline"]
+    [li]**Data gathering.**  All machine learning models require data as inputs.  In today’s increasingly digitized world, data can be derived from various sources including user interactions on a website, collections of photo images and sensor recordings.[/li]
+    [li]**Data preparation.** Data collected are rarely in a usable state as-is. Data often need to be cleaned, transformed and checked for errors before they are ready to be fed into a model.[/li]
+    [li]**Split dataset into training and testing sets.** The training dataset will be used for building and training the model while the testing dataset will be used to evaluate how well the model performs. It is important to evaluate the model on data it has not seen before so that it does not learn the idiosyncrasies of the data it was trained on.[/li]
+    [li]**Fit and train models.** This is the step where various types of ML models are built and applied to the training data.  Models are iterated on to improve their performance with the goal of generating the most accurate predictions possible.[/li]
+    [li]**Evaluate model on the test dataset.**  The top performing model is used on the testing data to get a sense of how the model will perform on real world data it’s never seen before.  Based on the results, further refinement and tuning of the model may be needed.[/li]
+    [li]**Make predictions!**  Once the model is finalized, it can begin to be used to answer the question it was designed for.[/li]
+    [/ol]
+
+[/div]
 
 
 ## Sources of bias
