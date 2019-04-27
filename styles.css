@@ -289,9 +289,13 @@ label {
 	margin-right: 20px;
 }
 
-input[type="radio"] {
+.feedbackLoopCrimeRateSelector input[type="radio"] {
 	display: inline;
 	width: auto;
+}
+
+.feedbackLoopCrimeRateSelector input[type="radio"]:disabled {
+	cursor: auto;
 }
 
 .feedbackLoopRunBtn:disabled {
