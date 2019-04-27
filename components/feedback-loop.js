@@ -115,8 +115,14 @@ class FeedbackLoopComponent extends D3Component {
         crimeData = generateData(n_a, n_b, totalTrials);
         // console.log(crimeData);
 
-        // reset title to "Day 0"
+        // reset title to "Day 0" and reset table
         d3.select(".dispatchedToLabel").text("Day 0");
+        d3.select(".pctSentToA span.neighborhoodA:nth-child(2)").text("0");
+        d3.select(".pctSentToB span.neighborhoodB:nth-child(2)").text("0");
+        d3.select(".observedCrimesA span.neighborhoodA:nth-child(2)").text(history[0].observed_a + " (" + PCTFORMAT(history[0].observed_a/(history[0].observed_a + history[0].observed_b)) + ")");
+        d3.select(".observedCrimesB span.neighborhoodB:nth-child(2)").text(history[0].observed_b + " (" + PCTFORMAT(history[0].observed_b/(history[0].observed_a + history[0].observed_b)) + ")");
+        d3.select(".totalCrimesA span.neighborhoodA:nth-child(2)").text(history[0].total_a + " (" + PCTFORMAT(history[0].total_a/(history[0].total_a + history[0].total_b)) + ")");
+        d3.select(".totalCrimesB span.neighborhoodB:nth-child(2)").text(history[0].total_b + " (" + PCTFORMAT(history[0].total_b/(history[0].total_a + history[0].total_b)) + ")");
 
         // redraw dots in plot
         d3.selectAll("#feedbackLoopPlot g").remove();
