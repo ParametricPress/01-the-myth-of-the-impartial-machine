@@ -52,7 +52,9 @@ However, for every neural network that can defeat Jeopardy champions and outplay
 
     [h2 style:`{marginTop: 0}`]The Machine Learning Pipeline[/h2]
 
-    Being able to use data to meaningfully answer questions via machine learning requires several steps. Before getting into the details of bias, it is important to understand these steps. If you're already comfortable with the basics of machine feel free to continue to the next section.
+    Being able to use data to meaningfully answer questions via machine learning requires several steps. Before getting into the details of bias, it is important to understand them.
+
+    If you're already comfortable with the basics of machine feel free to continue to the next section.
 
     [ol className:"ml-pipeline"]
     [li]**Data gathering.**  All machine learning models require data as inputs.  In today’s increasingly digitized world, data can be derived from various sources including user interactions on a website, collections of photo images and sensor recordings.[/li]
