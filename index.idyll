@@ -245,7 +245,7 @@ The next day, when the algorithm decides where to send John to, it will have a 1
 [div className:"feedbackLoopCrimeRateSelector"]
   Crimes per day in B: [Radio value:crimeRateB options:`["2", "4", "8"]` /]
 [/div]
-[Button onClick:`runSimulation = runSimulation + 1`]Run Simulation[/Button]
+[Button className:"feedbackLoopRunBtn" onClick:`runSimulation = runSimulation + 1`]Run Simulation[/Button]
 
 [FeedbackLoop crimeRateA:crimeRateA crimeRateB:crimeRateB runSimulation:runSimulation /]
 

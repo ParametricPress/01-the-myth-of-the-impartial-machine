@@ -92,6 +92,10 @@ class FeedbackLoopComponent extends D3Component {
    */
   update(props, oldProps) {
 
+    if(props.crimeRateA !== oldProps.crimeRateA || props.crimeRateB !== oldProps.crimeRateB) {
+      d3.select(".feedbackLoopRunBtn").text("Run simulation");
+    }
+
     if (props.runSimulation !== oldProps.runSimulation) {
       // console.log(props.crimeRateA, props.crimeRateB, props.runSimulation);
       // console.log("Old props:", oldProps.crimeRateA, oldProps.crimeRateB, oldProps.runSimulation);
@@ -174,6 +178,7 @@ class FeedbackLoopComponent extends D3Component {
           // d3.select(".finalResults").classed("hidden", false);
           t.stop();
           d3.select(".feedbackLoopRunBtn").attr("disabled", null);
+          d3.select(".feedbackLoopRunBtn").text("Rerun simulation");
           d3.selectAll(".feedbackLoopCrimeRateSelector input[type='radio']").attr("disabled", null);
         }
 
