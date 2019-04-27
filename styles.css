@@ -74,7 +74,7 @@ ol.ml-pipeline img {
 .parametric-optional-module {
 	font-family: 'Graphik Web';
 	font-size: 16px;
-	line-height: 18px;
+	line-height: 20px;
 	background: #fff;
 	border-radius: 10px;
 	padding: 1em;
@@ -301,22 +301,21 @@ ol.ml-pipeline img {
 	text-align: center;
 }
 
-
-
-
-
 /********* STYLES FOR ACCURACY METRICS INTERACTIVE *************/
+.recidivism-table-container {
+	background: #222;
+	padding: 1em 2em;
+	margin: 2em 0;
+	color: #fff;
+	font-family: 'Graphik Web';
+	line-height: 1.1;
+	font-weight: 400;
+}
 .recidivism-tables {
 	display: grid;
 	grid-template-columns: 33% 33% 33%;
 	grid-gap: 15px;
-	padding: 2em;
-	background: #222;
-	color: #fff;
-	margin: 2em 0;
-	font-family: 'Graphik Web';
-	line-height: 1.1;
-	font-weight: 400;
+	margin-top: 2em;
 }
 
 .recidivism-tables table {
