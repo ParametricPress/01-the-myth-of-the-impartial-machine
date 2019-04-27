@@ -226,7 +226,7 @@ ol.ml-pipeline img {
 	display: flex;
 	flex-direction: row;
 	padding-left: 1em;
-	justify-content: space-around;
+	column-gap: 3em;
 }
 .amplifiedBiasInteractive .plots .plot-container{
 	margin-top: 1em;
@@ -236,7 +236,9 @@ ol.ml-pipeline img {
 }
 
 .amplifiedBiasInteractive .plotTitle{
-	color: #d3d3d3;
+	color: #fff;
+	background: #7e7e7e;
+	border-radius: 9px 9px 0 0;
 }
 
 .amplifiedBiasInteractive .slider-container {
