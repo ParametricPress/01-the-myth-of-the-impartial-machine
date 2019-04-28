@@ -52,7 +52,8 @@ However, for every neural network that can defeat Jeopardy champions and outplay
 
     [h2 style:`{marginTop: 0}`]The Machine Learning Pipeline[/h2]
 
-    Being able to use data to meaningfully answer questions via machine learning requires several steps. Before getting into the details of bias, it is important to understand these steps. If you're already comfortable with the basics of machine feel free to continue to the next section.
+    Being able to use data to meaningfully answer questions via machine learning requires several steps. Before getting into the details of bias, it is important to understand them.
+
 
     [ol className:"ml-pipeline"]
     [li]**Data gathering.**  All machine learning models require data as inputs.  In today’s increasingly digitized world, data can be derived from various sources including user interactions on a website, collections of photo images and sensor recordings.[/li]
@@ -103,7 +104,7 @@ When one examines a data sample, it is imperative to check whether the sample is
       Population mean: [Display value:populationMean format:"$.0f" /]
     [/div]
 
-    [div]
+    [div style:`{alignSelf: 'center'}`]
       [div className:"slider"]
         Sample size: [Display value:n format:"0.0f" /]
         [Range value:n min:1 max:50 /]
@@ -125,7 +126,7 @@ When one examines a data sample, it is imperative to check whether the sample is
         Sample mean: [Display value:`sampleMeans[sampleMeans.length - 1] || ''` format:"$.0f" /]
       [/Conditional]
       [Conditional if:`!sampleMeans.length`]
-        Generate a sample.
+        Sample mean: generate a sample.
       [/Conditional]
     [/div]
   [/div]
@@ -140,13 +141,19 @@ When one examines a data sample, it is imperative to check whether the sample is
 **Data that are representative but still biased.**[br/]
 What if a dataset is representative of its target population? No more worries about bias coming through the data, right? Not so fast -- a representative dataset may still be biased to the extent that it reflects any underlying/historical social bias. A recruiting algorithm once used by Amazon was found to have disproportionately favored male candidates. The data used to train the algorithm were based on resumes collected over a 10-year period. Because the tech industry was traditionally dominated by men, a majority of the resumes were submitted by men. Therefore, even though the dataset was “representative” of the historical applicant pool, it captured the inherent gender bias and passed it on to the recruiting algorithm. Representative but biased data is in some sense a more problematic issue than non-representative data, since fixing the former would require addressing biases that are inherent in society.
 
+[Mobile]
+  [Aside]
+    [Recirc slug:parametricSlug /]
+  [/Aside]
+[/Mobile]
 
 ### 2) Bias that are amplified through algorithms
 
-
-[Aside]
-  [Recirc slug:parametricSlug /]
-[/Aside]
+[Desktop]
+  [Aside]
+    [Recirc slug:parametricSlug /]
+  [/Aside]
+[/Desktop]
 
 Machine learning algorithms themselves may amplify bias if they make predictions that are more skewed than the training data. Such amplification often occurs through two mechanisms: 1) algorithms incentivized to predict observations to belong to the majority group , and 2) runaway feedback loops. The two stylized examples below illustrate these mechanisms.
 
@@ -163,10 +170,10 @@ Having representative training data is the ideal scenario. In a more realistic s
 
   [div]
     [div className:"interactiveHed"]
-      Sampling errors can lead to biased models
+      TK TK Interactive Title
     [/div]
     [div className:"interactiveDek"]
-      Draw samples from a population and see how close your estimates are to the true value. What happens when the sample size is changed?
+      TK TK Interactive Subtitle
     [/div]
   [/div]
 
@@ -174,7 +181,7 @@ Having representative training data is the ideal scenario. In a more realistic s
     Input. [span className:"light"]Adjust the sliders to set model bias and accuracy.[/span]
   [/div]
 
-  [div style:`{display: 'flex', flexDirection: 'row', paddingLeft: '1em', color: '#7e7e7e', fontWeight: 500}`]
+  [div className:"interactive-flex-row" style:`{padding: '1em', color: '#d3d3d3', fontWeight: 500, display: 'inline-flex', margin: '1em 1em 0 1em', border: 'solid 1px #7e7e7e'}`]
     [div className:"slider-container"]
       [div className:"slider"]
         Bias: [Display value:`bias*100` format:".0f" /] / [Display value:`100 - bias*100` format:".0f" /]
@@ -187,7 +194,7 @@ Having representative training data is the ideal scenario. In a more realistic s
       [/div]
     [/div]
     [div className:"slider-container"]
-      [div className:"plotTitle"]Data [BiasDataLabel /][/div]
+      [div className:""]Data [BiasDataLabel /][/div]
       [BiasAmplifiedData id:"biasAmplifiedDataPlot" bias:bias /]
     [/div]
 
@@ -196,7 +203,7 @@ Having representative training data is the ideal scenario. In a more realistic s
   [div className:"interactive-instruction"]
     Model Predictions. [span className:"light"]Compare two models, one that is trained on the data, and one that always guesses "woman."[/span]
   [/div]
-  [div][BiasIncorrectPredLabel /][/div]
+  [div style:`{marginLeft: '1em'}`][BiasIncorrectPredLabel /][/div]
   [div className:"plots"]
     [div className:"plot-container"]
       [div className:"plotTitle"]Model trained on data[/div]
@@ -215,12 +222,20 @@ Having representative training data is the ideal scenario. In a more realistic s
 [/FullWidth]
 
 
+[Mobile]
+  [Aside]
+    [Newsletter /]
+  [/Aside]
+[/Mobile]
+
 **Runaway feedback loops.**[br/]
 In the previous image-classification example, bias amplification stops at the model prediction stage. However, in machine learning models where the prediction is fed back into the model as inputs for the next round of predictions, bias can be amplified further in the form of a feedback loop.
 
-[Aside]
-  [Newsletter /]
-[/Aside]
+[Desktop]
+  [Aside]
+    [Newsletter /]
+  [/Aside]
+[/Desktop]
 
 Consider a predictive policing algorithm used to determine the optimal allocation of police force across a city. Suppose the city has two precincts (A and B) and one policeman, John. The city wishes to use historical data on past crime occurrences to determine which precinct to dispatch John to.  The goal is to send John to each precinct in propotion to the frequency of crimes that occur in each precinct.  If 40% of crimes occur in precinct A, the algorithm should send John to patrol A 40% of the time.  In our example, let's say the city experienced a total of 22 crimes in the past year, with 12 of those occurring in precinct A and 10 in precinct B, as shown below:
 [img src:`"static/images/feedback-loop-1.png" ` /]
@@ -308,7 +323,19 @@ One can then apply model constraints to make the algorithm satisfy some fairness
 * Same “parity” -- Requiring that certain performance measures be held equal across groups. In the recidivism example, the algorithm would be required to achieve the same, say, false positive rate for white and black defendants.
 * Same “calibration” -- Requiring that certain performance measure be held equal across groups, among observations with the same predicted risk profile. In the recidivism example, the algorithm would be calibrated such that, among defendants that were given the same risk score, the proportion that is predicted to reoffend is the same across groups.
 
-[RecidivismTable fullWidth:true /]
+[div className:"recidivism-table-container" fullWidth:true]
+
+  [div]
+    [div className:"interactiveHed"]
+      TK TK Interactive Title
+    [/div]
+    [div className:"interactiveDek"]
+      TK TK Interactive Subtitle
+    [/div]
+  [/div]
+
+  [RecidivismTable /]
+[/div]
 
 ### 4) Going beyond the data / algorithm
 Beyond tackling bias directly in the data and / or the algorithm, tech companies have also begun adopting broader measures. One measure is to establish ethical AI guidelines, where minimizing bias is included as part of a company’s overarching AI objectives. (As ML is a subset of AI, the same ethical guidelines would then apply to ML product developments as well.) Google explicitly lists “Avoid creating or reinforcing unfair bias” as the second principle for AI applications. Microsoft similarly includes “AI systems should treat all people fairly” among its AI principles. Another measure is to conduct third-party algorithm audits to ensure each AI product satisfies a company’s AI guidelines; a growing number of data analytics and consulting firms are starting to offer such auditing services. An even broader measure that targets the human source is to promote diversity in the AI / ML workforce. As of 2018, only 13% of AI CEOs are women, and less than 7% of tenure-track engineering faculty identify as either African American or Hispanic. Black in AI and AI4ALL are budding examples of initiatives to change the current landscape by fostering a more diverse and inclusive community of AI / ML practitioners. While these measures alone do not eliminate bias completely from machine learning, they do reflect how companies and the broader AI / ML community are increasingly aware of the need to address bias as AI / ML become ever-more widely used.
