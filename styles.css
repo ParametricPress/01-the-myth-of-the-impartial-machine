@@ -296,6 +296,40 @@ ol.ml-pipeline img {
 
 
 /********* STYLES FOR FEEDBACK LOOPS INTERACTIVE *************/
+
+.feedbackLoopControls {
+	display: flex;
+	flex-direction: row;
+	font-family: 'Graphik Web';
+	justify-content: space-between;
+	font-weight: 400;
+	margin-bottom: 4em;
+	font-size: 16px;
+	border-bottom: solid 1px #222;
+	padding: 0 0 1em 0;
+	border-top: solid 2px #222;
+}
+
+.feedbackLoopControls > button {
+	height: 40px;
+	align-self: flex-end;
+}
+
+.parametric-multi-button-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.parametric-multi-button {
+  background: #c5c5c5;
+  color: #222;
+  margin: 0;
+  padding: 0.5em 1em;
+}
+.parametric-multi-button.selected {
+  background: #539987;
+}
+
 label {
 	margin-right: 20px;
 }
@@ -346,6 +380,7 @@ label {
 .finalResults {
 	font-family: 'Graphik Web';
 	display: grid;
+	font-weight: 400;
 	grid-template-columns: 50% 50%;
 	grid-template-rows: repeat(3, 30px);
 	grid-gap: 10px;
@@ -359,6 +394,9 @@ label {
 .finalResults.hidden {
 	opacity: 0;
 }
+
+
+
 
 
 
@@ -400,7 +438,7 @@ label {
 	margin: 1em 0 0.25em;
 	text-align: center;
 	position: relative;
-	left: 1.75em;
+	left: 38px;
 }
 
 .recidivism-table input {
@@ -456,6 +494,12 @@ label {
 /** Mobile styles */
 
 @media all and (max-width: 1000px) {
+
+	.recidivism-table .predictionLabel {
+		margin: 1em 0 0.25em;
+		text-align: center;
+		left: 32px;
+	}
 
 	ol.ml-pipeline li {
 		margin-bottom: 0;
@@ -516,6 +560,19 @@ label {
 	.recidivism-table input {
 		width: 100%;
 	}
+
+	.finalResults {
+		font-size: 14px;
+		line-height: 16px;
+	}
+	.feedbackLoopControls {
+		flex-direction: column;
+	}
+	.feedbackLoopControls > button {
+		align-self: flex-start;
+		margin-top: 1em;
+	}
+
 }
 
 

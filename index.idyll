@@ -251,13 +251,17 @@ The next day, when the algorithm decides where to send John to, it will have a 1
 [var name:"runSimulation" value:0 /]
 
 //[Radio value:crimeRateA options:`[{value: "2", label: "Low (2 crimes per day)"}, {value: "4", label: "Medium (4 crimes per day)"}, {value: "8", label: "High (8 crimes per day)"}]` /]
-[div className:"feedbackLoopCrimeRateSelector"]
-  Crimes per day in A: [Radio value:crimeRateA options:`["2", "4", "8"]` /]
+
+[div className:"feedbackLoopControls"]
+  [div className:"feedbackLoopCrimeRateSelector"]
+    Crimes per day in A: [MultiButton value:crimeRateA options:`["2", "4", "8"]` /]
+  [/div]
+  [div className:"feedbackLoopCrimeRateSelector"]
+    Crimes per day in B: [MultiButton value:crimeRateB options:`["2", "4", "8"]` /]
+  [/div]
+  [Button className:"feedbackLoopRunBtn" onClick:`runSimulation = runSimulation + 1`]Run Simulation[/Button]
 [/div]
-[div className:"feedbackLoopCrimeRateSelector"]
-  Crimes per day in B: [Radio value:crimeRateB options:`["2", "4", "8"]` /]
-[/div]
-[Button className:"feedbackLoopRunBtn" onClick:`runSimulation = runSimulation + 1`]Run Simulation[/Button]
+
 
 [FeedbackLoop crimeRateA:crimeRateA crimeRateB:crimeRateB runSimulation:runSimulation /]
 
