@@ -127,7 +127,7 @@ class RecidivismTable extends React.Component {
                 <tbody>
                   <tr>
                     <td>Accuracy:</td>
-                    <td>{PCTFORMAT(highRiskReoffense_a/totalHighRisk_a)}</td>
+                    <td>{totalHighRisk_a === 0 ? "100%" : PCTFORMAT(highRiskReoffense_a/totalHighRisk_a)}</td>
                     <td>{PCTFORMAT(highRiskReoffense_b/totalHighRisk_b)}</td>
                   </tr>
                   <tr>

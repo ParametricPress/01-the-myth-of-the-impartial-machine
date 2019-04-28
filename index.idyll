@@ -170,10 +170,10 @@ Having representative training data is the ideal scenario. In a more realistic s
 
   [div]
     [div className:"interactiveHed"]
-      TK TK Interactive Title
+      Algorithms can amplify bias found in data
     [/div]
     [div className:"interactiveDek"]
-      TK TK Interactive Subtitle
+      An image-classification model is being trained to identify the gender of people in cooking images. See how the composition of the data and the model accuracy influence the likelihood of amplifying bias.  When is the model incentivized to predict that cooking images are always of a woman and when is it not?
     [/div]
   [/div]
 
@@ -327,10 +327,10 @@ One can then apply model constraints to make the algorithm satisfy some fairness
 
   [div]
     [div className:"interactiveHed"]
-      TK TK Interactive Title
+      Models should be evaluated against metrics other than accuracy
     [/div]
     [div className:"interactiveDek"]
-      TK TK Interactive Subtitle
+      Set the number of defendants from Group A the model predicts as being at high risk of reoffending and see how that changes the accuracy, false positive rate and false negative rate. Is there a way to have all three metrics be the same between the two groups?
     [/div]
   [/div]
 
