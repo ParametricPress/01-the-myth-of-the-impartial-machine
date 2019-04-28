@@ -1,4 +1,4 @@
-[meta title:"The Myth of the Impartial Machine" description:"Lost amidst the rush to deploy artificially intelligent software at scale are incidents where probabilistic models have produced shockingly flawed results." /]
+[meta title:"The Myth of the Impartial Machine" description:"Lost amidst the rush to deploy artificially intelligent software are incidents where probabilistic models have produced shockingly flawed results." /]
 
 [var name:"parametricSlug" value:"bias-in-machine-learning" /]
 
@@ -8,7 +8,7 @@
   title:`["Impartial", "Machine"]`
   longTitle:`["The Myth of the", "Impartial Machine"]`
   date:"April 15, 2019"
-  dek:"Lost amidst the rush to deploy artificially intelligent software at scale are incidents where probabilistic models have produced shockingly flawed results."
+  dek:"Lost amidst the rush to deploy artificially intelligent software are incidents where probabilistic models have produced shockingly flawed results."
   fullWidth:true
   authors:`[{
     name: "Alice Feng",
