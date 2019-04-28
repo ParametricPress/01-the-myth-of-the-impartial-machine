@@ -294,6 +294,77 @@ ol.ml-pipeline img {
 	text-align: center;
 }
 
+
+
+
+/********* STYLES FOR FEEDBACK LOOPS INTERACTIVE *************/
+label {
+	margin-right: 20px;
+}
+
+.feedbackLoopCrimeRateSelector input[type="radio"] {
+	display: inline;
+	width: auto;
+}
+
+.feedbackLoopCrimeRateSelector input[type="radio"]:disabled {
+	cursor: auto;
+}
+
+.feedbackLoopRunBtn:disabled {
+	background-color: #d2d2d2;
+	cursor: auto;
+}
+
+.dispatchedToLabel {
+	font-family: 'Graphik Web';
+	width: 100%;
+	text-align: center;
+}
+
+.neighborhoodLabel {
+	text-anchor: middle;
+}
+
+.neighborhoodA {
+	color: #888;
+}
+
+.neighborhoodB {
+	color: #4801FF;
+
+}
+
+.neighborhoodLabel.neighborhoodA,
+.feedbackDot.neighborhoodA {
+	fill: #888;
+}
+
+.neighborhoodLabel.neighborhoodB,
+.feedbackDot.neighborhoodB {
+	fill: #4801FF;
+}
+
+.finalResults {
+	font-family: 'Graphik Web';
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: repeat(3, 30px);
+	grid-gap: 10px;
+	margin-bottom: 40px;
+	opacity: 1;
+	transition-property: opacity;
+	transition-duration: 1s;
+	transition-delay: 0.5s;
+}
+
+.finalResults.hidden {
+	opacity: 0;
+}
+
+
+
+
 /********* STYLES FOR ACCURACY METRICS INTERACTIVE *************/
 .recidivism-table-container {
 	background: #222;
