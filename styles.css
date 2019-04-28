@@ -398,6 +398,9 @@ label {
 
 .recidivism-table .predictionLabel {
 	margin: 1em 0 0.25em;
+	text-align: center;
+	position: relative;
+	left: 1.75em;
 }
 
 .recidivism-table input {

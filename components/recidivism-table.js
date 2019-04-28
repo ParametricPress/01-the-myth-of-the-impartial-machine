@@ -5,6 +5,20 @@ const d3 = require('d3');
 const accuracy = 0.666;
 const PCTFORMAT = d3.format(".0%");
 
+const ratioEqual = (an, ad, bn, bd) => {
+  if (ad === 0) {
+    if (bd === 0) {
+      return true;
+    }
+    if (bn / bd === 1) {
+      return true;
+    }
+    return false;
+  }
+
+  return an / ad === bn / bd;
+}
+
 class RecidivismTable extends React.Component {
     constructor(props) {
         super(props);
@@ -127,18 +141,30 @@ class RecidivismTable extends React.Component {
                 <tbody>
                   <tr>
                     <td>Accuracy:</td>
-                    <td>{totalHighRisk_a === 0 ? "100%" : PCTFORMAT(highRiskReoffense_a/totalHighRisk_a)}</td>
-                    <td>{PCTFORMAT(highRiskReoffense_b/totalHighRisk_b)}</td>
+                    <td style={{ background: ratioEqual(highRiskReoffense_a, totalHighRisk_a, highRiskReoffense_b, totalHighRisk_b) ? '#539987' : undefined}}>
+                      {totalHighRisk_a === 0 ? "100%" : PCTFORMAT(highRiskReoffense_a/totalHighRisk_a)}
+                    </td>
+                    <td style={{ background: ratioEqual(highRiskReoffense_a, totalHighRisk_a, highRiskReoffense_b, totalHighRisk_b) ? '#539987' : undefined}}>
+                      {PCTFORMAT(highRiskReoffense_b/totalHighRisk_b)}
+                    </td>
                   </tr>
                   <tr>
                     <td>False Positive Rate:</td>
-                    <td>{PCTFORMAT(highRiskNoReoffense_a/totalNoReoffense_a)}</td>
-                    <td>{PCTFORMAT(highRiskNoReoffense_b/totalNoReoffense_b)}</td>
+                    <td style={{ background: ratioEqual(highRiskNoReoffense_a, totalNoReoffense_a, highRiskNoReoffense_b, totalNoReoffense_b) ? '#539987' : undefined}}>
+                      {PCTFORMAT(highRiskNoReoffense_a/totalNoReoffense_a)}
+                    </td>
+                    <td style={{ background: ratioEqual(highRiskNoReoffense_a, totalNoReoffense_a, highRiskNoReoffense_b, totalNoReoffense_b) ? '#539987' : undefined}}>
+                      {PCTFORMAT(highRiskNoReoffense_b/totalNoReoffense_b)}
+                    </td>
                   </tr>
                   <tr>
                     <td>False Negative Rate:</td>
-                    <td>{PCTFORMAT((totalReoffense_a - highRiskReoffense_a)/totalReoffense_a)}</td>
-                    <td>{PCTFORMAT((totalReoffense_b - highRiskReoffense_b)/totalReoffense_b)}</td>
+                    <td style={{ background: ratioEqual(totalReoffense_a - highRiskReoffense_a, totalReoffense_a, totalReoffense_b - highRiskReoffense_b, totalReoffense_b) ? '#539987' : undefined}}>
+                      {PCTFORMAT((totalReoffense_a - highRiskReoffense_a)/totalReoffense_a)}
+                    </td>
+                    <td style={{ background: ratioEqual(totalReoffense_a - highRiskReoffense_a, totalReoffense_a, totalReoffense_b - highRiskReoffense_b, totalReoffense_b) ? '#539987' : undefined}}>
+                      {PCTFORMAT((totalReoffense_b - highRiskReoffense_b)/totalReoffense_b)}
+                    </td>
                   </tr>
                 </tbody>
               </table>
