@@ -184,7 +184,7 @@ class FeedbackLoopComponent extends D3Component {
           // d3.select(".finalResults").classed("hidden", false);
           t.stop();
           d3.select(".feedbackLoopRunBtn").attr("disabled", null);
-          d3.select(".feedbackLoopRunBtn").text("Rerun simulation");
+          d3.select(".feedbackLoopRunBtn").text("Replay simulation");
           d3.selectAll(".feedbackLoopCrimeRateSelector input[type='radio']").attr("disabled", null);
         }
 
