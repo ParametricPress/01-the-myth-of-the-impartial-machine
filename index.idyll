@@ -1,6 +1,6 @@
 [meta title:"The Myth of the Impartial Machine" description:"Lost amidst the rush to deploy artificially intelligent software are incidents where probabilistic models have produced shockingly flawed results." /]
 
-[var name:"parametricSlug" value:"bias-in-machine-learning" /]
+[var name:"parametricSlug" value:"the-myth-of-the-impartial-machine" /]
 
 [Nav fullWidth:true /]
 
