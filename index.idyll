@@ -1,4 +1,7 @@
-[meta title:"The Myth of the Impartial Machine" description:"Lost amidst the rush to deploy artificially intelligent software are incidents where probabilistic models have produced shockingly flawed results." /]
+[meta title:"The Myth of the Impartial Machine" description:"Lost amidst the rush to deploy artificially intelligent software are incidents where probabilistic models have produced shockingly flawed results."
+  shareImageUrl:"https://issue-01-preview.parametric.press/issue-01/the-myth-of-the-impartial-machine/static/images/share.png"
+  shareImageWidth:"880"
+  shareImageHeight:"440" /]
 
 [var name:"parametricSlug" value:"the-myth-of-the-impartial-machine" /]
 
@@ -7,7 +10,7 @@
 [Header
   title:`["Impartial", "Machine"]`
   longTitle:`["The Myth of the", "Impartial Machine"]`
-  date:"April 15, 2019"
+  date:"May 1, 2019"
   dek:"Lost amidst the rush to deploy artificially intelligent software are incidents where probabilistic models have produced shockingly flawed results."
   fullWidth:true
   authors:`[{
