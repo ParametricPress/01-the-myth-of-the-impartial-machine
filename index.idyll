@@ -26,7 +26,9 @@
 /]
 
 
-From voice assistants to image recognition, fraud detection to social media feeds, machine learning (ML) and artificial intelligence (AI) are becoming an increasingly important part of society.  The two fields have made enormous strides in recent years thanks to gains in computing power and so-called “information explosion.”  Such algorithms are being used in fields as varied as medicine, agriculture, insurance, transportation and art, and the number of companies rushing to embrace what ML and AI can offer has increased rapidly in recent years.  According to a [survey](http://assets.teradata.com/resourceCenter/downloads/AnalystReports/Teradata_Report_AI.pdf) conducted by Teradata in July 2017, 80% of enterprises have already begun investing in AI technologies and 30% plan to increase their spending over the next 36 months. Investment in such models is also [forecasted to grow](https://www.idc.com/getdoc.jsp?containerId=prUS43095417) from $12 billion in 2017 to $57.6 billion by 2021.  Billed as being more accurate, consistent and objective than human judgment, the promises and expectations of what ML and AI can achieve have never been greater.
+From voice assistants to image recognition, fraud detection to social media feeds, machine learning (ML) and artificial intelligence (AI) are becoming an increasingly important part of society.  The two fields have made enormous strides in recent years thanks to gains in computing power and the so-called “information explosion.” Such algorithms are being used in fields as varied as medicine, agriculture, insurance, transportation and art, and the number of companies rushing to embrace what ML and AI can offer has increased rapidly in recent years.
+
+According to a [survey](http://assets.teradata.com/resourceCenter/downloads/AnalystReports/Teradata_Report_AI.pdf) conducted by Teradata in July 2017, 80% of enterprises have already begun investing in AI technologies and 30% plan to increase their spending over the next 36 months. Investment in such models is also [forecasted to grow](https://www.idc.com/getdoc.jsp?containerId=prUS43095417) from $12 billion in 2017 to $57.6 billion by 2021.  Billed as being more accurate, consistent and objective than human judgment, the promises and expectations of what ML and AI can achieve have never been greater.
 
 
 [Aside]
@@ -46,7 +48,9 @@ From voice assistants to image recognition, fraud detection to social media feed
 
 [/Aside]
 
-However, for every neural network that can defeat Jeopardy champions and outplay Go masters, there are other well-documented instances where these algorithms have produced highly disturbing results.  Facial-analysis programs were found to have an error rate of [20 to 34 percent](news.mit.edu/2018/study-finds-gender-skin-type-bias-artificial-intelligence-systems-0212) when trying to determine the gender of African-American women compared to an error rate of less than 1 percent for white men.  ML algorithms used to predict which criminals are most likely to reoffend tended to incorrectly flag black defendants as being high risk [at twice the rate](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing) of white defendants.  A word embedding model used to help machines determine the meaning of words based on their similarity likewise [associated men with being computer programmers and women with homemakers](https://arxiv.org/pdf/1607.06520.pdf).  If data-trained models are supposed to be objective and impartial, how did these algorithms get things so wrong?  Can such bias be fixed?
+However, for every neural network that can defeat Jeopardy champions and outplay Go masters, there are other well-documented instances where these algorithms have produced highly disturbing results.  Facial-analysis programs were found to have an error rate of [20 to 34 percent](news.mit.edu/2018/study-finds-gender-skin-type-bias-artificial-intelligence-systems-0212) when trying to determine the gender of African-American women compared to an error rate of less than one percent for white men.  ML algorithms used to predict which criminals are most likely to reoffend tended to incorrectly flag black defendants as being high risk [at twice the rate](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing) of white defendants.  A word embedding model used to help machines determine the meaning of words based on their similarity likewise [associated men with being computer programmers and women with homemakers](https://arxiv.org/pdf/1607.06520.pdf).
+
+If data-trained models are supposed to be objective and impartial, how did these algorithms get things so wrong?  Can such bias be fixed?
 
 
 // [VISUAL: ML as a subset of AI]
@@ -71,7 +75,7 @@ However, for every neural network that can defeat Jeopardy champions and outplay
 
 
 ## Sources of bias
-There are two key ways bias can be introduced and amplified during the machine learning process: by using unrepresentative data and while fitting and training models.
+There are two key ways bias can be introduced and amplified during the machine learning process: by using non-representative data and while fitting and training models.
 
 ### Biased data
 
@@ -135,7 +139,9 @@ When one examines a data sample, it is imperative to check whether the sample is
   [/div]
 [/div]
 
-**Non-sampling errors** are typically more serious and may arise from many different sources such as errors in data collection, non-response, and selection bias. Typical examples include poorly phrased data-collection questions, web-only data collection that leave out people who don’t have easy access to the internet, over-representation of people that feel particularly strongly about a subject, and [responses that may not reflect one’s true opinion](https://hbr.org/2003/07/web-surveys-hidden-hazards). Even big data are susceptible to non-sampling errors. A [study by researchers at Google](https://arxiv.org/abs/1711.08536) found that the United States (which accounts for 4% of the world population) contributed over 45% of the data for ImageNet, a database of more than 14 million labelled images. Meanwhile, China and India combined contribute just 3% of images, despite accounting for over 36% of the world population. As a result of this skewed data distribution, image classification algorithms that use the ImageNet database would often correctly label an image of a traditional US bride with words like “bride” and “wedding” but label an image of an Indian bride with words like “costume”.
+**Non-sampling errors** are typically more serious and may arise from many different sources such as errors in data collection, non-response, and selection bias. Typical examples include poorly phrased data-collection questions, web-only data collection that leave out people who don’t have easy access to the internet, over-representation of people that feel particularly strongly about a subject, and [responses that may not reflect one’s true opinion](https://hbr.org/2003/07/web-surveys-hidden-hazards).
+
+Even big data are susceptible to non-sampling errors. A [study by researchers at Google](https://arxiv.org/abs/1711.08536) found that the United States (which accounts for 4% of the world population) contributed over 45% of the data for ImageNet, a database of more than 14 million labelled images. Meanwhile, China and India combined contribute just 3% of images, despite accounting for over 36% of the world population. As a result of this skewed data distribution, image classification algorithms that use the ImageNet database would often correctly label an image of a traditional US bride with words like “bride” and “wedding” but label an image of an Indian bride with words like “costume”.
 
 // [NonSamplingErrorBarChart className:"plot" /]
 
@@ -143,7 +149,9 @@ When one examines a data sample, it is imperative to check whether the sample is
 
 #### Data that are representative but still biased.
 
-What if a dataset is representative of its target population? No more worries about bias coming through the data, right? Not so fast—a representative dataset may still be biased to the extent that it reflects any historical social bias. [A recruiting algorithm once used by Amazon](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women-idUSKCN1MK08G) was found to have disproportionately favored male candidates. The data used to train the algorithm were based on resumes collected over a 10-year period. Because the tech industry was historically dominated by men, a majority of the resumes were submitted by men. Therefore, even though the dataset was “representative” of the historical applicant pool, it captured the inherent gender bias and passed it on to the recruiting algorithm. Representative but biased data is in some sense a more problematic issue than non-representative data since fixing the former would require addressing biases that are inherent in society.
+What if a dataset is representative of its target population? No more worries about bias coming through the data, right? Not so fast—a representative dataset may still be biased to the extent that it reflects any historical social bias. [A recruiting algorithm once used by Amazon](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women-idUSKCN1MK08G) was found to have disproportionately favored male candidates. The data used to train the algorithm were based on resumes collected over a 10-year period.
+
+Because the tech industry was historically dominated by men, a majority of the resumes were submitted by men. Therefore, even though the dataset was “representative” of the historical applicant pool, it captured the inherent gender bias and passed it on to the recruiting algorithm. Representative but biased data is in some sense a more problematic issue than non-representative data since fixing the former would require addressing biases that are inherent in society.
 
 [Mobile]
   [Aside]
@@ -161,15 +169,17 @@ What if a dataset is representative of its target population? No more worries ab
 
 Machine learning algorithms themselves may amplify bias if they make predictions that are more skewed than the training data. Such amplification often occurs through two mechanisms: 1) incentives to predict observations as belonging to the majority group and 2) runaway feedback loops.
 
-#### Algorithms incentivized to predict observations to belong to the majority group.
+#### Algorithms incentivized to predict the majority group.
 
-In order to maximize predictive accuracy when faced with an imbalanced dataset, machine learning algorithms are incentivized to put more learning weight on the majority group, thus disproportionately predicting observations to belong to that majority group.
+In order to maximize predictive accuracy when faced with an imbalanced dataset, machine learning algorithms are incentivized to put more learning weight on the majority group, thus disproportionately predicting observations to belong to that majority group. The next interactive example illustrates this tendency.
 
-The interactive example below illustrates this tendency. Suppose we have an image-classification algorithm tasked with identifying the gender of the person in a given image. The training dataset contains 10 cooking images; each image shows either a man or a woman in the kitchen. This dataset may range from a balanced, unbiased sample (5 images showing men, 5 images showing women) to a completely biased sample (all 10 images showing either women or men).
+Suppose we have an image-classification algorithm tasked with identifying the gender of the person in a given image. The training dataset contains 10 cooking images; each image shows either a man or a woman in the kitchen. This dataset may range from a balanced, unbiased sample (five images showing men, five images showing women) to a completely biased sample (all 10 images showing either women or men).
 
-Having unbiased training data is the ideal scenario. In a more realistic setting, women are likely to be over-represented in a sample of cooking images. Suppose the training dataset contains eight images of women cooking and two images of men and that the model has a 70% predictive accuracy (i.e., a Bias of 80/20 and Model accuracy of 70% in the interactive below). When this data is fed through the model, the model correctly labels the gender of six of the photos of women and one of the photos of a man while mistaking the gender of the remaining three photos (30% error rate). If the model were to instead simply predict that every cooking image is of a woman, it would lower its error rate to 20% because it has correctly labeled all of the photos with a woman while only mistaking the gender of the two photos of men. In pursuit of higher predictive accuracy, the model has amplified the bias from 80% women in the training data to 100% women in the model prediction.
+Having unbiased training data is the ideal scenario, but in a more realistic setting, women are likely to be over-represented in a sample of cooking images. Suppose the training dataset contains eight images of women cooking and two images of men and that the model has a 70% predictive accuracy (i.e., a bias of 80/20 and model accuracy of 70% in the interactive below). When this data is fed through the model, the model correctly labels the gender of six of the photos of women and one of the photos of a man while mistaking the gender of the remaining three photos (30% error rate).
 
-Play with the Bias and Model accuracy settings below to see how different mixes affect the tendency for the model to amplify bias. For a given level of predictive accuracy, how does the tendency for the model to amplify bias change with the amount of bias in the data, and vice versa? When is the model incentivized to amplify bias, and when it is not?
+If the model were to instead simply predict that every cooking image is of a woman, it would lower its error rate to 20% because it has correctly labeled all of the photos with a woman while only mistaking the gender of the two photos of men. In pursuit of higher predictive accuracy, the model has amplified the bias from 80% women in the training data to 100% women in the model prediction.
+
+Play with the bias and model accuracy settings below to see how different mixes affect the tendency for the model to amplify bias. For a given level of predictive accuracy, how does the tendency for the model to amplify bias change with the amount of bias in the data, and vice versa? When is the model incentivized to amplify bias, and when it is not?
 
 [FullWidth className:"amplifiedBiasInteractive interactive"]
   [var name:"bias" value:0.8 /]
@@ -227,6 +237,9 @@ Play with the Bias and Model accuracy settings below to see how different mixes 
     Result. [span className:"light"]Model [Display value:`modelAccuracy >= bias ? 'would not' : 'would' ` /] be incentivized to amplify bias.[/div]
   [/div]
 [/FullWidth]
+[caption]
+  This graphic is based on a scenario described in [this article](https://medium.com/@laurahelendouglas/ai-is-not-just-learning-our-biases-it-is-amplifying-them-4d0dee75931d) by Laura Douglas.
+[/caption]
 
 
 [Mobile]
@@ -245,14 +258,23 @@ In the previous image-classification example, bias amplification stops at the mo
   [/Aside]
 [/Desktop]
 
-Consider a predictive policing algorithm used to determine the optimal allocation of police force across a city. Suppose the city has two precincts (A and B) and one policeman, John. The city wishes to use historical data on past crime occurrences to determine which precinct to dispatch John to.  The goal is to send John to each precinct in propotion to the frequency of crimes that occur in each precinct.  If 40% of crimes occur in precinct A, the algorithm should send John to patrol A 40% of the time.  In our example, let's say the city experienced a total of 22 crimes in the past year, with 12 of those occurring in precinct A and 10 in precinct B, as shown below:
+Consider a predictive policing algorithm used to determine the optimal allocation of police force across a city. Suppose the city has two precincts (A and B) and one policeman, John. The city wishes to use historical data on past crime occurrences to determine to which precinct to dispatch John.  The goal is to send John to each precinct in propotion to the frequency of crimes that occur in each precinct.  If 40% of crimes occur in precinct A, the algorithm should send John to patrol A 40% of the time.
+
+In our example, let's say the city experienced a total of 22 crimes in the past year, with 12 of those occurring in precinct A and 10 in precinct B, as shown below:
+
 [img src:`"static/images/feedback-loop-1.png" ` /]
 
-The predictive algorithm uses this historical data to determine where to send John. The likelihood the algorithm will dispatch John to precinct A is in proportion to the share of all crimes that occurred in A. In this case, this probability is 12/22 = 54.5%. The probability the algorithm will choose to send John to precinct B is 10/22 = 45.5%. Let’s say the algorithm decides to dispatch John to patrol precinct A. While there, John encounters three crimes and logs them in the system.  The updated data now show a total of 15 past crimes in A and 10 in B.  However, because no one was sent to precinct B, crimes that occured in B on the same day were not captured in the data.
+The predictive algorithm uses this historical data to determine where to send John. The likelihood that the algorithm will dispatch John to precinct A is in proportion to the share of all crimes that occurred in A. In this case, this probability is 12/22 = 54.5%. The algorithm will choose to send John to precinct B with a probability of 10/22 = 45.5%.
+
+Let’s say the algorithm decides to dispatch John to patrol precinct A. While there, John encounters three crimes and logs them in the system.  The updated data now show a total of 15 past crimes in A and 10 in B.  However, because no one was sent to precinct B, crimes that occured in B on the same day were not captured in the data.
 
 [img src:`"static/images/feedback-loop-2.png" ` /]
 
-The next day, when the algorithm decides where to send John to, it will have a 15/25 = 60% probability of sending John to A and 10/25 = 40% probability of sending him to B. The algorithm now has an even higher likelihood of sending John to precinct A as a result of its decision to assign John to A yesterday. When the model chooses to send John to precinct A, more instances of crime will be logged for precinct A, while crime that occur in B are ignored and remain uncaptured in the data. Over time, the data will become increasingly distorted, with the gap between the observed crime ratio and the actual crime ratio of the two precincts widening  due to the decisions the model makes.
+The next day, when the algorithm decides where to send John to, it will have a 15/25 = 60% probability of sending John to A and 10/25 = 40% probability of sending him to B. The algorithm now has an even higher likelihood of sending John to precinct A as a result of its decision to assign John to A yesterday. When the model chooses to send John to precinct A, more instances of crime will be logged for precinct A, while crime that occur in B are ignored and remain uncaptured in the data.
+
+Over time, the data will become increasingly distorted, with the gap between the observed crime ratio and the actual crime ratio of the two precincts widening  due to the decisions the model makes.
+
+[br/]
 
 // [VISUAL: FEEDBACK LOOPS]
 [var name:"crimeRateA" value:"4" /]
@@ -274,13 +296,15 @@ The next day, when the algorithm decides where to send John to, it will have a 1
 
 [FeedbackLoop crimeRateA:crimeRateA crimeRateB:crimeRateB runSimulation:runSimulation /]
 
-Feedback loops are especially problematic when sub-groups in the training data exhibit large statistical differences (e.g. one precinct has a much higher crime rate than others); a model trained on such data will quickly “run away” and make predictions that fall into the majority group only, thereby generating ever-more lopsided data that are fed back into the model. Even when sub-groups are statistically similar, feedback loops can still lead to noisy and less accurate predictions. Algorithms where the predictive outcome determines what feedback the algorithm receives -- e.g. recidivism prediction, language translation, and social media news feeds -- should always be diligently monitored for the presence of feedback loops bias.
+Feedback loops are especially problematic when sub-groups in the training data exhibit large statistical differences (e.g. one precinct has a much higher crime rate than others); a model trained on such data will quickly “run away” and make predictions that fall into the majority group only, thereby generating ever-more lopsided data that are fed back into the model.
+
+Even when sub-groups are statistically similar, feedback loops can still lead to noisy and less accurate predictions. Algorithms where the predictive outcome determines what feedback the algorithm receives—e.g. recidivism prediction, language translation, and social media news feeds—should always be diligently monitored for the presence of feedback loops bias.
 
 ## Bias in data and in algorithms are interrelated
 
-It should be clear by this point that bias in data and algorithms are interrelated. When an algorithm is fed training data where one group dominates the sample, it is incentivized to prioritize learning about the dominant group and over-predict the number of observations that belong to the dominant group.  This tendency is particularly exacerbated when the model’s predictive accuracy is relatively low.  Conversely, if the data were balanced relative to the predictive accuracy, the model would have nothing to gain by over-predicting the dominant group.
+It should be clear by this point that bias in data and algorithms are interrelated. When an algorithm is fed training data where one group dominates the sample, it is incentivized to prioritize learning about the dominant group and over-predict the number of observations that belong to the dominant group.  This tendency is exacerbated when the model’s predictive accuracy is relatively low.  Conversely, if the data were balanced relative to the predictive accuracy, the model would have nothing to gain by over-predicting the dominant group.
 
-Bias can also be perpetuated through a feedback loop if the model’s own biased predictions are repeatedly fed back into it, becoming its own biased source data for the next round of predictions. In the machine learning context, we no longer just face the risk of garbage in, garbage out -- when there’s garbage in, more and more garbage may be generated through the ML pipeline if one does not monitor and address potential sources of bias.
+Bias can also be perpetuated through a feedback loop if the model’s own biased predictions are repeatedly fed back into it, becoming its own biased source data for the next round of predictions. In the machine learning context, we no longer just face the risk of garbage in, garbage out—when there’s garbage in, more and more garbage may be generated through the ML pipeline if one does not monitor and address potential sources of bias.
 
 // [VISUAL: BIAS AMPLIFICATION & INTERACTION]
 [inset]
@@ -295,7 +319,7 @@ How does one actually tackle bias in the ML pipeline? While a suitable fix depen
 
 ### 1. De-biasing data
 
-One key to de-biasing the data is to ensure that a representative sample is collected in the first place. Bias from sampling errors can be mitigated by collecting larger samples and adopting data collection techniques such as stratified random sampling. While sampling errors won’t go away entirely, rapid data growth -- [2.5 quintillion bytes per day and counting](https://www.forbes.com/sites/bernardmarr/2018/05/21/how-much-data-do-we-create-every-day-the-mind-blowing-stats-everyone-should-read/#20cad76360ba) -- and growing data collection capability have made it easier than ever to mitigate sampling errors compared to the past.
+One key to de-biasing data is to ensure that a representative sample is collected in the first place. Bias from sampling errors can be mitigated by collecting larger samples and adopting data collection techniques such as stratified random sampling. While sampling errors won’t go away entirely, rapid data growth—[2.5 quintillion bytes per day and counting](https://www.forbes.com/sites/bernardmarr/2018/05/21/how-much-data-do-we-create-every-day-the-mind-blowing-stats-everyone-should-read/#20cad76360ba)—and growing data collection capability have made it easier than ever to mitigate sampling errors compared to the past.
 
 Bias from non-sampling errors are much more varied and harder to tackle, but one should still strive to minimize these kinds of errors through means such as proper training, establishing a clear purpose and procedure for data collection, and conducting careful data validation. For example, in response to the image-classification database that contained disproportionately few wedding images from India, [Google deliberately sought out contributions](https://www.standard.co.uk/tech/bias-in-ai-google-head-of-ethical-machine-learning-a3986256.html) from India to make the database more representative.
 
@@ -330,28 +354,40 @@ Another intervention method that is particularly useful to combat feedback loops
 [img src:"static/animations/adjust-feedback-loop.gif" /]
 
 
-### 3. Evaluating performance against metrics other than accuracy
+### 3. Evaluating performance against alternative metrics
 
-For algorithms that make classification decisions among different groups, it is also important to consider the performance of the model against metrics other than accuracy -- for example, the false positive rate or false negative rate.
+For algorithms that make classification decisions among different groups, it is also important to consider the performance of the model against metrics other than accuracy—for example, the false positive rate or false negative rate.
 
 For example, consider a criminal-justice algorithm used to assign risk scores for recidivism to defendants. Someone is labeled as “high risk” if they have a ⅔ predicted chance of reoffending within two years. Suppose the training data only contain two groups: Group A and Group B; each group has a different underlying profile for recidivism. In this example, possible alternative model metrics would be:
 
 * **False positive rate:** the probability of labeling someone as high risk, even though they did not reoffend.[br/]
 * **False negative rate:** the probability of labeling someone as low risk, even though they did reoffend.
 
-One can then apply model constraints to make the algorithm satisfy some fairness rule. Common rules include:
+One can then apply model constraints to make the algorithm satisfy some fairness rule. Common rules include[sup]1[/sup]:
+
+[Desktop]
+  [Aside]
+  [sup]1[/sup]References:[br/][br/]Google Research (2016), [Attack discrimination with smarter machine learning](https://research.google.com/bigpicture/attacking-discrimination-in-ml/).[br/][br/] Gorbett-Davis and Goel (2018), [The Measure and Mismeasure of Fairness](https://5harad.com/papers/fair-ml.pdf).
+  [/Aside]
+[/Desktop]
 
 [ul]
   [li]
     **Predictive parity:** Let algorithms make predictions without considering characteristics such as gender and race. In the recidivism example, white and black defendants would be held to the same risk scoring standards.
   [/li]
   [li]
-    **Well-calibrated:** In situations with more than one predicted outcome (for example, risk scores on a scale of 1 to 9 instead of simply high versus low risk), this would mean the proportion predicted to reoffend is the same across groups for every possible score value.
+    **Well-calibrated:** In situations with more than one predicted outcome (for example, risk scores on a scale of one to nine instead of simply high versus low risk), this would mean the proportion predicted to reoffend is the same across groups for every possible score value.
   [/li]
   [li]
   **Error rate balance:** Requiring that certain performance measures be held equal across groups. In the recidivism example, the algorithm would be required to achieve the same false positive rate or the same false negative rate across groups A and B.
   [/li]
 [/ul]
+
+[Mobile]
+  [Aside]
+  References[sup]1[/sup]: Google Research, [Attack discrimination with smarter machine learning](https://research.google.com/bigpicture/attacking-discrimination-in-ml/). Gorbett-Davis and Goel (2018), [The Measure and Mismeasure of Fairness](https://5harad.com/papers/fair-ml.pdf).
+  [/Aside]
+[/Mobile]
 
 In the simplified recidivism model below, the predictive parity rule has been imposed such that for both groups, 67% of people that are labeled as “high risk” indeed get rearrested. Play with the model by setting the total number of people in Group A that are labeled as “high risk”. Can you set this number such that the model achieves equal false negative rates in addition to predictive parity? Is there a value that allows the model to achieve equal false positive and false negative rates and predictive parity?
 
@@ -369,10 +405,12 @@ In the simplified recidivism model below, the predictive parity rule has been im
   [RecidivismTable /]
 [/div]
 
-### 4. Going beyond the data / algorithm
+### 4. Going beyond data and algorithms
 Beyond tackling bias directly in the data and / or the algorithm, there are broader measures that tech companies in particular have begun to adopt. One measure is to establish ethical AI guidelines, where minimizing bias is included as part of a company’s overarching AI objectives. (As ML is a subset of AI, the same ethical guidelines would then apply to ML product developments as well.) [Google](https://www.blog.google/technology/ai/ai-principles/) explicitly lists “Avoid creating or reinforcing unfair bias” as the second principle for AI applications. [Microsoft](https://www.microsoft.com/en-us/ai/our-approach-to-ai) similarly includes “AI systems should treat all people fairly” among its AI principles.
 
-Another measure is to conduct third-party algorithm audits to ensure each AI product satisfies a company’s AI guidelines; a growing number of data analytics and consulting firms are [starting to offer such auditing services](https://www.entrepreneur.com/article/319228). An even broader measure that targets the human source is to promote diversity in the AI / ML workforce. As of 2018, [only 13% of AI CEOs are women, and less than 7% of tenure-track engineering faculty identify as either African American or Hispanic](https://medium.com/ai4allorg/building-a-diverse-and-inclusive-ai-workforce-with-the-support-of-ey-and-the-ai4all-advisory-board-70c028f2951f). [Black in AI](https://blackinai.github.io/) and [AI4ALL](http://ai-4-all.org/) are budding examples of initiatives to change the current landscape by fostering a more diverse and inclusive community of AI / ML practitioners. While these measures alone do not eliminate bias completely from machine learning, they do reflect how companies and the broader AI / ML community are increasingly aware of the need to address bias as such technologies become ever-more widely used.
+Another measure is to conduct third-party algorithm audits to ensure each AI product satisfies a company’s AI guidelines; a growing number of data analytics and consulting firms are [starting to offer such auditing services](https://www.entrepreneur.com/article/319228). An even broader measure that targets the human source is to promote diversity in the AI / ML workforce. As of 2018, [only 13% of AI CEOs are women, and less than 7% of tenure-track engineering faculty identify as either African American or Hispanic](https://medium.com/ai4allorg/building-a-diverse-and-inclusive-ai-workforce-with-the-support-of-ey-and-the-ai4all-advisory-board-70c028f2951f). [Black in AI](https://blackinai.github.io/) and [AI4ALL](http://ai-4-all.org/) are budding examples of initiatives to change the current landscape by fostering a more diverse and inclusive community of AI / ML practitioners.
+
+While these measures alone do not eliminate bias completely from machine learning, they do reflect how companies and the broader AI / ML community are increasingly aware of the need to address bias as such technologies become ever-more widely used.
 
 
 // [VISUAL: THREE SIDE-BY-SIDE ILLUSTRATIONS OF ALTERNATIVE MEASURES]
@@ -383,7 +421,7 @@ Another measure is to conduct third-party algorithm audits to ensure each AI pro
 ## Conclusion
 
 ### Challenges to addressing bias in machine learning
-While the previous section mentioned approaches that can be taken to mitigate bias in ML, truly eliminating such disparities is a more challenging problem than may appear at first glance.  Collecting data that perfectly represent all subgroups in a population, while certainly helpful, is not a panacea.  If the underlying systems being modeled are themselves unjust (e.g., minority neighborhoods tend to be disproportionately policed, poor and minority families are more likely to be reported to child abuse hotlines, hiring managers may prefer men over women for software engineering roles), then the model results will still end up reflecting these biased behaviors.  Conversely, removing bias from ML, though it may generate less ethically troubling results, will not fix the underlying social injustices either.
+While the previous section mentioned approaches that can be taken to mitigate bias in ML, truly eliminating such disparities is a more challenging problem than it may appear at first glance.  Collecting data that perfectly represent all subgroups in a population, while certainly helpful, is not a panacea.  If the underlying systems being modeled are themselves unjust (e.g., minority neighborhoods tend to be disproportionately policed, poor and minority families are more likely to be reported to child abuse hotlines, hiring managers may prefer men over women for software engineering roles), then the model results will still end up reflecting these biased behaviors.  Conversely, removing bias from ML, though it may generate less ethically troubling results, will not fix the underlying social injustices either.
 
 Another challenge is pinpointing exactly what a “fair” outcome means. Going back to the recidivism example, is it that the model is equally good at predicting which groups of defendants will commit another crime (predictive parity) even if the model incorrectly labels more defendants from Group B as likely to reoffend?  Or should the goal be that the model incorrectly predicts which defendants will reoffend at equal rates between the two groups (equal false positive rates)? Or that the model fails to catch reoffenders at the same rate between the two groups (equal false negative rates)?  All are valid ways to define “fairness”, yet it has been proven to be mathematically impossible to satisfy all of these conditions simultaneously.  Trying to be fair in one way necessarily means being unfair in another way.
 

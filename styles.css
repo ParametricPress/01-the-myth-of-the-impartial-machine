@@ -389,6 +389,8 @@ label {
 	transition-property: opacity;
 	transition-duration: 1s;
 	transition-delay: 0.5s;
+	border-bottom: solid 1px #222;
+	padding-bottom: 1em;
 }
 
 .finalResults.hidden {

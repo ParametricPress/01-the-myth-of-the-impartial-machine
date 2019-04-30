@@ -67,7 +67,7 @@ const rScale = d3.scaleSqrt()
 
 const colorScale = d3.scaleLog()
 .domain([d3.min(data, function(d) { return d.income; }), d3.max(data, function(d) { return d.income; })])
-.range(['#c5c5c5', '#5DA391']);
+.range(['#fff', '#DACDFF']);
 
 const simulation = d3.forceSimulation()
     .force("center", d3.forceCenter(width/2, height/2)) // Attraction to the center of the svg area
