@@ -1,5 +1,5 @@
-[meta title:"The Myth of the Impartial Machine" description:"Lost amidst the rush to deploy artificially intelligent software are incidents where probabilistic models have produced shockingly flawed results."
-  shareImageUrl:"https://issue-01-preview.parametric.press/issue-01/the-myth-of-the-impartial-machine/static/images/share.png"
+[meta title:"The Myth of the Impartial Machine" description:"Wide-ranging applications of data science bring utopian proposals of a world free from bias, but in reality, machine learning models reproduce the inequalities that shape the data they’re fed. Can programmers free their models from prejudice?"
+  shareImageUrl:"https://parametric.press/issue-01/the-myth-of-the-impartial-machine/static/images/share.png"
   shareImageWidth:"880"
   shareImageHeight:"440" /]
 
@@ -442,7 +442,7 @@ Lest the situation seem hopeless, there are steps that companies and organizatio
   [/Aside]
 [/Desktop]
 
-Another important point is being transparent and open about what exactly a ML model is doing, how it arrived at the results it did, and which accuracy metrics did it optimize to.  Being able to explain why the model predicted, for example, someone as not being creditworthy allows not only that individual an opportunity to understand what happened but also makes it easier to identify problems in the model’s performance.  Finally, acknowledging that ML is not a magical solution that will solve all of the world’s problems but, like any other tool, has its limitations and weaknesses will help with maintaining a more realistic perspective on what these models can (and cannot) achieve.  Microsoft and Google have recently begun [including warnings](https://www.wired.com/story/google-microsoft-warn-ai-may-do-dumb-things/) about the risks of using AI in their Securities and Exchange Commission filings.
+Another important point is being transparent and open about what, exactly, a ML model does, how it arrived at the results it did, and what accuracy metrics did it is optimize for.  Being able to explain why the model predicted, for example, someone as not being creditworthy not only allowsthat individual to understand what happened, but also makes it easier to identify problems in the model’s performance.  Finally, acknowledging that ML is not a magical solution that will solve all of the world’s problems but, like any other tool, has its limitations and weaknesses will help with maintaining a more realistic perspective on what these models can (and cannot) achieve.  Microsoft and Google have recently begun [including warnings](https://www.wired.com/story/google-microsoft-warn-ai-may-do-dumb-things/) about the risks of using AI in their Securities and Exchange Commission filings.
 
 
 [Mobile]
