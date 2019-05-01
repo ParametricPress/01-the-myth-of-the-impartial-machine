@@ -11,18 +11,20 @@
   title:`["Impartial", "Machine"]`
   longTitle:`["The Myth of the", "Impartial Machine"]`
   date:"May 1, 2019"
-  dek:"Lost amidst the rush to deploy artificially intelligent software are incidents where probabilistic models have produced shockingly flawed results."
+  dek:"Wide-ranging applications of data science bring utopian proposals of a world free from bias, but in reality, machine learning models reproduce the inequalities that shape the data they’re fed. Can programmers free their models from prejudice?"
   fullWidth:true
   authors:`[{
     name: "Alice Feng",
-    role: 'Author'
+    role: 'Author',
+    url: 'https://alicefeng.github.io/'
   }, {
     name: "Shuyan Wu",
-    role: 'Author'
+    role: 'Author',
+    url: 'https://shuyanwu.com/'
   }]`
-  doi:""
-  archive:""
-  source:""
+  doi:"https://doi.org/10.5281/zenodo.2655980"
+  archive:`'https://parametric-press-archives.s3.amazonaws.com/issue-01/' + parametricSlug + '.warc.gz'`
+  source:`"https://github.com/ParametricPress/01-" + parametricSlug `
 /]
 
 
@@ -455,9 +457,10 @@ Algorithms are being used to recommend what to watch next on Netflix, filter out
 
 
 [AuthorBio]
-**Alice Feng** is a data visualization developer at the Urban Institute in Washington, DC.  Her work focuses on making public policy research more accessible and engaging through interactive, web-based visualizations.
 
-**Shuyan Wu**  TK TK  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nunc fringilla massa dignissim consectetur. Sed quis tristique tellus. Pellentesque quis erat placerat, varius quam id, auctor dolor.
+[b][a href:"https://alicefeng.github.io/"]Alice Feng[/a][/b] is a data visualization developer at the Urban Institute in Washington, DC.  Her work focuses on making public policy research more accessible and engaging through interactive, web-based visualizations.
+
+[b][a href:"https://shuyanwu.com"]Shuyan Wu[/a][/b] is a graphic designer and illustrator with a former background in economics. She currently works at the State of Rhode Island, where she designs digital and print communication campaigns.
 
 Edited by Fred Hohman, Matthew Conlen, and Victoria Uren.
 [/AuthorBio]
